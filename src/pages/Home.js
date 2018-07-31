@@ -6,12 +6,43 @@ import CodeBlock from "../components/codeblock/CodeBlock";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
+//copy-to-clipboard
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
+const codeString = [
+  {
+    meta: {
+      language: 'javascript',
+      uses: 'blah'
+    },
+    code: `
+counterChangeHandler = () => {
+  console.log("you did it")
+  this.props.onIncrementCounter()
+}`
+  },
+  {
+    meta: {
+      language: 'javascript',
+      uses: 'blah'
+    },
+    code: `
+    .App-header {
+      background-color: #222;
+      height: 150px;
+      padding: 20px;
+      color: white;
+    }`
+  },
+];
+
 
 class Home extends Component {
   state = {
+    copied: false,
     name: 'Cat in the Hat',
     age: '',
-    multiline: 'Controlled',
+    multiline: '',
     currency: 'EUR',
   };
 
@@ -21,6 +52,10 @@ class Home extends Component {
     this.setState({
       [name]: event.target.value,
     });
+  };
+
+  onCopy = () => {
+    this.setState({copied: true});
   };
 
   counterChangeHandler = () => {
@@ -33,18 +68,6 @@ class Home extends Component {
     const { multiline } = this.state;
     console.log('state multiline', multiline)
 
-    const codeString = [
-      `counterChangeHandler = () => {
-        console.log("you did it")
-        this.props.onIncrementCounter()
-      }`,
-      `.App-header {
-        background-color: #222;
-        height: 150px;
-        padding: 20px;
-        color: white;
-      }`
-    ];
 
     return (
       <ContainerAlpha>
@@ -52,13 +75,19 @@ class Home extends Component {
         <TextField
           fullWidth
           id="multiline-flexible"
-          label="Multiline"
+          label="Code Snippit"
           multiline
           rowsMax="20"
           value={this.state.multiline}
           onChange={this.handleChange('multiline')}
           margin="normal"
         />
+        <section className="section">
+          <h2>1. Button</h2>
+          <CopyToClipboard onCopy={this.onCopy} text={this.state.multiline}>
+            <button>Copy to clipboard with button</button>
+          </CopyToClipboard>
+        </section>
         <Button variant="outlined">
           Default
         </Button>
@@ -75,8 +104,12 @@ class Home extends Component {
           >
             COUNTER
           </button>
-          {codeString.map((num, index) => {
-            return <CodeBlock code={num} key={index} />;
+          {codeString.map((el, index) => {
+            return (
+              <div key={index} style={{margin: 10}}>
+                <CodeBlock code={el}  />;
+              </div>
+            )
           })}
         </div>
       </ContainerAlpha>
