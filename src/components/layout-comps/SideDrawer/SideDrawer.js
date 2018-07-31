@@ -7,7 +7,7 @@ import {LogoContainer} from '../../styled'
 
 const sideDrawer = props => {
   // to conditionally control side drawer classes
-  console.log("sideDrawer props, ", props);
+  //console.log("sideDrawer props, ", props);
 
   let attachedClasses = ["sidedrawer-sidedrawer", "sidedrawer-close"];
   if (props.open) {

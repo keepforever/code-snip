@@ -50,13 +50,13 @@ const links = [
     display: "KeepForever"
   },
   {
-    name: "add-snippit-page",
-    route: "/snippit",
-    display: "Add Snippit"
+    name: "add-snip-page",
+    route: "/add-snip",
+    display: "Add Snip"
   },
   {
     name: "counter",
-    route: "/counter",
-    display: "Counter"
+    route: "/code-edit",
+    display: "Code Edit"
   }
 ];

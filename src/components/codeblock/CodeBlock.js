@@ -26,12 +26,8 @@ class CodeBlock extends Component {
   }
 }
 
-
-
 export default CodeBlock
 
-
-
-{/* <CopyToClipboard onCopy={this.onCopy} text={this.state.value}>
-  <span>Copy to clipboard with span</span>
-</CopyToClipboard> */}
+// <CopyToClipboard onCopy={this.onCopy} text={this.state.value}>
+//   <span>Copy to clipboard with span</span>
+// </CopyToClipboard>

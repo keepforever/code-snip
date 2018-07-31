@@ -36,7 +36,6 @@ counterChangeHandler = () => {
   },
 ];
 
-
 class Home extends Component {
   state = {
     copied: false,
@@ -148,14 +147,3 @@ const styles = {
 //   onClick={() => this.props.onIncrementCounter()}>
 //   Counter
 // </Button>
-
-
-// onChangeText = (key, value) => {
-//   console.log('key', key, 'value', value)
-//   this.setState(state => ({
-//     values: {
-//       ...state.values,
-//       [key]: value,
-//     },
-//   }));
-// };

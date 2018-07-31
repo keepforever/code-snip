@@ -5,7 +5,7 @@ export const LayoutChildrenDiv = styled.div`
   margin-top: 56px;
 `
 export const ContainerAlpha = styled.div`
-  margin: 10px 10px;
+  margin: 90px 20px;
 `;
 
 export const Backdrop = styled.div`
@@ -24,6 +24,10 @@ export const LinkContainer = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   font-size: x-large;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
 `;
 
 export {

@@ -3,12 +3,24 @@ import {Route, Switch} from 'react-router-dom';
 
 // main routes
 import Home from './pages/Home';
+import AddSnip from './pages/AddSnip';
+import CodeEditTest from './pages/CodeEditTest';
 
 const routes = [
   {
     path: "/",
     exact: true,
     main: () => <Home />
+  },
+  {
+    path: "/add-snip",
+    exact: true,
+    main: () => <AddSnip />
+  },
+  {
+    path: "/code-edit",
+    exact: true,
+    main: () => <CodeEditTest />
   },
   // {
   //   path: "/about",
