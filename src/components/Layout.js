@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import Toolbar from "./layout-comps/Toolbar";
-
-//import SideDrawer from "../Navigation/SideDrawer/SideDrawer";
-import SideDrawer from "./layout-comps/SideDrawer/SideDrawer";
-
-import { LayoutChildrenDiv } from './styled'
+import { LayoutChildrenDiv } from './styled';
+import MaterialToolbar from './layout-comps/MaterialToolbar';
+import MaterialDrawer from './layout-comps/MaterialDrawer';
 
 class Layout extends Component {
   state = {
@@ -25,18 +22,27 @@ class Layout extends Component {
 
   render() {
     return (
-      <div>
-        <Toolbar
+      <React.Fragment>
+        <MaterialToolbar
           links={links}
           drawerToggleClicked={this.sideDrawerToggleHandler}
         />
-        <SideDrawer
+        {/* <Toolbar
+          links={links}
+          drawerToggleClicked={this.sideDrawerToggleHandler}
+        /> */}
+        <MaterialDrawer
           links={links}
           open={this.state.showSideDrawer}
           closed={this.sideDrawerClosedHandler}
         />
+        {/* <SideDrawer
+          links={links}
+          open={this.state.showSideDrawer}
+          closed={this.sideDrawerClosedHandler}
+        /> */}
         <LayoutChildrenDiv>{this.props.children}</LayoutChildrenDiv>
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -55,8 +61,8 @@ const links = [
     display: "Add Snip"
   },
   {
-    name: "counter",
-    route: "/code-edit",
-    display: "Code Edit"
+    name: "data-viz",
+    route: "/data-viz",
+    display: "Data Viz"
   }
 ];

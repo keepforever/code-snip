@@ -4,7 +4,7 @@ import {Route, Switch} from 'react-router-dom';
 // main routes
 import Home from './pages/Home';
 import AddSnip from './pages/AddSnip';
-import CodeEditTest from './pages/CodeEditTest';
+import DataViz from './pages/DataViz';
 
 const routes = [
   {
@@ -18,9 +18,9 @@ const routes = [
     main: () => <AddSnip />
   },
   {
-    path: "/code-edit",
+    path: "/data-viz",
     exact: true,
-    main: () => <CodeEditTest />
+    main: () => <DataViz />
   },
   // {
   //   path: "/about",

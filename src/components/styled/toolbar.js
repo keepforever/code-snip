@@ -18,8 +18,6 @@ export const ToolbarHeader = styled.header`
 `;
 
 export const ToolbarLinks = styled.div`
-  display: flex;
-  flex-direction: row;
   @media (max-width: 500px) {
     display: none;
   }

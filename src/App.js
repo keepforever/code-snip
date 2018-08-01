@@ -6,8 +6,26 @@ import { Provider } from "react-redux";
 
 import Layout from "./components/Layout";
 import Routes from "./routes";
-// reducer
-// Redux Store
+
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
+import purple from '@material-ui/core/colors/purple';
+import orange from '@material-ui/core/colors/orange';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: orange[200], // same as '#FFCC80',
+      main: '#FB8C00', // same as orange[600]
+      dark: purple[400],
+      contrastText: 'rgb(0,0,0)'
+    },
+    secondary: {
+      main: blue[700]
+    }
+  }
+})
+
 const store = createStore(reducer);
 
 class App extends Component {
@@ -15,9 +33,11 @@ class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <Layout>
-            <Routes />
-          </Layout>
+          <MuiThemeProvider theme={theme}>
+            <Layout>
+              <Routes />
+            </Layout>
+          </MuiThemeProvider>
         </BrowserRouter>
       </Provider>
     );
