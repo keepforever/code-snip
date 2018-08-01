@@ -63,6 +63,7 @@ class MyKeywordInput extends Component {
           id="name"
           label="Pending Keyword"
           value={this.state.pendingKeyword}
+          fullWidth
           onChange={this.handleChange('pendingKeyword')}
           margin="normal"
           onKeyPress={(ev) => {
@@ -75,20 +76,26 @@ class MyKeywordInput extends Component {
         />
         <div
           onClick={() => this.addKeyword(this.state.pendingKeyword)}>
-          <Button variant="outlined">
-            Add Keyword
+          <Button
+            fullWidth
+            color="secondary"
+            variant="raised">
+              Add Keyword
           </Button>
         </div>
-        <h3>pending wants:</h3>
-        {this.state.keywords.map((c, index) => {
-          return (
-            <Chip
-              key={index}
-              label={c}
-              onDelete={() => this.removeKeyword(index)}
-            />
-          )
-        })}
+        <h5 style={{margin: 5}}>Keyword Tags:</h5>
+        <div style={{display:'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+          {this.state.keywords.map((c, index) => {
+            return (
+              <div style={{marginRight: 7, marginBotton: 7}} key={index}>
+                <Chip
+                  label={c}
+                  onDelete={() => this.removeKeyword(index)}
+                />
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }

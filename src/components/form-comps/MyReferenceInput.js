@@ -61,6 +61,7 @@ class MyReferenceInput extends Component {
       <div>
         <TextField
           id="name"
+          fullWidth
           label="Pending Reference"
           value={this.state.pendingReference}
           onChange={this.handleChange('pendingReference')}
@@ -74,21 +75,29 @@ class MyReferenceInput extends Component {
           }}
         />
         <div
+          style={{width: '100%'}}
           onClick={() => this.addReference(this.state.pendingReference)}>
-          <Button variant="outlined">
-            Add Reference
+          <Button
+            fullWidth
+            color="secondary"
+            variant="raised">
+              Add Reference
           </Button>
         </div>
-        <h3>pending wants:</h3>
-        {this.state.references.map((c, index) => {
-          return (
-            <Chip
-              key={index}
-              label={c}
-              onDelete={() => this.removeReference(index)}
-            />
-          )
-        })}
+        <h5 style={{margin: 5}}>Refrence Tags:</h5>
+        <div style={{display:'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+          {this.state.references.map((c, index) => {
+            return (
+              <div style={{marginRight: 7, marginBotton: 7}} key={index}>
+                <Chip
+                  label={c}
+                  onDelete={() => this.removeReference(index)}
+                />
+              </div>
+            )
+          })}
+        </div>
+
       </div>
     )
   }

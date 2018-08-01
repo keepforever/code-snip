@@ -5,7 +5,10 @@ export const LayoutChildrenDiv = styled.div`
   margin-top: 56px;
 `
 export const ContainerAlpha = styled.div`
-  margin: 90px 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 90px 15%;
+  color: white;
 `;
 
 export const Backdrop = styled.div`
