@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MyCompanionInput from '../components/MyCompanionInput'
+import MyCompanionInput from '../components/form-comps/MyCompanionInput'
 
 class CodeEditTest extends Component {
 

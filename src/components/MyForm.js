@@ -1,18 +1,30 @@
 import React from 'react'
 import { withFormik } from 'formik'
-import { object, string } from 'yup'
+import { object, string, array } from 'yup'
 // or import * as yup from 'yup' for more than just 'object' and 'string'
 // attempting 3rd party input with formik
-import MyCodeInput from './MyCodeInput'
-import MyTypeSelect from './MyTypeSelect'
-import MyFrameSelect from './MyFrameSelect'
-import MyLangSelect from './MyLangSelect'
-import MyNotesInput from './MyNotesInput'
-import MyKeywordInput from './MyKeywordInput'
-import MyCompanionInput from './MyCompanionInput'
-import MyReferenceInput from './MyReferenceInput'
+import MyCodeInput from './form-comps/MyCodeInput'
+import MyTypeSelect from './form-comps/MyTypeSelect'
+import MyFrameSelect from './form-comps/MyFrameSelect'
+import MyLangSelect from './form-comps/MyLangSelect'
+import MyNotesInput from './form-comps/MyNotesInput'
+import MyKeywordInput from './form-comps/MyKeywordInput'
+import MyCompanionInput from './form-comps/MyCompanionInput'
+import MyReferenceInput from './form-comps/MyReferenceInput'
 // diagnostics for form input
-import DisplayFormikState from './DisplayFormikState'
+import DisplayFormikState from './form-comps/DisplayFormikState'
+//
+// yup.mixed;
+// yup.string;
+// yup.number;
+// yup.boolean; // also aliased as yup.bool
+// yup.date;
+// yup.object;
+// yup.array;
+//
+// yup.reach;
+// yup.addMethod;
+// yup.ValidationError;
 
 const formikEnhancer = withFormik({
     mapPropsToValues({
@@ -28,14 +40,15 @@ const formikEnhancer = withFormik({
         companion: companion || [],
         keywords: keywords || [],
         reference: reference || [],
-        password: password || '',
-        newsletter: newsletter || false,
-        plan: plan || 'free'
       }
     },
     validationSchema: object().shape({
-      email: string().email('Email not valid').required('Email is required'),
-      password: string().min(9, 'Password must be 9 characters or longer').required('Password is required')
+      snipType: string().required('Type is required'),
+      language: string().required('Language is required'),
+      framework: string().required('Framework is required'),
+      code: string().required('Code is required'),
+      notes: string(),
+      companion: array(),
     }),
     handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
       setTimeout(() => {

@@ -7,7 +7,7 @@ class AddSnip extends Component {
   render () {
     return (
       <ContainerAlpha>
-        <h1>Hello AddSnip</h1>
+        <h2>Add A Snippit</h2>
         <MyForm />
       </ContainerAlpha>
 
