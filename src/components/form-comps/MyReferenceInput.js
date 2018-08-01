@@ -56,7 +56,7 @@ class MyReferenceInput extends Component {
   };
 
   render() {
-    console.log('MyReferenceInput state', this.state)
+    //console.log('MyReferenceInput state', this.state)
     return (
       <div>
         <TextField

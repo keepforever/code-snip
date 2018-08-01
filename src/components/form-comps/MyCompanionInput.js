@@ -56,12 +56,13 @@ class MyCompanionInput extends Component {
   };
 
   render() {
-    console.log('MyCompanionInput state', this.state)
+    //console.log('MyCompanionInput state', this.state)
     return (
       <div>
         <TextField
           id="name"
           label="Pending Companion"
+          fullWidth
           value={this.state.pendingCompanion}
           onChange={this.handleChange('pendingCompanion')}
           margin="normal"
@@ -75,7 +76,10 @@ class MyCompanionInput extends Component {
         />
         <div
           onClick={() => this.addCompanion(this.state.pendingCompanion)}>
-          <Button variant="outlined">
+          <Button
+            fullWidth
+            color="secondary"
+            variant="raised">
             Add Companion
           </Button>
         </div>

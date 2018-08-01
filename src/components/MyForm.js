@@ -13,7 +13,10 @@ import MyCompanionInput from './form-comps/MyCompanionInput'
 import MyReferenceInput from './form-comps/MyReferenceInput'
 // diagnostics for form input
 import DisplayFormikState from './form-comps/DisplayFormikState'
-//
+import { clearLog } from '../utils'
+import Paper from '@material-ui/core/Paper';
+import Button from "@material-ui/core/Button";
+
 // yup.mixed;
 // yup.string;
 // yup.number;
@@ -21,7 +24,7 @@ import DisplayFormikState from './form-comps/DisplayFormikState'
 // yup.date;
 // yup.object;
 // yup.array;
-//
+
 // yup.reach;
 // yup.addMethod;
 // yup.ValidationError;
@@ -52,6 +55,7 @@ const formikEnhancer = withFormik({
     }),
     handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
       setTimeout(() => {
+        clearLog('submit form values', values)
         if(values.email === 'andrew@test.io') {
           setErrors({ email: 'That email is already taken' })
         } else {
@@ -60,6 +64,7 @@ const formikEnhancer = withFormik({
         setSubmitting(false)
       }, 2000)
       alert('balls!')
+      resetForm()
     }
   });
 
@@ -79,68 +84,66 @@ const MyForm = props => {
     isSubmitting
   } = props;
   return (
-    <div style={{color: 'white', backgroundColor: '#ACCCCE'}}>
-      <form style={{margin: 20, }} onSubmit={handleSubmit}>
-        <MyReferenceInput
-          onChange={setFieldValue}
-        />
+      <Paper >
+        <form style={{margin: 20, }} onSubmit={handleSubmit}>
+          <MyReferenceInput
+            onChange={setFieldValue}
+          />
+          <MyKeywordInput
+            onChange={setFieldValue}
+          />
+          <MyCompanionInput
+            onChange={setFieldValue}
+          />
+          <label htmlFor="MyTypeSelect">Selet Type</label>
+          <MyTypeSelect
+            value={values.snipType}
+            onChange={setFieldValue}
+          />
+          <label htmlFor="MyLangSelect">Selet Language</label>
+          <MyLangSelect
+            value={values.language}
+            onChange={setFieldValue}
+          />
+          <label htmlFor="MyFrameSelect">Selet Framework</label>
+          <MyFrameSelect
+            value={values.framework}
+            onChange={setFieldValue}
+          />
+          <MyCodeInput
+            value={values.code}
+            onChange={setFieldValue}
+          />
+          <h3>Notes</h3>
+          <MyNotesInput
+            value={values.notes}
+            onChange={setFieldValue}
+          />
+          <button
+            type="button"
+            className="outline"
+            onClick={handleReset}
+            disabled={!dirty || isSubmitting}
+          >
+            Reset
+          </button>
+          <div
+            onClick={() => clearLog('submit', 'submit')}>
+            <Button
+              type="submit"
+              variant="outlined">
+              Submit
+            </Button>
+          </div>
+          {/* <button type="submit" disabled={isSubmitting}>
+            Submit
+          </button> */}
+        </form>
+        <div style={{margin: '5%'}}>
+          <DisplayFormikState {...props} />
+        </div>
 
-        <MyKeywordInput
-          onChange={setFieldValue}
-        />
-        
-        <MyCompanionInput
-          onChange={setFieldValue}
-        />
-        <label htmlFor="MyTypeSelect">Selet Type</label>
-        <MyTypeSelect
-          value={values.snipType}
-          onChange={setFieldValue}
-        />
-        <label htmlFor="MyLangSelect">Selet Language</label>
-        <MyLangSelect
-          value={values.language}
-          onChange={setFieldValue}
-        />
-        <label htmlFor="MyFrameSelect">Selet Framework</label>
-        <MyFrameSelect
-          value={values.framework}
-          onChange={setFieldValue}
-        />
-        <MyCodeInput
-          value={values.code}
-          onChange={setFieldValue}
-        />
-        <h3>Notes</h3>
-        <MyNotesInput
-          value={values.notes}
-          onChange={setFieldValue}
-        />
-        <button
-          type="button"
-          className="outline"
-          onClick={handleReset}
-          disabled={!dirty || isSubmitting}
-        >
-          Reset
-        </button>
-        <button type="submit" disabled={isSubmitting}>
-          Submit
-        </button>
-        <DisplayFormikState {...props} />
-        <label htmlFor="email" style={{ display: "block" }}>
-          Email
-        </label>
-        <input
-          id="email"
-          placeholder="Enter your email"
-          type="email"
-          value={values.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-      </form>
-    </div>
+      </Paper>
   )
 }
 

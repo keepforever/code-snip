@@ -7,7 +7,7 @@ class AddSnip extends Component {
   render () {
     return (
       <ContainerAlpha>
-        <h2>Add A Snippit</h2>
+        <h2 style={{color: 'white'}}>Add A Snippit</h2>
         <MyForm />
       </ContainerAlpha>
 

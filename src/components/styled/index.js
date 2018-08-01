@@ -7,8 +7,7 @@ export const LayoutChildrenDiv = styled.div`
 export const ContainerAlpha = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0px 15%;
-  color: white;
+  margin: 0px 5%;
 `;
 
 export const Backdrop = styled.div`

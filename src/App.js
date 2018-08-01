@@ -8,7 +8,7 @@ import Layout from "./components/Layout";
 import Routes from "./routes";
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
 import purple from '@material-ui/core/colors/purple';
 import orange from '@material-ui/core/colors/orange';
 
@@ -21,7 +21,7 @@ const theme = createMuiTheme({
       contrastText: 'rgb(0,0,0)'
     },
     secondary: {
-      main: blue[700]
+      main: red[700]
     }
   }
 })

@@ -56,7 +56,7 @@ class MyKeywordInput extends Component {
   };
 
   render() {
-    console.log('MyKeywordInput state', this.state)
+    //console.log('MyKeywordInput state', this.state)
     return (
       <div>
         <TextField
