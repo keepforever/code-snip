@@ -5,15 +5,19 @@ import { object, string } from 'yup'
 // attempting 3rd party input with formik
 import MyCodeInput from './MyCodeInput'
 import MyTypeSelect from './MyTypeSelect'
-import DisplayFormikState from './DisplayFormikState'
 import MyFrameSelect from './MyFrameSelect'
 import MyLangSelect from './MyLangSelect'
 import MyNotesInput from './MyNotesInput'
+import MyKeywordInput from './MyKeywordInput'
+import MyCompanionInput from './MyCompanionInput'
+import MyReferenceInput from './MyReferenceInput'
+// diagnostics for form input
+import DisplayFormikState from './DisplayFormikState'
 
 const formikEnhancer = withFormik({
     mapPropsToValues({
       snipType, language, framework, code, notes, companion, keywords,
-      repos, liveExamples, password, newsletter, plan
+      reference, password, newsletter, plan
     }) {
       return {
         snipType: snipType || 'boiler',
@@ -21,10 +25,9 @@ const formikEnhancer = withFormik({
         framework: framework || 'react',
         code: code || '',
         notes: notes || '',
-        companion: companion || '',
-        keywords: keywords || '',
-        repos: repos || '',
-        liveExamples: liveExamples || '',
+        companion: companion || [],
+        keywords: keywords || [],
+        reference: reference || [],
         password: password || '',
         newsletter: newsletter || false,
         plan: plan || 'free'
@@ -64,6 +67,18 @@ const MyForm = props => {
   } = props;
   return (
     <form onSubmit={handleSubmit}>
+      <label htmlFor="MyReferenceInput">Enter Reference Links</label>
+      <MyReferenceInput
+        onChange={setFieldValue}
+      />
+      <label htmlFor="MyKeywordInput">Enter Keywords</label>
+      <MyKeywordInput
+        onChange={setFieldValue}
+      />
+      <label htmlFor="MyCompanionInput">Enter Companion Libs</label>
+      <MyCompanionInput
+        onChange={setFieldValue}
+      />
       <label htmlFor="MyTypeSelect">Selet Type</label>
       <MyTypeSelect
         value={values.snipType}

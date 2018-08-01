@@ -6,6 +6,7 @@ const DisplayFormikState = ( props ) => {
   for (const key of Object.keys(values)) {
     keyz.push(key)
   }
+  //console.log('DisplayFormikState values', values)
   // console.log('DisplayFormikState, keyz', keyz)
   // console.log('DisplayFormikState, obj', values[keyz[0]])
   //console.log('DisplayFormikState props, ', props)
@@ -13,14 +14,13 @@ const DisplayFormikState = ( props ) => {
     <div>
       <h3>Hello DisplayFormikState</h3>
       <div>
-        {keyz.map((key, index) => {
+        {
+          keyz.map((key, index) => {
           return (
-            <div key={index}>
+            <div style={{marginTop: 15}} key={index}>
               {key}: {values[key]}
             </div>
-          )
-        })
-
+          )})
         }
       </div>
     </div>

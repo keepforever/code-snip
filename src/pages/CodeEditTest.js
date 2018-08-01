@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MyCodeInput from '../components/MyCodeInput'
+import MyCompanionInput from '../components/MyCompanionInput'
 
 class CodeEditTest extends Component {
 
@@ -7,7 +7,7 @@ class CodeEditTest extends Component {
     return (
       <div style={{margin: 70}}>
         <h3>Hello CodeEditTest</h3>
-        <MyCodeInput />
+        <MyCompanionInput />
       </div>
 
     );
