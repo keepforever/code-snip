@@ -11,6 +11,7 @@ import MyNotesInput from './form-comps/MyNotesInput'
 import MyKeywordInput from './form-comps/MyKeywordInput'
 import MyCompanionInput from './form-comps/MyCompanionInput'
 import MyReferenceInput from './form-comps/MyReferenceInput'
+import MyNameInput from './form-comps/MyNameInput'
 // diagnostics for form input
 import DisplayFormikState from './form-comps/DisplayFormikState'
 import { clearLog } from '../utils'
@@ -31,10 +32,11 @@ import Button from "@material-ui/core/Button";
 
 const formikEnhancer = withFormik({
     mapPropsToValues({
-      snipType, language, framework, code, notes, companion, keywords,
-      reference, password, newsletter, plan
+      snipName, snipType, language, framework, code, notes, companion,
+      keywords, reference, password, newsletter, plan
     }) {
       return {
+        snipName: snipName || '',
         snipType: snipType || 'boiler',
         language: language || 'javascript',
         framework: framework || 'react',
@@ -46,12 +48,15 @@ const formikEnhancer = withFormik({
       }
     },
     validationSchema: object().shape({
+      snipName: string().required('You must name your snippit'),
       snipType: string().required('Type is required'),
       language: string().required('Language is required'),
       framework: string().required('Framework is required'),
       code: string().required('Code is required'),
       notes: string(),
       companion: array(),
+      refrence: array(),
+      keywords: array(),
     }),
     handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
       setTimeout(() => {
@@ -87,12 +92,22 @@ class MyForm extends Component {
        //touched, errors, setFieldTouched, handleChange, handleBlur,
     } = this.props;
 
-    clearLog('myform state', this.state)
+    clearLog('MyForm props', this.props)
 
     return (
       <Paper >
         <div style={{backgroundColor: "#dd2c00", paddingTop: 10, paddingLeft: '5%', paddingRight: '5%'}}>
           <form  onSubmit={handleSubmit}>
+            <Paper>
+              <div
+                onClick={handleReset}
+                style={{marginTop: 8, padding: 10, backgroundColor: '#1b5e20'}}>
+            <MyNameInput
+              value={values.snipName}
+              onChange={setFieldValue}
+            />
+              </div>
+            </Paper>
             <Paper>
               <div style={{padding: 10, backgroundColor: '#1b5e20'}}>
                 <MyTypeSelect

@@ -15,8 +15,8 @@ class MyCompanionInput extends Component {
   state = defaultState
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('prevState.shouldClear', prevState.shouldClear)
-    console.log('prevProps.shouldClear', prevProps.shouldClear)
+    //console.log('prevState.shouldClear', prevState.shouldClear)
+    //console.log('prevProps.shouldClear', prevProps.shouldClear)
 
     const flip = !prevState.shouldClear
 
