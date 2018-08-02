@@ -64,5 +64,10 @@ const links = [
     name: "data-viz",
     route: "/data-viz",
     display: "Data Viz"
+  },
+  {
+    name: "search-snip",
+    route: "/search-snips",
+    display: "Search Snips"
   }
 ];

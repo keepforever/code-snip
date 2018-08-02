@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { ContainerAlpha } from "../components/styled";
 //import CodeBlock from "../components/codeblock/CodeBlock";
 import CodeBlockExpandable from '../components/CodeBlockExpandable'
@@ -7,6 +6,10 @@ import CodeBlockExpandable from '../components/CodeBlockExpandable'
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { codeString } from '../utils'
+// REDUX
+import { incrementCounter } from '../store/actions/counter';
+import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
 
 class Home extends Component {
   state = {
@@ -38,6 +41,8 @@ class Home extends Component {
 
     const { multiline } = this.state;
     console.log('state multiline', multiline)
+    const {  ctr, user, snipp } = this.props
+    console.log('mapStateToProps HOME', ctr, user, snipp)
 
 
     return (
@@ -56,7 +61,7 @@ class Home extends Component {
           </div>
           <div
             style={styles.button}
-            onClick={() => this.props.onIncrementCounter()}
+            onClick={() => this.props.incrementCounterAction()}
             >
               <Button color="primary" variant="raised" fullWidth>
                 Counter
@@ -79,20 +84,21 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-  return { ctr: state.counter };
-};
-
-// Todo: Outsource action types for typo resistance
-const mapDispatchToProps = dispatch => {
   return {
-    onIncrementCounter: () => dispatch({ type: "INCREMENT", payload: 5 })
+    ctr: state.counter.count,
+    user: state.user.userId,
+    snipp: state.snippit.snippits
+
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    incrementCounterAction: incrementCounter,
+  }, dispatch)
+}
+
+export default connect( mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = {
   button: {
@@ -100,13 +106,3 @@ const styles = {
     backgroundColor: 'black'
   }
 };
-
-
-//material-ui
-//
-// <Button
-//   variant="raised"
-//   color="primary"
-//   onClick={() => this.props.onIncrementCounter()}>
-//   Counter
-// </Button>

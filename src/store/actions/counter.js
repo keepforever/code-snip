@@ -1,8 +1,7 @@
-// following pattern of naming action creators as camelcase versions of action
-// identifiers
-// export const addIngredient = (name) => {
-//     return {
-//         type: actionTypes.ADD_INGREDIENT,
-//         ingredientName: name
-//     };
-// };
+import * as actionTypes from './actionTypes';
+
+export const incrementCounter = () => {
+    return {
+        type: actionTypes.INCREMENT_COUNTER,
+    };
+};

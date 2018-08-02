@@ -5,6 +5,7 @@ import {Route, Switch} from 'react-router-dom';
 import Home from './pages/Home';
 import AddSnip from './pages/AddSnip';
 import DataViz from './pages/DataViz';
+import SearchSnippits from './pages/SearchSnippits';
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     path: "/data-viz",
     exact: true,
     main: () => <DataViz />
+  },
+  {
+    path: "/search-snips",
+    exact: true,
+    main: () => <SearchSnippits />
   },
   // {
   //   path: "/about",
