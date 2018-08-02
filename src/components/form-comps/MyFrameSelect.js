@@ -7,7 +7,13 @@ import Tab from '@material-ui/core/Tab';
 const styles = {
   root: {
     flexGrow: 1,
+    backgroundColor: 'black',
+    marginTop: 5,
+    marginBottom:5,
   },
+  tab: {
+    color: 'white'
+  }
 };
 
 const valueMap = ['react','react-native', 'vue', 'sage-maker', ]
@@ -37,7 +43,7 @@ class MyFrameSelect extends React.Component {
         >
           {
             valueMap.map((val, index) => {
-              return <Tab label={val} key={index} />
+              return <Tab className={classes.tab} label={val} key={index} />
             })
           }
         </Tabs>

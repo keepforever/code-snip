@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Chip from '@material-ui/core/Chip';
+import Typography from "@material-ui/core/Typography";
 
 
 const defaultState = {
@@ -13,13 +14,6 @@ const defaultState = {
 class MyReferenceInput extends Component {
 
   state = defaultState
-
-
-  // getSnapshotBeforeUpdate(prevProps, prevState) {
-  //   console.log('snap next props', prevProps['shouldClear'])
-  //   return prevProps['shouldClear']
-  // }
-
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log('prevState.shouldClear', prevState.shouldClear)
@@ -70,8 +64,7 @@ class MyReferenceInput extends Component {
   }
 
   handleChange = name => event => {
-    // console.log('event,target,value, name', name)
-    // console.log('event,target,value', event.target.value)
+
     this.setState({
       [name]: event.target.value,
     });
@@ -82,6 +75,9 @@ class MyReferenceInput extends Component {
 
     return (
       <div>
+        <Typography variant="subheading" color='secondary'>
+          Refrence:
+        </Typography>
         <TextField
           id="name"
           fullWidth
@@ -102,12 +98,11 @@ class MyReferenceInput extends Component {
           onClick={() => this.addReference(this.state.pendingReference)}>
           <Button
             fullWidth
-            color="secondary"
+            color="primary"
             variant="raised">
               Add Reference
           </Button>
         </div>
-        <h5 style={{margin: 5}}>Refrence Tags:</h5>
         <div style={{display:'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
           {this.state.references.map((c, index) => {
             return (

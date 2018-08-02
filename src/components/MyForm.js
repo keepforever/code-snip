@@ -91,72 +91,96 @@ class MyForm extends Component {
 
     return (
       <Paper >
-        <form style={{margin: 20, }} onSubmit={handleSubmit}>
-          <MyCodeInput
-            value={values.code}
-            onChange={setFieldValue}
-          />
-          <Paper>
-            <div style={{marginTop: 8, padding: 10}}>
-              <MyReferenceInput
-                onChange={setFieldValue}
-                shouldClear={this.state.clearChips}
-              />
-            </div>
-          </Paper>
-            <div style={{marginTop: 8, padding: 10}}>
-              <MyKeywordInput
-                onChange={setFieldValue}
-                shouldClear={this.state.clearChips}
-              />
-            </div>
-          <Paper>
-            <div style={{marginTop: 8, padding: 10}}>
-              <MyCompanionInput
-                onChange={setFieldValue}
-                shouldClear={this.state.clearChips}
-              />
-            </div>
-          </Paper>
-          <label htmlFor="MyTypeSelect">Selet Type</label>
-          <MyTypeSelect
-            value={values.snipType}
-            onChange={setFieldValue}
-          />
-          <label htmlFor="MyLangSelect">Selet Language</label>
-          <MyLangSelect
-            value={values.language}
-            onChange={setFieldValue}
-          />
-          <label htmlFor="MyFrameSelect">Selet Framework</label>
-          <MyFrameSelect
-            value={values.framework}
-            onChange={setFieldValue}
-          />
-          <h3>Notes</h3>
-          <MyNotesInput
-            value={values.notes}
-            onChange={setFieldValue}
-          />
-          <button
-            type="button"
-            className="outline"
-            onClick={handleReset}
-            disabled={!dirty || isSubmitting}
-          >
-            Reset
-          </button>
-          <div
-            onClick={() => this.clearChips()}>
-            <Button
-              type="submit"
-              variant="outlined">
-              Submit
-            </Button>
+        <div style={{backgroundColor: "#dd2c00", paddingTop: 10, paddingLeft: '5%', paddingRight: '5%'}}>
+          <form  onSubmit={handleSubmit}>
+            <Paper>
+              <div style={{padding: 10, backgroundColor: '#1b5e20'}}>
+                <MyTypeSelect
+                  value={values.snipType}
+                  onChange={setFieldValue}
+                />
+                <MyLangSelect
+                  value={values.language}
+                  onChange={setFieldValue}
+                />
+                <MyFrameSelect
+                  value={values.framework}
+                  onChange={setFieldValue}
+                />
+              </div>
+            </Paper>
+            <Paper>
+              <div style={{marginTop: 8, padding: 10, backgroundColor: '#1b5e20'}}>
+                <MyCodeInput
+                  value={values.code}
+                  onChange={setFieldValue}
+                />
+              </div>
+            </Paper>
+            <Paper>
+              <div style={{marginTop: 8, padding: 10, backgroundColor: '#1b5e20'}}>
+                <MyReferenceInput
+                  onChange={setFieldValue}
+                  shouldClear={this.state.clearChips}
+                />
+              </div>
+            </Paper>
+            <Paper>
+              <div style={{marginTop: 8, padding: 10, backgroundColor: '#1b5e20'}}>
+                <MyKeywordInput
+                  onChange={setFieldValue}
+                  shouldClear={this.state.clearChips}
+                />
+              </div>
+            </Paper>
+            <Paper>
+              <div style={{marginTop: 8, padding: 10, backgroundColor: '#1b5e20'}}>
+                <MyCompanionInput
+                  onChange={setFieldValue}
+                  shouldClear={this.state.clearChips}
+                />
+              </div>
+            </Paper>
+            <Paper>
+              <div
+                onClick={handleReset}
+                style={{marginTop: 8, padding: 10, backgroundColor: '#1b5e20'}}>
+            <MyNotesInput
+              value={values.notes}
+              onChange={setFieldValue}
+            />
+              </div>
+            </Paper>
+            <Paper>
+              <div
+                onClick={handleReset}
+                style={{marginTop: 8, padding: 10, backgroundColor: '#1b5e20'}}>
+                <Button
+                  disabled={!dirty || isSubmitting}
+                  fullWidth
+                  color="primary"
+                  variant="raised">
+                  Reset
+                </Button>
+              </div>
+            </Paper>
+            <Paper>
+              <div
+                onClick={() => this.clearChips()}
+                style={{marginTop: 8, padding: 10, backgroundColor: '#1b5e20'}}>
+                <Button
+                  fullWidth
+                  type="submit"
+                  color="primary"
+                  variant="raised">
+                  Submit
+                </Button>
+              </div>
+            </Paper>
+          </form>
+          <div >
+            <DisplayFormikState {...this.props} />
           </div>
-        </form>
-        <div style={{margin: '5%'}}>
-          <DisplayFormikState {...this.props} />
         </div>
       </Paper>
     )

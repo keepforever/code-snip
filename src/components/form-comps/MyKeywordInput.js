@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Chip from '@material-ui/core/Chip';
+import Typography from "@material-ui/core/Typography";
 
 
 const defaultState = {
@@ -74,6 +75,9 @@ class MyKeywordInput extends Component {
     //console.log('MyKeywordInput state', this.state)
     return (
       <div>
+        <Typography variant="subheading" color='secondary'>
+          Keywords:
+        </Typography>
         <TextField
           id="name"
           label="Pending Keyword"
@@ -93,12 +97,11 @@ class MyKeywordInput extends Component {
           onClick={() => this.addKeyword(this.state.pendingKeyword)}>
           <Button
             fullWidth
-            color="secondary"
+            color="primary"
             variant="raised">
               Add Keyword
           </Button>
         </div>
-        <h5 style={{margin: 5}}>Keyword Tags:</h5>
         <div style={{display:'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
           {this.state.keywords.map((c, index) => {
             return (

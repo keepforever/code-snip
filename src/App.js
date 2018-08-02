@@ -11,17 +11,18 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 import purple from '@material-ui/core/colors/purple';
 import orange from '@material-ui/core/colors/orange';
+import green from '@material-ui/core/colors/green';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       light: orange[200], // same as '#FFCC80',
       main: '#FB8C00', // same as orange[600]
-      dark: purple[400],
+      dark: red[400],
       contrastText: 'rgb(0,0,0)'
     },
     secondary: {
-      main: red[700]
+      main: orange[200]
     }
   }
 })

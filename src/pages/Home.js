@@ -42,14 +42,18 @@ class Home extends Component {
 
     return (
       <ContainerAlpha>
-        <h1>Home Page</h1>
-        <Typography variant="title" color="inherit">
+        <Typography color="secondary" variant="headline">
+          Hello home page
+        </Typography>
+        <Typography variant="title" color="secondary">
           React & Material-UI Sample Application
         </Typography>
         <div className="container">
-          <p onChange={() => this.counterChangeHandler(this.props.ctr)}>
-            Counter value: {this.props.ctr}
-          </p>
+          <div onChange={() => this.counterChangeHandler(this.props.ctr)}>
+            <Typography variant="subheading" color='secondary'>
+              Counter value: {this.props.ctr}
+            </Typography>
+          </div>
           <div
             style={styles.button}
             onClick={() => this.props.onIncrementCounter()}

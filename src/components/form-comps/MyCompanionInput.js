@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Chip from '@material-ui/core/Chip';
-
+import Typography from "@material-ui/core/Typography";
 
 const defaultState = {
   companions: [],
@@ -74,6 +74,9 @@ class MyCompanionInput extends Component {
     //console.log('MyCompanionInput state', this.state)
     return (
       <div>
+        <Typography variant="subheading" color='secondary'>
+          Companion
+        </Typography>
         <TextField
           id="name"
           label="Pending Companion"
@@ -93,12 +96,11 @@ class MyCompanionInput extends Component {
           onClick={() => this.addCompanion(this.state.pendingCompanion)}>
           <Button
             fullWidth
-            color="secondary"
+            color="primary"
             variant="raised">
             Add Companion
           </Button>
         </div>
-        <h3>pending wants:</h3>
         {this.state.companions.map((c, index) => {
           return (
             <Chip

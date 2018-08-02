@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AceEditor from 'react-ace';
+import Typography from "@material-ui/core/Typography";
 
 import 'brace/mode/javascript';
 import 'brace/theme/monokai';
@@ -17,7 +18,9 @@ class MyCodeInput extends Component {
 
     return (
       <div>
-        <h3 style={{margin: 0}}>Code Here:</h3>
+        <Typography variant="subheading" color='secondary'>
+          Snippit:
+        </Typography>
         <AceEditor
           width="100%"
           height="300px"
