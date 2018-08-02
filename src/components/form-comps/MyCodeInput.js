@@ -17,14 +17,17 @@ class MyCodeInput extends Component {
 
     return (
       <div>
-        <h1>Hello My Code Input</h1>
+        <h3 style={{margin: 0}}>Code Here:</h3>
         <AceEditor
+          width="100%"
+          height="300px"
+          wrapEnabled={true}
           mode="javascript"
           theme="monokai"
           name="blah2"
           onLoad={this.onLoad}
           onChange={this.handleChange}
-          fontSize={14}
+          fontSize={18}
           showPrintMargin={true}
           showGutter={false}
           highlightActiveLine={true}

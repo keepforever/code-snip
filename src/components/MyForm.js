@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { withFormik } from 'formik'
 import { object, string, array } from 'yup'
 // or import * as yup from 'yup' for more than just 'object' and 'string'
@@ -68,33 +68,56 @@ const formikEnhancer = withFormik({
     }
   });
 
+class MyForm extends Component {
 
-const MyForm = props => {
-  const {
-    values,
-    //touched,
-    dirty,
-    //errors,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    handleReset,
-    setFieldValue,
-    //setFieldTouched,
-    isSubmitting
-  } = props;
-  return (
+  state = {
+    clearChips: false
+  }
+
+  clearChips = () => {
+    const flip = !this.state.clearChips
+    this.setState({
+      clearChips: flip
+    })
+  }
+
+  render() {
+    const {
+      values, dirty, handleSubmit, handleReset, setFieldValue, isSubmitting,
+       //touched, errors, setFieldTouched, handleChange, handleBlur,
+    } = this.props;
+
+    clearLog('myform state', this.state)
+
+    return (
       <Paper >
         <form style={{margin: 20, }} onSubmit={handleSubmit}>
-          <MyReferenceInput
+          <MyCodeInput
+            value={values.code}
             onChange={setFieldValue}
           />
-          <MyKeywordInput
-            onChange={setFieldValue}
-          />
-          <MyCompanionInput
-            onChange={setFieldValue}
-          />
+          <Paper>
+            <div style={{marginTop: 8, padding: 10}}>
+              <MyReferenceInput
+                onChange={setFieldValue}
+                shouldClear={this.state.clearChips}
+              />
+            </div>
+          </Paper>
+            <div style={{marginTop: 8, padding: 10}}>
+              <MyKeywordInput
+                onChange={setFieldValue}
+                shouldClear={this.state.clearChips}
+              />
+            </div>
+          <Paper>
+            <div style={{marginTop: 8, padding: 10}}>
+              <MyCompanionInput
+                onChange={setFieldValue}
+                shouldClear={this.state.clearChips}
+              />
+            </div>
+          </Paper>
           <label htmlFor="MyTypeSelect">Selet Type</label>
           <MyTypeSelect
             value={values.snipType}
@@ -108,10 +131,6 @@ const MyForm = props => {
           <label htmlFor="MyFrameSelect">Selet Framework</label>
           <MyFrameSelect
             value={values.framework}
-            onChange={setFieldValue}
-          />
-          <MyCodeInput
-            value={values.code}
             onChange={setFieldValue}
           />
           <h3>Notes</h3>
@@ -128,23 +147,20 @@ const MyForm = props => {
             Reset
           </button>
           <div
-            onClick={() => clearLog('submit', 'submit')}>
+            onClick={() => this.clearChips()}>
             <Button
               type="submit"
               variant="outlined">
               Submit
             </Button>
           </div>
-          {/* <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button> */}
         </form>
         <div style={{margin: '5%'}}>
-          <DisplayFormikState {...props} />
+          <DisplayFormikState {...this.props} />
         </div>
-
       </Paper>
-  )
+    )
+  }
 }
 
 export default formikEnhancer(MyForm);

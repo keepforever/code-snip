@@ -7,11 +7,26 @@ import Chip from '@material-ui/core/Chip';
 const defaultState = {
   keywords: [],
   pendingKeyword: '',
+  shouldClear: false
 }
 
 class MyKeywordInput extends Component {
 
   state = defaultState
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('prevState.shouldClear', prevState.shouldClear)
+    console.log('prevProps.shouldClear', prevProps.shouldClear)
+
+    const flip = !prevState.shouldClear
+
+    if(prevProps.shouldClear !== prevState.shouldClear) {
+      this.setState({
+        keywords: [],
+        shouldClear: flip
+      })
+    }
+  }
 
   addKeyword(keyword) {
     if (keyword.length === 0) {

@@ -7,11 +7,33 @@ import Chip from '@material-ui/core/Chip';
 const defaultState = {
   references: [],
   pendingReference: '',
+  shouldClear: false,
 }
 
 class MyReferenceInput extends Component {
 
   state = defaultState
+
+
+  // getSnapshotBeforeUpdate(prevProps, prevState) {
+  //   console.log('snap next props', prevProps['shouldClear'])
+  //   return prevProps['shouldClear']
+  // }
+
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('prevState.shouldClear', prevState.shouldClear)
+    console.log('prevProps.shouldClear', prevProps.shouldClear)
+
+    const flip = !prevState.shouldClear
+
+    if(prevProps.shouldClear !== prevState.shouldClear) {
+      this.setState({
+        references: [],
+        shouldClear: flip
+      })
+    }
+  }
 
   addReference(reference) {
     if (reference.length === 0) {
@@ -57,6 +79,7 @@ class MyReferenceInput extends Component {
 
   render() {
     //console.log('MyReferenceInput state', this.state)
+
     return (
       <div>
         <TextField

@@ -7,11 +7,26 @@ import Chip from '@material-ui/core/Chip';
 const defaultState = {
   companions: [],
   pendingCompanion: '',
+  shouldClear: false,
 }
 
 class MyCompanionInput extends Component {
 
   state = defaultState
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('prevState.shouldClear', prevState.shouldClear)
+    console.log('prevProps.shouldClear', prevProps.shouldClear)
+
+    const flip = !prevState.shouldClear
+
+    if(prevProps.shouldClear !== prevState.shouldClear) {
+      this.setState({
+        companions: [],
+        shouldClear: flip
+      })
+    }
+  }
 
   addCompanion(companion) {
     if (companion.length === 0) {
