@@ -3,14 +3,9 @@ import React from "react";
 import PanelSummary from './PanelSummary';
 import PanelDetails from './PanelDetails';
 // material-ui
-import ListItem from "@material-ui/core/ListItem";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import Paper from "@material-ui/core/Paper";
-import Chip from "@material-ui/core/Chip";
 // utils
 //import { clearLog } from "../utils";
 
