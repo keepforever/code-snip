@@ -1,26 +1,26 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 const styles = {
   root: {
     flexGrow: 1,
-    backgroundColor: 'black',
     marginTop: 5,
-    marginBottom:5,
+    marginBottom: 5
   },
   tab: {
-    color: 'white'
+    color: "white"
   }
 };
 
-const valueMap = ['react','react-native', 'vue', 'sage-maker', ]
+const valueMap = ["react", "react-native", "vue", "sage-maker"];
 
 class MyFrameSelect extends React.Component {
   state = {
     value: 0,
+    showNumber: 0
   };
 
   handleChange = (event, value) => {
@@ -38,14 +38,13 @@ class MyFrameSelect extends React.Component {
           value={this.state.value}
           onChange={this.handleChange}
           indicatorColor="primary"
-          textColor="primary"
-          centered
+          textColor="secondary"
+          scrollable
+          scrollButtons="auto"
         >
-          {
-            valueMap.map((val, index) => {
-              return <Tab className={classes.tab} label={val} key={index} />
-            })
-          }
+          {valueMap.map((val, index) => {
+            return <Tab className={classes.tab} label={val} key={index} />;
+          })}
         </Tabs>
       </Paper>
     );

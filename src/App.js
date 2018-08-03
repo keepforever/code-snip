@@ -9,54 +9,56 @@ import Layout from "./components/Layout";
 import Routes from "./routes";
 //apollo stuff
 import { ApolloProvider } from "react-apollo";
-import { ApolloClient, InMemoryCache } from 'apollo-client-preset';
-import { createUploadLink } from 'apollo-upload-client';
+import { ApolloClient, InMemoryCache } from "apollo-client-preset";
+import { createUploadLink } from "apollo-upload-client";
 //To pass Auth token in Header
-import { setContext } from 'apollo-link-context';
+import { setContext } from "apollo-link-context";
 //import ApolloClient from "apollo-boost";
 
 //material-ui
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
-import orange from '@material-ui/core/colors/orange';
-import green from '@material-ui/core/colors/green';
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import red from "@material-ui/core/colors/red";
+import orange from "@material-ui/core/colors/orange";
+import green from "@material-ui/core/colors/green";
 // util
-import { clearLog } from './utils'
+import { clearLog } from "./utils";
 
 //apollo
 const authLink = setContext(async (_, { headers }) => {
   //const token = await AsyncStorage.getItem(TOKEN_KEY);
   // hard coded temporarily
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamtjOW16dDI4dHM3MGIxMmYwdzdxaDdnIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1MzMyMzU4MjV9.V8opCDwDdC8KT0SFyVt5Q3ZdXtgyGecEMc0xo35Ltrc'
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamtjOW16dDI4dHM3MGIxMmYwdzdxaDdnIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1MzMyMzU4MjV9.V8opCDwDdC8KT0SFyVt5Q3ZdXtgyGecEMc0xo35Ltrc";
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
+      authorization: token ? `Bearer ${token}` : ""
+    }
   };
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(createUploadLink({
-    uri: 'https://itm-adv-server-wkszfikcyh.now.sh' })
+  link: authLink.concat(
+    createUploadLink({
+      uri: "https://itm-adv-server-wkszfikcyh.now.sh"
+    })
   ),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache()
 });
 
 //clearLog("src/App.js, Client: ", client.link.request)
 
-
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: "dark",
     primary: {
-      main: '#e65100',
+      main: "#e65100"
     },
     secondary: {
-      main: '#ffea00'
+      main: "#ffea00"
     }
   }
-})
+});
 
 const store = createStore(rootReducer);
 

@@ -1,17 +1,15 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-
+import React from "react";
+import TextField from "@material-ui/core/TextField";
 
 class MyNotesInput extends React.Component {
-
   state = {
-    multiline: ``,
-  }
+    multiline: ``
+  };
   handleTextChange = name => event => {
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target.value
     });
-    this.handleChange(event.target.value)
+    this.handleChange(event.target.value);
   };
 
   handleChange = value => {
@@ -21,16 +19,16 @@ class MyNotesInput extends React.Component {
   };
 
   render() {
-    const { value } = this.props
+    const { value } = this.props;
     return (
       <TextField
         fullWidth
         id="multiline-flexible"
-        label="Notes about this snippit..."
+        label="add notes about this snippit..."
         multiline
         rowsMax="100"
         value={value}
-        onChange={this.handleTextChange('multiline')}
+        onChange={this.handleTextChange("multiline")}
         margin="normal"
       />
     );

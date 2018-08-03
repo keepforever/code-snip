@@ -1,26 +1,21 @@
-import React, { Component } from 'react';
-import AceEditor from 'react-ace';
+import React, { Component } from "react";
+import AceEditor from "react-ace";
 import Typography from "@material-ui/core/Typography";
 
-import 'brace/mode/javascript';
-import 'brace/theme/monokai';
-
+import "brace/mode/javascript";
+import "brace/theme/monokai";
 
 class MyCodeInput extends Component {
-
   handleChange = value => {
     // this is going to call setFieldValue and manually update values.topcis
     this.props.onChange("code", value);
   };
 
-  render () {
-    const { value } = this.props
+  render() {
+    const { value } = this.props;
 
     return (
       <div>
-        <Typography variant="subheading" color='secondary'>
-          Snippit:
-        </Typography>
         <AceEditor
           width="100%"
           height="300px"
@@ -37,14 +32,15 @@ class MyCodeInput extends Component {
           value={value}
           setOptions={{
             showLineNumbers: true,
-            tabSize: 2,
-            }}/>
+            tabSize: 2
+          }}
+        />
       </div>
     );
   }
 }
 
-export default MyCodeInput
+export default MyCodeInput;
 
 // 3rd party example code
 // class MySelect extends React.Component {

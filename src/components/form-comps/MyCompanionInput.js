@@ -1,30 +1,29 @@
-import React, {Component} from 'react';
-import TextField from '@material-ui/core/TextField';
+import React, { Component } from "react";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Chip from '@material-ui/core/Chip';
+import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
 
 const defaultState = {
   companions: [],
-  pendingCompanion: '',
-  shouldClear: false,
-}
+  pendingCompanion: "",
+  shouldClear: false
+};
 
 class MyCompanionInput extends Component {
-
-  state = defaultState
+  state = defaultState;
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     //console.log('prevState.shouldClear', prevState.shouldClear)
     //console.log('prevProps.shouldClear', prevProps.shouldClear)
 
-    const flip = !prevState.shouldClear
+    const flip = !prevState.shouldClear;
 
-    if(prevProps.shouldClear !== prevState.shouldClear) {
+    if (prevProps.shouldClear !== prevState.shouldClear) {
       this.setState({
         companions: [],
         shouldClear: flip
-      })
+      });
     }
   }
 
@@ -32,41 +31,38 @@ class MyCompanionInput extends Component {
     if (companion.length === 0) {
       this.setState(state => ({
         ...state,
-        pendingCompanion: ''
+        pendingCompanion: ""
       }));
-      return
+      return;
     }
-    const updatedCompanions = [
-      ...this.state.companions,
-      companion.trim()
-    ]
+    const updatedCompanions = [...this.state.companions, companion.trim()];
     this.setState(state => ({
       ...state,
       companions: updatedCompanions,
-      pendingCompanion: ''
+      pendingCompanion: ""
     }));
     this.props.onChange("companion", updatedCompanions);
   }
 
-  removeCompanion = (index) => {
-    const currentCompanions = [...this.state.companions]
+  removeCompanion = index => {
+    const currentCompanions = [...this.state.companions];
 
-    const updatedCompanions = currentCompanions.filter((c) => {
-      return c !== currentCompanions[index]
-    })
+    const updatedCompanions = currentCompanions.filter(c => {
+      return c !== currentCompanions[index];
+    });
 
     this.setState(state => ({
       ...state,
       companions: updatedCompanions,
-      pendingCompanion: ''
+      pendingCompanion: ""
     }));
-  }
+  };
 
   handleChange = name => event => {
     // console.log('event,target,value, name', name)
     // console.log('event,target,value', event.target.value)
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target.value
     });
   };
 
@@ -74,30 +70,23 @@ class MyCompanionInput extends Component {
     //console.log('MyCompanionInput state', this.state)
     return (
       <div>
-        <Typography variant="subheading" color='secondary'>
-          Companion
-        </Typography>
         <TextField
           id="name"
-          label="Pending Companion"
+          label="type here to add companion libs"
           fullWidth
           value={this.state.pendingCompanion}
-          onChange={this.handleChange('pendingCompanion')}
+          onChange={this.handleChange("pendingCompanion")}
           margin="normal"
-          onKeyPress={(ev) => {
+          onKeyPress={ev => {
             console.log(`Pressed keyCode ${ev.key}`);
-            if (ev.key === 'Enter') {
-              this.addCompanion(this.state.pendingCompanion)
+            if (ev.key === "Enter") {
+              this.addCompanion(this.state.pendingCompanion);
               ev.preventDefault();
             }
           }}
         />
-        <div
-          onClick={() => this.addCompanion(this.state.pendingCompanion)}>
-          <Button
-            fullWidth
-            color="primary"
-            variant="raised">
+        <div onClick={() => this.addCompanion(this.state.pendingCompanion)}>
+          <Button fullWidth color="primary" variant="raised">
             Add Companion
           </Button>
         </div>
@@ -108,11 +97,11 @@ class MyCompanionInput extends Component {
               label={c}
               onDelete={() => this.removeCompanion(index)}
             />
-          )
+          );
         })}
       </div>
-    )
+    );
   }
 }
 
-export default MyCompanionInput
+export default MyCompanionInput;

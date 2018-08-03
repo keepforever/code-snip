@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-// Formik
-import { withFormik, Formik } from "formik";
-// graphql
-import gql from "graphql-tag";
-import { graphql, compose } from "react-apollo";
-import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
-// yup validation
+import { withFormik } from "formik";
 import { object, string, array } from "yup";
-// locals
+// or import * as yup from 'yup' for more than just 'object' and 'string'
+// attempting 3rd party input with formik
 import MyCodeInput from "./form-comps/MyCodeInput";
 import MyTypeSelect from "./form-comps/MyTypeSelect";
 import MyFrameSelect from "./form-comps/MyFrameSelect";
@@ -17,12 +12,23 @@ import MyKeywordInput from "./form-comps/MyKeywordInput";
 import MyCompanionInput from "./form-comps/MyCompanionInput";
 import MyReferenceInput from "./form-comps/MyReferenceInput";
 import MyNameInput from "./form-comps/MyNameInput";
-// utils
+// diagnostics for form input
 import DisplayFormikState from "./form-comps/DisplayFormikState";
 import { clearLog } from "../utils";
-// material-ui
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+
+// yup.mixed;
+// yup.string;
+// yup.number;
+// yup.boolean; // also aliased as yup.bool
+// yup.date;
+// yup.object;
+// yup.array;
+
+// yup.reach;
+// yup.addMethod;
+// yup.ValidationError;
 
 const formikEnhancer = withFormik({
   mapPropsToValues({
@@ -63,7 +69,7 @@ const formikEnhancer = withFormik({
     keywords: array()
   }),
   handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    clearLog("form submitted with values", values);
+    alert("balls!");
     clearLog("handleSubmit props", props);
     resetForm();
   }
@@ -239,12 +245,5 @@ class MyForm extends Component {
     );
   }
 }
-// export default formikEnhancer(MyForm);
-const Balls = formikEnhancer(MyForm);
 
-export default compose(
-  graphql(SNIPPITS_QUERY, {
-    options: { fetchPolicy: "cache-and-network" },
-    name: "snippitsQuery"
-  })
-)(Balls);
+export default formikEnhancer(MyForm);

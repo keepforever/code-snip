@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { LayoutChildrenDiv } from './styled';
-import MaterialToolbar from './layout-comps/MaterialToolbar';
-import MaterialDrawer from './layout-comps/MaterialDrawer';
+import { LayoutChildrenDiv } from "./styled";
+import MaterialToolbar from "./layout-comps/MaterialToolbar";
+import MaterialDrawer from "./layout-comps/MaterialDrawer";
 
 class Layout extends Component {
   state = {
@@ -27,20 +27,6 @@ class Layout extends Component {
           links={links}
           drawerToggleClicked={this.sideDrawerToggleHandler}
         />
-        {/* <Toolbar
-          links={links}
-          drawerToggleClicked={this.sideDrawerToggleHandler}
-        /> */}
-        <MaterialDrawer
-          links={links}
-          open={this.state.showSideDrawer}
-          closed={this.sideDrawerClosedHandler}
-        />
-        {/* <SideDrawer
-          links={links}
-          open={this.state.showSideDrawer}
-          closed={this.sideDrawerClosedHandler}
-        /> */}
         <LayoutChildrenDiv>{this.props.children}</LayoutChildrenDiv>
       </React.Fragment>
     );

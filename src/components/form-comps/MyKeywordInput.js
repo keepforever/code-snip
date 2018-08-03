@@ -1,31 +1,29 @@
-import React, {Component} from 'react';
-import TextField from '@material-ui/core/TextField';
+import React, { Component } from "react";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Chip from '@material-ui/core/Chip';
+import Chip from "@material-ui/core/Chip";
 import Typography from "@material-ui/core/Typography";
-
 
 const defaultState = {
   keywords: [],
-  pendingKeyword: '',
+  pendingKeyword: "",
   shouldClear: false
-}
+};
 
 class MyKeywordInput extends Component {
-
-  state = defaultState
+  state = defaultState;
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     //console.log('prevState.shouldClear', prevState.shouldClear)
     //console.log('prevProps.shouldClear', prevProps.shouldClear)
 
-    const flip = !prevState.shouldClear
+    const flip = !prevState.shouldClear;
 
-    if(prevProps.shouldClear !== prevState.shouldClear) {
+    if (prevProps.shouldClear !== prevState.shouldClear) {
       this.setState({
         keywords: [],
         shouldClear: flip
-      })
+      });
     }
   }
 
@@ -33,41 +31,38 @@ class MyKeywordInput extends Component {
     if (keyword.length === 0) {
       this.setState(state => ({
         ...state,
-        pendingKeyword: ''
+        pendingKeyword: ""
       }));
-      return
+      return;
     }
-    const updatedkeywords = [
-      ...this.state.keywords,
-      keyword.trim()
-    ]
+    const updatedkeywords = [...this.state.keywords, keyword.trim()];
     this.setState(state => ({
       ...state,
       keywords: updatedkeywords,
-      pendingKeyword: ''
+      pendingKeyword: ""
     }));
     this.props.onChange("keywords", updatedkeywords);
   }
 
-  removeKeyword = (index) => {
-    const currentkeywords = [...this.state.keywords]
+  removeKeyword = index => {
+    const currentkeywords = [...this.state.keywords];
 
-    const updatedkeywords = currentkeywords.filter((c) => {
-      return c !== currentkeywords[index]
-    })
+    const updatedkeywords = currentkeywords.filter(c => {
+      return c !== currentkeywords[index];
+    });
 
     this.setState(state => ({
       ...state,
       keywords: updatedkeywords,
-      pendingKeyword: ''
+      pendingKeyword: ""
     }));
-  }
+  };
 
   handleChange = name => event => {
     // console.log('event,target,value, name', name)
     // console.log('event,target,value', event.target.value)
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target.value
     });
   };
 
@@ -75,48 +70,40 @@ class MyKeywordInput extends Component {
     //console.log('MyKeywordInput state', this.state)
     return (
       <div>
-        <Typography variant="subheading" color='secondary'>
-          Keywords:
-        </Typography>
         <TextField
           id="name"
-          label="Pending Keyword"
+          label="type here to add a keyword..."
           value={this.state.pendingKeyword}
           fullWidth
-          onChange={this.handleChange('pendingKeyword')}
+          onChange={this.handleChange("pendingKeyword")}
           margin="normal"
-          onKeyPress={(ev) => {
+          onKeyPress={ev => {
             console.log(`Pressed keyCode ${ev.key}`);
-            if (ev.key === 'Enter') {
-              this.addKeyword(this.state.pendingKeyword)
+            if (ev.key === "Enter") {
+              this.addKeyword(this.state.pendingKeyword);
               ev.preventDefault();
             }
           }}
         />
-        <div
-          onClick={() => this.addKeyword(this.state.pendingKeyword)}>
-          <Button
-            fullWidth
-            color="primary"
-            variant="raised">
-              Add Keyword
+        <div onClick={() => this.addKeyword(this.state.pendingKeyword)}>
+          <Button fullWidth color="primary" variant="raised">
+            Add Keyword
           </Button>
         </div>
-        <div style={{display:'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
+        <div
+          style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
+        >
           {this.state.keywords.map((c, index) => {
             return (
-              <div style={{marginRight: 7, marginBotton: 7}} key={index}>
-                <Chip
-                  label={c}
-                  onDelete={() => this.removeKeyword(index)}
-                />
+              <div style={{ marginRight: 7, marginBotton: 7 }} key={index}>
+                <Chip label={c} onDelete={() => this.removeKeyword(index)} />
               </div>
-            )
+            );
           })}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default MyKeywordInput
+export default MyKeywordInput;
