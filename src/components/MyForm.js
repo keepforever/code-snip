@@ -5,6 +5,7 @@ import { withFormik, Formik } from "formik";
 import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
+import { CREATE_SNIPPIT } from "../graphql/mutations/CREATE_SNIPPIT";
 // yup validation
 import { object, string, array } from "yup";
 // locals
@@ -35,9 +36,6 @@ const formikEnhancer = withFormik({
     companion,
     keywords,
     reference,
-    password,
-    newsletter,
-    plan
   }) {
     return {
       snipName: snipName || "",
@@ -62,9 +60,25 @@ const formikEnhancer = withFormik({
     refrence: array(),
     keywords: array()
   }),
-  handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
+  async handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
     clearLog("form submitted with values", values);
     clearLog("handleSubmit props", props);
+    let response;
+    response = await props.createSnippit({
+      variables: {
+        author: 'cjkc9mzt28ts70b12f0w7qh7g',
+        name: values.snipName,
+        language: values.language,
+        code: values.code,
+        type: values.snipType,
+        framework: values.framework,
+        notes: values.notes,
+        companion: values.companion,
+        keywords: values.keywords,
+        reference: values.reference
+      }
+    });
+    clearLog("response", response);
     resetForm();
   }
 });
@@ -76,9 +90,7 @@ class MyForm extends Component {
 
   clearChips = () => {
     const flip = !this.state.clearChips;
-    this.setState({
-      clearChips: flip
-    });
+    this.setState({ clearChips: flip });
   };
 
   render() {
@@ -96,7 +108,13 @@ class MyForm extends Component {
 
     return (
       <Paper>
-        <div style={{ paddingTop: 10, paddingLeft: "5%", paddingRight: "5%" }}>
+        <div
+          style={{
+            paddingTop: 10,
+            paddingLeft: "5%",
+            paddingRight: "5%"
+          }}
+        >
           <form onSubmit={handleSubmit}>
             <Paper>
               <div
@@ -204,7 +222,7 @@ class MyForm extends Component {
               >
                 <Button
                   disabled={!dirty || isSubmitting}
-                  fullWidth
+                  fullWidth={true}
                   color="default"
                   variant="raised"
                 >
@@ -221,7 +239,7 @@ class MyForm extends Component {
                 }}
               >
                 <Button
-                  fullWidth
+                  fullWidth={true}
                   type="submit"
                   color="secondary"
                   variant="raised"
@@ -244,7 +262,15 @@ const Balls = formikEnhancer(MyForm);
 
 export default compose(
   graphql(SNIPPITS_QUERY, {
-    options: { fetchPolicy: "cache-and-network" },
+    options: {
+      fetchPolicy: "cache-and-network"
+    },
     name: "snippitsQuery"
+  }),
+  graphql(CREATE_SNIPPIT, {
+    options: {
+      fetchPolicy: "cache-and-network"
+    },
+    name: "createSnippit"
   })
 )(Balls);
