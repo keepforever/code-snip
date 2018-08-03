@@ -71,12 +71,12 @@ class Home extends Component {
 
     return (
       <ContainerAlpha>
-        <Typography color="secondary" variant="headline">
+        {/* <Typography color="secondary" variant="headline">
           Hello home page
         </Typography>
         <Typography variant="title" color="secondary">
           React & Material-UI Sample Application
-        </Typography>
+        </Typography> */}
         <div className="container">
           <div onChange={() => this.counterChangeHandler(this.props.ctr)}>
             <Typography variant="subheading" color='secondary'>

@@ -29,31 +29,58 @@ function newCodeBlockExpandable(props) {
   clearLog('NEW_CODE_BLOCK_EXPANDABLE', props)
 
   return (
-    <div className={classes.root}>
+    <div >
       <ExpansionPanel>
         <ExpansionPanelSummary className={classes.summaryMeta} expandIcon={<div />}>
-        <ListItem>
-          <ListItemText primary={snip.name} secondary={snip.language} />
+        <ListItem component={() => {
+          return (
+            <div style={{display: 'flex', width: '100%', flexDirection: 'column'}}>
+              <Paper>
+                <div style={{flexFlow: 'column wrap', backgroundImage:`linear-gradient(180deg, rgba(230, 81, 0, 0.1) 10%, rgba(230, 81, 0, 0.7))`}}>
+                  <Paper>
+                    <div style ={{padding: 10}}>
+                      <Typography variant="title" color="secondary">
+                        {snip.name}
+                      </Typography>
+                      <Typography variant="title" color="secondary" >
+                        {snip.language}
+                      </Typography>
+                    </div>
+                  </Paper>
+                    <div style={{padding: 10, marginBottom: 5, display: 'flex', flexFlow: 'row wrap'}}>
+                      {snip.keywords.map((k, index) => {
+                        return (
+                          <div style={{margin: 5, display: 'inline-block'}}>
+                            <Chip className={classes.chippy} key={index} label={k} />
+                          </div>
+                        )
+                      })}
+                    </div>
+                    <div style={{padding: 10, marginBottom: 5, display: 'flex', flexFlow: 'row wrap'}}>
+                      {snip.keywords.map((k, index) => {
+                        return (
+                          <Chip className={classes.chippy} key={index} label={k} />
+                        )
+                      })}
+                    </div>
+                    <div>
+                      {snip.companion.map((c, index) => {
+                        return (
+                          <div style={{margin: 18, display: 'inline-block'}}>
+                            <Chip index={index} label={c} />
+                          </div>
+                        )
+                      })}
+                    </div>
+                </div>
+              </Paper>
+            </div>
+          )
+        } }>
+
           <div className={classes.listMetaRight}>
 
-              <div style={{marginBottom: 5}}>
-                {snip.keywords.map((k, index) => {
-                  return (
-                    <div style={{margin: 5, display: 'inline-block'}}>
-                      <Chip className={classes.chippy} key={index} label={k} />
-                    </div>
-                  )
-                })}
-              </div>
-              <div>
-                {snip.companion.map((c, index) => {
-                  return (
-                    <div style={{margin: 5, display: 'inline-block'}}>
-                      <Chip index={index} label={c} />
-                    </div>
-                  )
-                })}
-              </div>
+
           </div>
         </ListItem>
         </ExpansionPanelSummary>
@@ -80,9 +107,6 @@ newCodeBlockExpandable.propTypes = {
 export default withStyles(styles)(newCodeBlockExpandable);
 
 const styles = theme => ({
-  root: {
-    width: '100%',
-  },
   listMetaRight: {
     backgroundColor: 'blue',
     width: '100%',
