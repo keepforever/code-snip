@@ -33,8 +33,8 @@ function ButtonAppBar(props) {
               <MenuIcon />
             </IconButton>
           </div>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            News
+          <Typography variant="subheading" color="inherit" className={classes.flex}>
+            Snarf Snarf
           </Typography>
             <ToolbarLinks>
               {props.links.map((link, index) => {

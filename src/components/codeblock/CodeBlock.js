@@ -6,21 +6,17 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 class CodeBlock extends Component {
 
-  onCopy = () => {
-    alert('COPIED!')
-  }
+  // onCopy = () => {
+  //   alert('COPIED!')
+  // }
 
   render () {
-    const { code: { code, meta: { language } }  } = this.props
+    const {code} = this.props
     return (
-      <div>
-        <div>language: {language}</div>
+      <div style={{width: '100%'}}>
         <Highlight language="javascript">
           {code}
         </Highlight>
-        <CopyToClipboard onCopy={this.onCopy} text={code}>
-          <Button variant="outlined">Copy</Button>
-        </CopyToClipboard>
       </div>
     );
   }

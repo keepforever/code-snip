@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { ContainerAlpha } from "../components/styled";
-//import CodeBlock from "../components/codeblock/CodeBlock";
+import NewCodeBlockExpandable from '../components/newCodeBlockExpandable'
 import CodeBlockExpandable from '../components/CodeBlockExpandable'
 //material-ui
+import purple from '@material-ui/core/colors/purple';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { codeString } from '../utils'
@@ -10,6 +12,14 @@ import { codeString } from '../utils'
 import { incrementCounter } from '../store/actions/counter';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
+// graphql dependencies
+import gql from 'graphql-tag';
+import { graphql, compose } from 'react-apollo';
+//import Q's and M's
+import { SNIPPITS_QUERY } from '../graphql/queries/SNIPPITS_QUERY';
+import { DELETE_OFFER } from '../graphql/mutations/DELETE_OFFER';
+// utils
+import { clearLog } from '../utils';
 
 class Home extends Component {
   state = {
@@ -40,9 +50,23 @@ class Home extends Component {
   render() {
 
     const { multiline } = this.state;
-    console.log('state multiline', multiline)
+
     const {  ctr, user, snipp } = this.props
-    console.log('mapStateToProps HOME', ctr, user, snipp)
+
+
+    const {
+      listSnippits: { loading, snippits },
+      userId,
+      specificSnippit
+    } = this.props
+
+    let snipMeta = [];
+    if(loading) {
+      return <CircularProgress thickness={7} />
+    } else {
+      clearLog('HOME loading completed', this.props.listSnippits.snippits)
+      snipMeta = [...snippits]
+    }
 
 
     return (
@@ -67,13 +91,10 @@ class Home extends Component {
                 Counter
               </Button>
           </div>
-          {codeString.map((item, index) => {
+          {snippits.map((item, index) => {
             return (
               <React.Fragment key={index}>
-                <CodeBlockExpandable snip={item} />
-                {/* <div style={{margin: 10}}>
-                  <CodeBlock code={el}  />;
-                </div> */}
+                <NewCodeBlockExpandable snip={item} />
               </React.Fragment>
             )
           })}
@@ -98,7 +119,17 @@ const mapDispatchToProps = dispatch => {
   }, dispatch)
 }
 
-export default connect( mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(compose(
+  graphql(SNIPPITS_QUERY, {
+    options: {
+      fetchPolicy: "cache-and-network",
+      variables: {
+        orderBy: 'createdAt_ASC'
+      }
+    },
+    name: "listSnippits"
+  })
+)(Home));
 
 const styles = {
   button: {
@@ -106,3 +137,12 @@ const styles = {
     backgroundColor: 'black'
   }
 };
+//
+//
+// {codeString.map((item, index) => {
+//   return (
+//     <React.Fragment key={index}>
+//       <CodeBlockExpandable snip={item} />
+//     </React.Fragment>
+//   )
+// })}

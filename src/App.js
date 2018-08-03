@@ -18,7 +18,6 @@ import { setContext } from 'apollo-link-context';
 //material-ui
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
-import purple from '@material-ui/core/colors/purple';
 import orange from '@material-ui/core/colors/orange';
 import green from '@material-ui/core/colors/green';
 // util
