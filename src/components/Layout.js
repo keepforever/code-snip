@@ -27,6 +27,11 @@ class Layout extends Component {
           links={links}
           drawerToggleClicked={this.sideDrawerToggleHandler}
         />
+        <MaterialDrawer
+          links={links}
+          open={this.state.showSideDrawer}
+          closed={this.sideDrawerClosedHandler}
+        />
         <LayoutChildrenDiv>{this.props.children}</LayoutChildrenDiv>
       </React.Fragment>
     );

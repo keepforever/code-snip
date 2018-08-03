@@ -1,8 +1,8 @@
 import React from "react";
 
-import NavigationItem from "../ui/NavigationItem";
-import DrawerToggle from "./DrawerToggle";
-import { ToolbarHeader, ToolbarLinks } from "../styled";
+import NavigationItem from "../../ui/NavigationItem";
+import DrawerToggle from "../DrawerToggle";
+import { ToolbarHeader, ToolbarLinks } from "../../styled";
 
 const toolbar = props => {
   //console.log('toolbar props', props)

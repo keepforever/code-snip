@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const incrementCounter = (state, action) => {
-  
+  clearLog('counter reducer', action)
   const newCount = state.count + 1
   return updateObject(state, {
     count: newCount

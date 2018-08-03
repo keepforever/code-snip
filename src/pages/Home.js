@@ -1,32 +1,27 @@
 import React, { Component } from "react";
 import { ContainerAlpha } from "../components/styled";
 import NewCodeBlockExpandable from "../components/newCodeBlockExpandable";
-import CodeBlockExpandable from "../components/CodeBlockExpandable";
 //material-ui
-import purple from "@material-ui/core/colors/purple";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { codeString } from "../utils";
 // REDUX
 import { incrementCounter } from "../store/actions/counter";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
-import gql from "graphql-tag";
+//import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
-import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
+//import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
 // utils
 import { clearLog } from "../utils";
 
 class Home extends Component {
   state = {
     copied: false,
-    name: "Cat in the Hat",
     age: "",
-    multiline: "",
     currency: "EUR"
   };
 
@@ -43,37 +38,25 @@ class Home extends Component {
   };
 
   counterChangeHandler = () => {
-    console.log("you did it");
+    clearLog("counter");
     this.props.onIncrementCounter();
   };
 
   render() {
-    const { multiline } = this.state;
-
-    const { ctr, user, snipp } = this.props;
+    const { ctr } = this.props;
 
     const {
       listSnippits: { loading, snippits },
-      userId,
-      specificSnippit
+      //userId,
+      //specificSnippit
     } = this.props;
 
-    let snipMeta = [];
     if (loading) {
       return <CircularProgress thickness={7} />;
-    } else {
-      //clearLog("HOME loading completed", this.props.listSnippits.snippits);
-      snipMeta = [...snippits];
     }
 
     return (
       <ContainerAlpha>
-        {/* <Typography color="secondary" variant="headline">
-          Hello home page
-        </Typography>
-        <Typography variant="title" color="secondary">
-          React & Material-UI Sample Application
-        </Typography> */}
         <div className="container">
           <div
             style={styles.button}
@@ -85,7 +68,7 @@ class Home extends Component {
           </div>
           <div onChange={() => this.counterChangeHandler(this.props.ctr)}>
             <Typography variant="subheading" color="secondary">
-              Counter value: {this.props.ctr}
+              Counter value: {ctr}
             </Typography>
           </div>
           {snippits.map((item, index) => {

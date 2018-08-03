@@ -1,9 +1,9 @@
 import React from "react";
 import "./SideDrawer.css";
-import NavigationItem from "../../ui/NavigationItem";
-import Backdrop from "../Backdrop";
-import Aus from '../../hoc/Aus';
-import {LogoContainer} from '../../styled'
+import NavigationItem from "../../../ui/NavigationItem";
+import Backdrop from "../../Backdrop";
+import Aus from '../../../hoc/Aus';
+import {LogoContainer} from '../../../styled'
 
 const sideDrawer = props => {
   // to conditionally control side drawer classes

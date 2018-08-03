@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject, clearLog } from '../../utils';
+//import { updateObject, clearLog } from '../../utils';
+import { clearLog } from '../../utils';
 
 const initialState = {
     snippits: ['test'],

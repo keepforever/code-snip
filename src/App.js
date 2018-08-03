@@ -3,7 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./store/reducers";
-import reducer from "./store/reducer";
 //my custom components
 import Layout from "./components/Layout";
 import Routes from "./routes";
@@ -17,11 +16,9 @@ import { setContext } from "apollo-link-context";
 
 //material-ui
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import red from "@material-ui/core/colors/red";
-import orange from "@material-ui/core/colors/orange";
-import green from "@material-ui/core/colors/green";
+
 // util
-import { clearLog } from "./utils";
+//import { clearLog } from "./utils";
 
 //apollo
 const authLink = setContext(async (_, { headers }) => {

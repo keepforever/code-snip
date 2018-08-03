@@ -1,11 +1,13 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject, clearLog } from '../../utils';
 
+
 const initialState = {
     userId: "balls",
 };
 
 const addUser = ( state, action ) => {
+  clearLog('x', 'x')
   return updateObject(state, {
     userId: action.user
   })

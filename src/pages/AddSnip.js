@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import MyForm from "../components/MyForm";
 import { ContainerAlpha } from "../components/styled";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
 class AddSnip extends Component {

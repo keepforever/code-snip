@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 // Formik
-import { withFormik, Formik } from "formik";
+import { withFormik } from "formik";
 // graphql
-import gql from "graphql-tag";
+//import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 import { CREATE_SNIPPIT } from "../graphql/mutations/CREATE_SNIPPIT";

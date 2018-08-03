@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {DrawerToggleDiv} from '../styled'
+import {DrawerToggleDiv} from '../../styled'
 
 const drawerToggle = ( props ) => {
   return (

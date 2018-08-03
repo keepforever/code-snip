@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Highlight from 'react-highlight'
 import './hilight.css'
-import Button from "@material-ui/core/Button";
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+//import Button from "@material-ui/core/Button";
+//import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 class CodeBlock extends Component {
 

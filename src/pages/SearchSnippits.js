@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 // graphql dependencies
-import gql from "graphql-tag";
+  //import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
-import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
+  //import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
 // redux
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -23,7 +23,7 @@ const defaultState = {
   }
 };
 
-class SearchSnippits extends React.Component {
+class SearchSnippits extends Component {
   state = defaultState;
 
   navToSpecificSnippit = snip => {
@@ -90,8 +90,8 @@ class SearchSnippits extends React.Component {
 
     const {
       listSnippits: { loading, snippits },
-      userId,
-      specificSnippit
+      //userId,
+      //specificSnippit
     } = this.props;
 
     const {
