@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ContainerAlpha } from "../components/styled";
-import NewCodeBlockExpandable from "../components/newCodeBlockExpandable";
+import SnipListItem from "../components/snip-list-item/SnipListItem";
 //material-ui
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
@@ -52,7 +52,11 @@ class Home extends Component {
     } = this.props;
 
     if (loading) {
-      return <CircularProgress thickness={7} />;
+      return (
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 400}}>
+          <CircularProgress thickness={7} />;
+        </div>
+      )
     }
 
     return (
@@ -74,7 +78,7 @@ class Home extends Component {
           {snippits.map((item, index) => {
             return (
               <React.Fragment key={index}>
-                <NewCodeBlockExpandable snip={item} />
+                <SnipListItem snip={item} />
               </React.Fragment>
             );
           })}

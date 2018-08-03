@@ -4,7 +4,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import MaterialNavItem from './MaterialNavItem';
+import MaterialDrawerNavItem from './MaterialDrawerNavItem';
 
 const styles = {
   list: {
@@ -24,7 +24,7 @@ class TemporaryDrawer extends React.Component {
       links.map((link, index) => {
         return (
           <ListItem key={index}>
-            <MaterialNavItem  config={link} />
+            <MaterialDrawerNavItem  config={link} />
           </ListItem>
         )
       })
@@ -32,9 +32,11 @@ class TemporaryDrawer extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
+        <br/>
+        <br/>
         <List>{sideDrawerListItems}</List>
-        <Divider />
-        <List>{sideDrawerListItems}</List>
+
+        {/* <List>{sideDrawerListItems}</List> */}
       </div>
     );
 
