@@ -1,156 +1,123 @@
 import React, { Component } from "react";
-// graphql dependencies
-  //import gql from "graphql-tag";
-import { graphql, compose } from "react-apollo";
-//import Q's and M's
-import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
-  //import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
-// redux
-import { connect } from "react-redux";
+//material-ui
+import TextField from "@material-ui/core/TextField";
+import AppBar from "@material-ui/core/AppBar";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+// REDUX
+import { incrementCounter } from "../store/actions/counter";
+import { toggleLandingPage } from "../store/actions/landingPage";
 import { bindActionCreators } from "redux";
-import { selectSpecificSnippit } from "../store/actions/snippit";
+import { connect } from "react-redux";
+// graphql dependencies
+
+//import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
 // utils
-import { clearLog } from "../utils";
+import { clearLog, processSnipsForSearch } from "../utils";
 // locals
-import MySearchInput from "../components/MySearchInput";
-import OuterSpace from "../components/outer-space";
-// material-ui
-import Paper from "@material-ui/core/Paper";
+import Portal from '../components/portals/portalTemplate'
+import { ContainerAlpha, ModalContainer, WelcomeContainer } from "../components/styled";
+import SnipListItem from "../components/snip-list-item/SnipListItem";
+import LandingPage from '../components/landing/LandingPage'
 
-const defaultState = {
-  values: {
-    search: ""
-  }
-};
 
-class SearchSnippits extends Component {
-  state = defaultState;
+class Search extends Component {
 
-  navToSpecificSnippit = snip => {
-    console.log("SearchSnippits navToSpecificSnippit()", snip);
-    this.props.selectSnippitAction(snip);
-    //this.props.navigation.navigate('SpecificOffer');
+  state = {
+    search: '',
   };
 
-  deleteSnippit = id => {
-    const { variables } = this.props.listSnippits;
-
-    this.props.deleteSnippit({
-      variables: {
-        id
-      },
-      update: store => {
-        const data = store.readQuery({ query: SNIPPITS_QUERY, variables });
-        data.snippitsConnection.edges = data.snippitsConnection.edges.filter(
-          s => s.node.id !== id
-        );
-        store.writeQuery({ query: SNIPPITS_QUERY, data, variables });
-      }
-    });
-  };
-
-  editSnippit = id => {
-    clearLog("SearchSnippits editSnippit()", id);
-  };
-
-  // for search bar text entry
-  onChangeText = (key, value) => {
-    this.setState(state => ({
-      values: {
-        ...state.values,
-        [key]: value
-      }
-    }));
-    // refetch the query as we type
-    this.props.listSnippits.refetch({
-      where: {
-        name_contains: value
-      },
-      after: null
+  handleTextChange = name => event => {
+    this.setState({
+      [name]: event.target.value
     });
   };
 
   render() {
-    // for sorting, graphql give you 'refetch' on the data object (here, the
-    // data object is named 'listOffers' because, in the compose config, we
-    // named the different Q's and M's )
-    // 'variables', also on listOffers, allows us to keep track of the params
-    // we are sending to a given query. Here we will use to toggle between sorting
-    // by text or title
-    // const {
-    //   listSnippits: {
-    //     snippitsConnection = {pageInfo: {}, edges: []},
-    //     refetch,
-    //     variables,
-    //     fetchMore,
-    //     loading,
-    //   },
-    //   userId, specificSnippit
-    // } = this.props
+    //clearLog('HOME PROPS', this.props)
+    const {  user: { snips },  } = this.props;
+    const { search } = this.state
 
-    const {
-      listSnippits: { loading, snippits },
-      //userId,
-      //specificSnippit
-    } = this.props;
+    const processedSnips = processSnipsForSearch(snips)
 
-    const {
-      values: { search }
-    } = this.state;
-    //clearLog('SEARCH_SNIPPITS props', this.props)
-    clearLog("LOADING", loading);
-
-    let snippitsMap = {}; // to help address keys error in lue of adding random number
-    let snipMeta = [];
-    if (loading) {
-      return null;
-    } else {
-      clearLog("loading completed", this.props);
-      snipMeta = [...snippits];
+    let match = [];
+    if(search.length > 1) {
+      processedSnips.forEach((item, index) => {
+        const bagToString = item.bagOfWords.join(" ")
+        if (bagToString.includes(search.trim())) {
+          match.push(index)
+        }
+      })
     }
+
+
+    console.log('match', match)
+
+    clearLog('processedSnips', processedSnips)
+
     return (
-      <div>
-        {snipMeta.map((snip, index) => {
-          return (
-            <Paper key={snip.id}>
-              <div>{snip.name}</div>
-            </Paper>
-          );
-        })}
-        <MySearchInput onSearchTextChange={this.onChangeText} />
-        <OuterSpace />
-      </div>
+      <ContainerAlpha>
+        <div>
+          <AppBar position="static" color="default">
+            <TextField
+              fullWidth
+              id="multiline-flexible"
+              label="Snarf your snips..."
+              multiline
+              rowsMax="1"
+              value={search}
+              onChange={this.handleTextChange("search")}
+              margin="normal"
+            />
+          </AppBar>
+        </div>
+        <div className="container">
+          {match.map((item, index) => {
+            return (
+              <React.Fragment key={index}>
+                <SnipListItem snip={snips[item]} />
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </ContainerAlpha>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    userId: state.user.userId,
-    specificSnippit: state.snippit.specificSnippit
+    ctr: state.counter.count,
+    user: state.user.userInfo,
+    snipp: state.snippit.snippits,
+    shouldShowLanding: state.landingPage.showLandingPage
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
-    { selectSnippitAction: selectSpecificSnippit },
+    {
+      incrementCounterAction: incrementCounter,
+      toggleLandingPageAction: toggleLandingPage,
+    },
     dispatch
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(
-  compose(
-    graphql(SNIPPITS_QUERY, {
-      options: {
-        fetchPolicy: "cache-and-network",
-        variables: {
-          orderBy: "createdAt_ASC"
-        }
-      },
-      name: "listSnippits"
-    })
-  )(SearchSnippits)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
+
+
+const styles = {
+  button: {
+    width: 200,
+    backgroundColor: "black"
+  },
+  headerContainer: {
+    height: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "20 0"
+  }
+};

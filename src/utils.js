@@ -1,5 +1,28 @@
-//dummy data
+//search helper
+export const processSnipsForSearch = (snips) => {
+  let processedSnips = []
+  snips.forEach(s => {
 
+    let words = []
+    const name = [s.name]
+    const notes = s.notes.split(" ").map((w, index) => {
+      return w.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    })
+    const keywords = s.keywords
+
+    const soup = words.concat(name).concat(notes).concat(keywords)
+    const id = s.id
+
+    processedSnips.push({
+      id,
+      bagOfWords: [...soup]
+    })
+  })
+
+  return processedSnips
+}
+
+//dummy data
 export const codeString = [
   {
     meta: {
