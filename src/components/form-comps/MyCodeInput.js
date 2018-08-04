@@ -28,7 +28,7 @@ class MyCodeInput extends Component {
           fontSize={18}
           showPrintMargin={true}
           showGutter={false}
-          highlightActiveLine={true}
+          highlightActiveLine={false}
           value={value}
           setOptions={{
             showLineNumbers: true,

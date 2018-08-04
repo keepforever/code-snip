@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject, clearLog } from '../../utils';
+import { updateObject, clearLog, processSnipsForSearch } from '../../utils';
 
 
 const initialState = {
@@ -9,6 +9,7 @@ const initialState = {
 
 const setUserInfo = ( state, action ) => {
   clearLog('setUserInfo reducer', action)
+
   const token = action.payload.token
   const meta = {
     name: action.payload.user.name,
@@ -16,11 +17,14 @@ const setUserInfo = ( state, action ) => {
     id: action.payload.user.id,
   }
   const snips = action.payload.user.snippits
+  const snipSoup = processSnipsForSearch(snips)
+
   return updateObject(state, {
     userInfo: {
       token,
       meta,
-      snips
+      snips,
+      snipSoup
     }
   })
 }

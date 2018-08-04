@@ -55,7 +55,7 @@ class Home extends Component {
   render() {
     const { ctr } = this.props;
     //clearLog('home showPortal state', this.state.showPortal)
-    clearLog('HOME PROPS', this.props)
+    //clearLog('HOME PROPS history', this.props.history)
     const {
       listSnippits: { loading, snippits },
       //userId,
@@ -69,7 +69,6 @@ class Home extends Component {
         </div>
       )
     }
-
     if(this.props.shouldShowLanding) {
       return (
         <Portal>
@@ -77,7 +76,6 @@ class Home extends Component {
         </Portal>
       )
     }
-
     return (
       <ContainerAlpha>
         <div>
@@ -111,11 +109,6 @@ class Home extends Component {
             Counter value: {ctr}
           </Typography>
         </div>
-        {/* {this.props.shouldShowLanding && (
-          <Portal>
-            <LandingPage togglePortal={this.togglePortal} />
-          </Portal>
-        )} */}
         <div style={styles.button} onClick={() => this.togglePortal()} >
           <Button color="primary" variant="raised" fullWidth>
             Portal

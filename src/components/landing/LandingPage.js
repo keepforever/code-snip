@@ -21,17 +21,13 @@ import { clearLog } from "../../utils";
 
 
 const defaultState = {
-  email: "",
-  password: "",
+  email: "b@b.com",
+  password: "b",
   isSubmitting: false
 }
 
 class LandingPage extends Component {
-  state = {
-    email: "",
-    password: "",
-    isSubmitting: false
-  };
+  state = defaultState
   togglePortal = () => {
     this.props.toggleLandingPageAction();
   };
@@ -92,7 +88,7 @@ class LandingPage extends Component {
               </div>
               <div >
                 <Typography variant="body1" color="error">
-                  Temp Login Creds: <br/> email =  b@b.com <br/> pw =  b
+                  Login credentials prefilled, just click 'LOGIN'...
                 </Typography>
               </div>
               <TextField
@@ -116,7 +112,7 @@ class LandingPage extends Component {
                 margin="normal"
               />
               <div style={styles.button} onClick={this.togglePortal}>
-                <Button color="secondary" variant="raised" fullWidth>
+                <Button color="secondary" disabled variant="raised" fullWidth>
                   Enter
                 </Button>
               </div>

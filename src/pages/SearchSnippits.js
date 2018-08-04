@@ -36,14 +36,14 @@ class Search extends Component {
 
   render() {
     //clearLog('HOME PROPS', this.props)
-    const {  user: { snips },  } = this.props;
+    const {  user: { snips, snipSoup },  } = this.props;
     const { search } = this.state
 
-    const processedSnips = processSnipsForSearch(snips)
+    //const processedSnips = processSnipsForSearch(snips)
 
     let match = [];
     if(search.length > 1) {
-      processedSnips.forEach((item, index) => {
+      snipSoup.forEach((item, index) => {
         const bagToString = item.bagOfWords.join(" ")
         if (bagToString.includes(search.trim())) {
           match.push(index)
@@ -51,10 +51,7 @@ class Search extends Component {
       })
     }
 
-
-    console.log('match', match)
-
-    clearLog('processedSnips', processedSnips)
+    clearLog('snipSoup', snipSoup)
 
     return (
       <ContainerAlpha>
@@ -63,7 +60,7 @@ class Search extends Component {
             <TextField
               fullWidth
               id="multiline-flexible"
-              label="Snarf your snips..."
+              label="Snarf for snips..."
               multiline
               rowsMax="1"
               value={search}

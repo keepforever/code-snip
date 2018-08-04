@@ -3,14 +3,21 @@ export const processSnipsForSearch = (snips) => {
   let processedSnips = []
   snips.forEach(s => {
 
-    let words = []
     const name = [s.name]
+    const lang = [s.language]
+    const framework = [s.framework]
+    const type = [s.type]
+    const code = s.code.split(" ").map((w, index) => {
+      return w.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    })
     const notes = s.notes.split(" ").map((w, index) => {
       return w.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     })
     const keywords = s.keywords
+    const companion = s.companion
+    const reference = s.reference
 
-    const soup = words.concat(name).concat(notes).concat(keywords)
+    const soup = [...name, ...lang, ...framework, ...type, ...code, ...notes, ...keywords, ...companion, ...reference].filter(Boolean) //filter(Boolean) removes "" from array
     const id = s.id
 
     processedSnips.push({

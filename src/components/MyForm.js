@@ -249,9 +249,9 @@ class MyForm extends Component {
               </div>
             </Paper>
           </form>
-          <div>
+          {/* <div>
             <DisplayFormikState {...this.props} />
-          </div>
+          </div> */}
         </div>
       </Paper>
     );
