@@ -11,15 +11,7 @@ class AddSnip extends Component {
         <div>
           <AppBar position="static" color="default">
             <Typography variant="title" color="inherit">
-              <div
-                style={{
-                  height: 50,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "20 0"
-                }}
-              >
+              <div style={styles.container} >
                 Add Snippit
               </div>
             </Typography>
@@ -32,3 +24,13 @@ class AddSnip extends Component {
 }
 
 export default AddSnip;
+
+const styles = {
+  container: {
+    height: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "20 0"
+  }
+}

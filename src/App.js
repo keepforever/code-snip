@@ -12,8 +12,6 @@ import { ApolloClient, InMemoryCache } from "apollo-client-preset";
 import { createUploadLink } from "apollo-upload-client";
 //To pass Auth token in Header
 import { setContext } from "apollo-link-context";
-//import ApolloClient from "apollo-boost";
-
 //material-ui
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 

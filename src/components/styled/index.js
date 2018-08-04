@@ -1,6 +1,22 @@
 import styled from "styled-components";
 //import { keyframes } from "styled-components";
 
+export {
+  DrawerToggleDiv,
+  LogoContainer
+} from './drawer'
+
+export {
+  ToolbarLinks,
+  ToolbarHeader
+}  from './toolbar'
+
+export {
+  ModalContainer,
+  WelcomeContainer
+} from './modal'
+
+
 export const LayoutChildrenDiv = styled.div`
   margin-top: 56px;
 `
@@ -32,13 +48,3 @@ export const LinkContainer = styled.div`
     color: red;
   }
 `;
-
-export {
-  DrawerToggleDiv,
-  LogoContainer
-} from './drawer'
-
-export {
-  ToolbarLinks,
-  ToolbarHeader
-}  from './toolbar'
