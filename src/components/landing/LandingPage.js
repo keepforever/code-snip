@@ -8,6 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import OuterSpace from "../outer-space";
 // REDUX
 import { toggleLandingPage } from "../../store/actions/landingPage";
+import { setUserInfo } from "../../store/actions/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
@@ -56,10 +57,12 @@ class LandingPage extends Component {
       console.log(error);
       return;
     }
-    clearLog("LOGIN_MUTATION response", response);
+    clearLog("LOGIN_MUTATION response", response.data.login.payload);
     this.setState({
       ...defaultState,
     });
+    this.props.setUserInfoAction(response.data.login.payload);
+    this.props.toggleLandingPageAction();
   };
 
   handleTextChange = name => event => {
@@ -160,7 +163,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      toggleLandingPageAction: toggleLandingPage
+      toggleLandingPageAction: toggleLandingPage,
+      setUserInfoAction: setUserInfo
     },
     dispatch
   );

@@ -129,7 +129,7 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     ctr: state.counter.count,
-    user: state.user.userId,
+    user: state.user.userInfo,
     snipp: state.snippit.snippits,
     shouldShowLanding: state.landingPage.showLandingPage
   };

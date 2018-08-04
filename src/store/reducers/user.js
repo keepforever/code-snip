@@ -3,19 +3,31 @@ import { updateObject, clearLog } from '../../utils';
 
 
 const initialState = {
-    userId: "balls",
+    userInfo:{},
+    authToken: ''
 };
 
-const addUser = ( state, action ) => {
-  clearLog('x', 'x')
+const setUserInfo = ( state, action ) => {
+  clearLog('setUserInfo reducer', action)
+  const token = action.payload.token
+  const meta = {
+    name: action.payload.user.name,
+    email: action.payload.user.email,
+    id: action.payload.user.id,
+  }
+  const snips = action.payload.user.snippits
   return updateObject(state, {
-    userId: action.user
+    userInfo: {
+      token,
+      meta,
+      snips
+    }
   })
 }
 // note: we always have a "type" property on any actions passed to reducer
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-      case actionTypes.ADD_USER : return addUser(state, action)
+      case actionTypes.SET_USER_INFO : return setUserInfo(state, action)
       default: return state;
     }
 }
