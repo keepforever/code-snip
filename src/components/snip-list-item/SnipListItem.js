@@ -11,7 +11,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 
 
 function newCodeBlockExpandable(props) {
-  const { snip: {name, language, keywords, companion, reference, notes, code } } = props;
+  const { snip: {framework, name, language, keywords, companion, reference, notes, code } } = props;
 
   //clearLog("NEW_CODE_BLOCK_EXPANDABLE", props);
 
@@ -19,7 +19,7 @@ function newCodeBlockExpandable(props) {
     <div>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<div />}>
-          <PanelSummary meta={{name, language, keywords}}/>
+          <PanelSummary meta={{name, framework, language, keywords}}/>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <PanelDetails meta={{companion, notes, code, name, reference}} />

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 const NavigationItem = props => {
   const {  config: { route, display }  } = props;
@@ -10,7 +11,9 @@ const NavigationItem = props => {
 
     <Link style={{all: 'unset', }} to={route}>
       <Button color="inherit">
-        {display}
+        <Typography variant="button" color="inherit">
+          {display}
+        </Typography>
       </Button>
     </Link>
 

@@ -15,7 +15,8 @@ export const WelcomeContainer = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 75%;
+  width: 65%;
+  padding: 3%;
   transform: translate(-50%, -50%);
   ${'' /* max-width: 75%; */}
   max-height: 75%;

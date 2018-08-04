@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 // REDUX
 import { incrementCounter } from "../store/actions/counter";
+import { toggleLandingPage } from "../store/actions/landingPage";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
@@ -20,13 +21,13 @@ import { clearLog } from "../utils";
 import Portal from '../components/portals/portalTemplate'
 import { ContainerAlpha, ModalContainer, WelcomeContainer } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
-import LandingPage from '../components/LandingPage'
+import LandingPage from '../components/landing/LandingPage'
 
 class Home extends Component {
   state = {
     age: "",
     currency: "EUR",
-    showPortal: true
+    showPortal: false
   };
 
   handleChange = name => event => {
@@ -38,11 +39,12 @@ class Home extends Component {
   };
 
   togglePortal = () => {
-    this.setState(prevState => {
-      return {
-        showPortal: !prevState.showPortal
-      };
-    });
+    // this.setState(prevState => {
+    //   return {
+    //     showPortal: !prevState.showPortal
+    //   };
+    // });
+    this.props.toggleLandingPageAction()
   };
 
   counterChangeHandler = () => {
@@ -53,7 +55,7 @@ class Home extends Component {
   render() {
     const { ctr } = this.props;
     //clearLog('home showPortal state', this.state.showPortal)
-
+    clearLog('HOME PROPS', this.props)
     const {
       listSnippits: { loading, snippits },
       //userId,
@@ -65,6 +67,14 @@ class Home extends Component {
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 400}}>
           <CircularProgress thickness={7} />;
         </div>
+      )
+    }
+
+    if(this.props.shouldShowLanding) {
+      return (
+        <Portal>
+          <LandingPage togglePortal={this.togglePortal} />
+        </Portal>
       )
     }
 
@@ -101,11 +111,11 @@ class Home extends Component {
             Counter value: {ctr}
           </Typography>
         </div>
-        {this.state.showPortal && (
+        {/* {this.props.shouldShowLanding && (
           <Portal>
             <LandingPage togglePortal={this.togglePortal} />
           </Portal>
-        )}
+        )} */}
         <div style={styles.button} onClick={() => this.togglePortal()} >
           <Button color="primary" variant="raised" fullWidth>
             Portal
@@ -120,14 +130,16 @@ const mapStateToProps = state => {
   return {
     ctr: state.counter.count,
     user: state.user.userId,
-    snipp: state.snippit.snippits
+    snipp: state.snippit.snippits,
+    shouldShowLanding: state.landingPage.showLandingPage
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      incrementCounterAction: incrementCounter
+      incrementCounterAction: incrementCounter,
+      toggleLandingPageAction: toggleLandingPage,
     },
     dispatch
   );
