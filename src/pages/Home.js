@@ -52,7 +52,7 @@ class Home extends Component {
 
   render() {
     const { ctr } = this.props;
-    clearLog('home showPortal state', this.state.showPortal)
+    //clearLog('home showPortal state', this.state.showPortal)
 
     const {
       listSnippits: { loading, snippits },
