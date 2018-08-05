@@ -15,13 +15,19 @@ import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 //import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
-// utils
-import { clearLog } from "../utils";
 // locals
 import Portal from '../components/portals/portalTemplate'
 import { ContainerAlpha, ModalContainer, WelcomeContainer } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
 import LandingPage from '../components/landing/LandingPage'
+// utils
+import { clearLog } from "../utils";
+
+// TODO: ADD EXPORT DATA BUTTON SOMEWHERE
+
+//import fileDownload  from 'js-file-download';
+// const snippitDownload = JSON.stringify(snippits);
+// fileDownload(snippitDownload, 'your-snips-history.json')
 
 class Home extends Component {
   state = {
@@ -76,6 +82,9 @@ class Home extends Component {
         </Portal>
       )
     }
+
+
+
     return (
       <ContainerAlpha>
         <div>

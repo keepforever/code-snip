@@ -7,10 +7,11 @@ class DataViz extends Component {
     console.log('data viz props', this.props)
     return (
       <div style={{color: 'white', margin: 70}}>
-        <Typography variant="title" color="inherit">
+        <Typography variant="headline" color="inherit">
         TODO:
+        <br/>
         </Typography>
-        <Typography variant="body2" color="inherit">
+        <Typography variant="title" color="inherit">
           This component is slated to house some data visualizations using D3.js library.
           <br/>
           <br/>
