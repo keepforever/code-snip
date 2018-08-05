@@ -84,12 +84,12 @@ class LandingPage extends Component {
                 </Typography>
               </div>
               <div style={styles.welcomeText}>
-                <Typography variant="title" color="secondary">
+                <Typography variant="headline" color="secondary">
                   <strong>Snip Snarf</strong>
                 </Typography>
               </div>
               <div >
-                <Typography variant="body1" color="error">
+                <Typography variant="body2" color="primary">
                   Login credentials prefilled, just click 'LOGIN'...
                 </Typography>
               </div>
@@ -121,7 +121,7 @@ class LandingPage extends Component {
               <MyMaterialToolTip tipKey="loginButton">
                 <div style={styles.button} onClick={this.loginSubmit}>
                   <Button
-                    color="primary"
+                    color="secondary"
                     disabled={this.state.isSubmitting}
                     variant="raised"
                     fullWidth
@@ -140,10 +140,10 @@ class LandingPage extends Component {
 
 const styles = {
   main: {
-    padding: 20
+    padding: 15
   },
   welcomeText: {
-    paddingBottom: 15
+    paddingBottom: 10
   },
   button: {
     width: "100%",

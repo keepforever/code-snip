@@ -10,7 +10,7 @@ class AddSnip extends Component {
       <ContainerAlpha>
         <div>
           <AppBar position="static" color="default">
-            <Typography variant="title" color="inherit">
+            <Typography variant="title" color="secondary">
               <div style={styles.container} >
                 Add Snippit
               </div>

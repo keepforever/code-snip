@@ -86,7 +86,7 @@ class MyCompanionInput extends Component {
           }}
         />
         <div onClick={() => this.addCompanion(this.state.pendingCompanion)}>
-          <Button fullWidth color="primary" variant="raised">
+          <Button fullWidth color="secondary" variant="raised">
             Add Companion
           </Button>
         </div>

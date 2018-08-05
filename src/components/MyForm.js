@@ -128,7 +128,6 @@ class MyForm extends Component {
                 style={{
                   marginTop: 8,
                   padding: 10,
-                  backgroundImage: `linear-gradient(180deg, rgba(31, 31, 31, 0.1) 10%, #212121 70%`
                 }}
               >
                 <MyNameInput value={values.snipName} onChange={setFieldValue} />
@@ -138,7 +137,6 @@ class MyForm extends Component {
               <div
                 style={{
                   padding: 10,
-                  backgroundImage: `linear-gradient(180deg, rgba(31, 31, 31, 0.1) 10%, #212121 70%`
                 }}
               >
                 <MyTypeSelect
@@ -160,7 +158,6 @@ class MyForm extends Component {
                 style={{
                   marginTop: 8,
                   padding: 10,
-                  backgroundImage: `linear-gradient(180deg, rgba(31, 31, 31, 0.1) 10%, #212121 70%`
                 }}
               >
                 <MyCodeInput value={values.code} onChange={setFieldValue} />
@@ -171,7 +168,6 @@ class MyForm extends Component {
                 style={{
                   marginTop: 8,
                   padding: 10,
-                  backgroundImage: `linear-gradient(180deg, rgba(31, 31, 31, 0.1) 10%, #212121 70%`
                 }}
               >
                 <MyReferenceInput
@@ -185,7 +181,6 @@ class MyForm extends Component {
                 style={{
                   marginTop: 8,
                   padding: 10,
-                  backgroundImage: `linear-gradient(180deg, rgba(31, 31, 31, 0.1) 10%, #212121 70%`
                 }}
               >
                 <MyKeywordInput
@@ -199,7 +194,6 @@ class MyForm extends Component {
                 style={{
                   marginTop: 8,
                   padding: 10,
-                  backgroundImage: `linear-gradient(180deg, rgba(31, 31, 31, 0.1) 10%, #212121 70%`
                 }}
               >
                 <MyCompanionInput
@@ -213,7 +207,6 @@ class MyForm extends Component {
                 style={{
                   marginTop: 8,
                   padding: 10,
-                  backgroundImage: `linear-gradient(180deg, rgba(31, 31, 31, 0.1) 10%, #212121 70%`
                 }}
               >
                 <MyNotesInput value={values.notes} onChange={setFieldValue} />
@@ -248,7 +241,7 @@ class MyForm extends Component {
                 <Button
                   fullWidth={true}
                   type="submit"
-                  color="secondary"
+                  color="primary"
                   variant="raised"
                 >
                   Submit

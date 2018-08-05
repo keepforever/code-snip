@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { LayoutChildrenDiv } from "./styled";
 import MaterialToolbar from "./layout-comps/MaterialToolbar";
 import MaterialDrawer from "./layout-comps/MaterialDrawer";
+import { links } from '../constants'
 // portal
 
 class Layout extends Component {
@@ -33,33 +34,10 @@ class Layout extends Component {
           open={this.state.showSideDrawer}
           closed={this.sideDrawerClosedHandler}
         />
-        <LayoutChildrenDiv>{this.props.children}</LayoutChildrenDiv>
+        <div>{this.props.children}</div>
       </React.Fragment>
     );
   }
 }
 
 export default Layout;
-
-const links = [
-  {
-    name: "logo-home",
-    route: "/",
-    display: "KeepForever"
-  },
-  {
-    name: "add-snip-page",
-    route: "/add-snip",
-    display: "Add Snip"
-  },
-  {
-    name: "data-viz",
-    route: "/data-viz",
-    display: "Data Viz"
-  },
-  {
-    name: "search-snip",
-    route: "/search-snips",
-    display: "Search Snips"
-  }
-];

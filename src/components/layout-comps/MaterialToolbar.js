@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MaterialNavItem from "./MaterialNavItem";
 import { ToolbarLinks } from '../styled/toolbar'
+import lightBlue from '@material-ui/core/colors/lightBlue';
 
 const styles = {
   root: {
@@ -26,14 +27,14 @@ function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="error">
         <Toolbar >
           <div onClick={props.drawerToggleClicked}>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
           </div>
-          <Typography variant="subheading" color="secondary" className={classes.flex}>
+          <Typography variant="subheading" color="default" className={classes.flex}>
             Snip Snarf <small>by keepforever</small>
           </Typography>
             <ToolbarLinks>

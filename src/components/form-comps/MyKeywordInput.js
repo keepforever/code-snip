@@ -85,7 +85,7 @@ class MyKeywordInput extends Component {
           }}
         />
         <div onClick={() => this.addKeyword(this.state.pendingKeyword)}>
-          <Button fullWidth color="primary" variant="raised">
+          <Button fullWidth color="secondary" variant="raised">
             Add Keyword
           </Button>
         </div>

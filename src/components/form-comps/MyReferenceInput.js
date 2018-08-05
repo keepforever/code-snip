@@ -88,7 +88,7 @@ class MyReferenceInput extends Component {
           style={{ width: "100%" }}
           onClick={() => this.addReference(this.state.pendingReference)}
         >
-          <Button fullWidth color="primary" variant="raised">
+          <Button fullWidth color="secondary" variant="raised">
             Add Reference
           </Button>
         </div>

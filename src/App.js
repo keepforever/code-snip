@@ -14,6 +14,27 @@ import { createUploadLink } from "apollo-upload-client";
 import { setContext } from "apollo-link-context";
 //material-ui
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import amber from '@material-ui/core/colors/amber';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: deepOrange,
+    secondary: lightBlue,
+    error: amber,
+    // Used by `getContrastText()` to maximize the contrast between the background and
+    // the text.
+    contrastThreshold: 99,
+    // Used to shift a color's luminance by approximately
+    // two indexes within its tonal palette.
+    // E.g., shift from Red 500 to Red 300 or Red 700.
+    tonalOffset: 0.9,
+  },
+});
+
 
 // util
 //import { clearLog } from "./utils";
@@ -39,20 +60,6 @@ const client = new ApolloClient({
     })
   ),
   cache: new InMemoryCache()
-});
-
-//clearLog("src/App.js, Client: ", client.link.request)
-
-const theme = createMuiTheme({
-  palette: {
-    type: "dark",
-    primary: {
-      main: "#e65100"
-    },
-    secondary: {
-      main: "#ffea00"
-    }
-  }
 });
 
 const store = createStore(rootReducer);

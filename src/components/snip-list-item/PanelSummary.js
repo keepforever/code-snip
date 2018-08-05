@@ -4,10 +4,13 @@ import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
+// locals
 import MyMaterialToolTip from "../tool-tips/MyMaterialToolTip";
+import RandomSummaryMeta from './RandomSummaryMeta'
 
 const PanelSummary = props => {
-  const { name, language, keywords, framework } = props.meta;
+  const { soup, name, language, keywords, framework } = props.meta;
+
   return (
     <Paper
       component={() => {
@@ -25,7 +28,7 @@ const PanelSummary = props => {
                       </div>
                     <div style={styles.g_Container}>
                       <div style={styles.d_Container}>
-                        <Typography variant="subheading" color="textPrimary">
+                        <Typography variant="subheading" color="error">
                           {framework}
                         </Typography>
                       </div>
@@ -40,15 +43,7 @@ const PanelSummary = props => {
                 );
               }}
             />
-            <div style={styles.f_Container}>
-              {keywords.map((k, index) => {
-                return (
-                  <div key={index} style={{ margin: 3 }}>
-                    <Chip label={k} />
-                  </div>
-                );
-              })}
-            </div>
+            <RandomSummaryMeta soup={soup} />
           </div>
         );
       }}
@@ -69,7 +64,6 @@ const styles = {
     width: "100%",
     alignItems: "space-between",
     justifyContent: "space-between",
-    backgroundImage: `linear-gradient(180deg, rgba(230, 81, 0, 0.1) 10%, rgba(230, 81, 0, 0.7))`
   },
   c_Container: {
     display: "flex",
@@ -88,7 +82,6 @@ const styles = {
     paddingRight: 2
   },
   f_Container: {
-    backgroundImage: `linear-gradient(180deg, rgba(0, 81, 0, 0.1) 10%, rgba(0, 81, 0, 0.7))`,
     paddingBottom: 7,
     marginLeft: 7,
     justifyContent: "stretch",
@@ -105,3 +98,15 @@ const styles = {
     alignItems: "space-between"
   }
 };
+
+//
+// old chip display
+// <div style={styles.f_Container}>
+//   {keywords.map((k, index) => {
+//     return (
+//       <div key={index} style={{ margin: 3 }}>
+//         <Chip label={k} />
+//       </div>
+//     );
+//   })}
+// </div>

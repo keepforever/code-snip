@@ -17,14 +17,10 @@ export {
 } from './modal'
 
 
-export const LayoutChildrenDiv = styled.div`
-  margin-top: 56px;
-`
 export const ContainerAlpha = styled.div`
   color: 'white';
   display: flex;
   flex-direction: column;
-  margin: 0px 5%;
 `;
 
 export const Backdrop = styled.div`

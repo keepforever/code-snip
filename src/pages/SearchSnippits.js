@@ -57,6 +57,11 @@ class Search extends Component {
 
     return (
       <ContainerAlpha>
+        <AppBar position="static" color="default">
+          <Typography variant="title" color="secondary">
+            <div style={styles.container}>Search Snips</div>
+          </Typography>
+        </AppBar>
 
           <div>
             <AppBar position="static" color="default">
@@ -75,16 +80,20 @@ class Search extends Component {
           {match.map((item, index) => {
             return (
               <React.Fragment key={index}>
-                <SnipListItem snip={snips[item]} />
+                <SnipListItem
+                  soup={this.props.user.snipSoup[index].bagOfWords}
+                  snip={snips[item]} />
               </React.Fragment>
             );
           })}
         </div>
-        <MyMaterialToolTip tipKey="searchBarGuidance">
-          <Typography variant="body2" color="secondary">
-            help
-          </Typography>
-        </MyMaterialToolTip>
+          <div style={styles.container}>
+          <MyMaterialToolTip tipKey="searchBarGuidance">
+            <Typography variant="body2" color="secondary">
+              help
+            </Typography>
+          </MyMaterialToolTip>
+        </div>
       </ContainerAlpha>
     );
   }
@@ -118,6 +127,13 @@ const styles = {
     backgroundColor: "black"
   },
   headerContainer: {
+    height: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "20 0"
+  },
+  container: {
     height: 50,
     display: "flex",
     alignItems: "center",

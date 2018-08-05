@@ -10,9 +10,6 @@ const styles = {
     marginTop: 5,
     marginBottom: 5
   },
-  tab: {
-    color: "white"
-  }
 };
 
 const valueMap = ["react", "react-native", "vue", "sage-maker"];
@@ -37,13 +34,13 @@ class MyFrameSelect extends React.Component {
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
-          indicatorColor="primary"
+          indicatorColor="secondary"
           textColor="secondary"
           scrollable
           scrollButtons="auto"
         >
           {valueMap.map((val, index) => {
-            return <Tab className={classes.tab} label={val} key={index} />;
+            return <Tab label={val} key={index} />;
           })}
         </Tabs>
       </Paper>

@@ -11,7 +11,7 @@ const NavigationItem = props => {
 
     <Link style={{all: 'unset', }} to={route}>
       <Button color="inherit">
-        <Typography variant="button" color="inherit">
+        <Typography variant="button" color="secondary">
           {display}
         </Typography>
       </Button>

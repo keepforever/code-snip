@@ -60,13 +60,12 @@ class Home extends Component {
 
   render() {
     const { ctr } = this.props;
-    //clearLog('home showPortal state', this.state.showPortal)
-    //clearLog('HOME PROPS history', this.props.history)
     const {
       listSnippits: { loading, snippits },
       //userId,
       //specificSnippit
     } = this.props;
+    clearLog('HomeProps', this.props)
 
     if (loading) {
       return (
@@ -83,13 +82,11 @@ class Home extends Component {
       )
     }
 
-
-
     return (
       <ContainerAlpha>
         <div>
           <AppBar position="static" color="default">
-            <Typography variant="title" color="inherit">
+            <Typography variant="title" color="secondary">
               <div style={styles.headerContainer} >
                 Your Snips
               </div>
@@ -100,11 +97,14 @@ class Home extends Component {
           {snippits.map((item, index) => {
             return (
               <React.Fragment key={index}>
-                <SnipListItem snip={item} />
+                <SnipListItem
+                  soup={this.props.user.snipSoup[index].bagOfWords}
+                  snip={item} />
               </React.Fragment>
             );
           })}
         </div>
+        {/*
         <div
           style={styles.button}
           onClick={() => this.props.incrementCounterAction()}
@@ -113,7 +113,7 @@ class Home extends Component {
             Counter
           </Button>
         </div>
-        <div onChange={() => this.counterChangeHandler(this.props.ctr)}>
+         <div onChange={() => this.counterChangeHandler(this.props.ctr)}>
           <Typography variant="subheading" color="secondary">
             Counter value: {ctr}
           </Typography>
@@ -122,7 +122,7 @@ class Home extends Component {
           <Button color="primary" variant="raised" fullWidth>
             Portal
           </Button>
-        </div>
+        </div> */}
       </ContainerAlpha>
     );
   }
