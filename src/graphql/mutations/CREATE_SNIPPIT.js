@@ -31,7 +31,20 @@ export const CREATE_SNIPPIT = gql`
       name
       author{
         name
+        snippits {
+          id
+          name
+          type
+          language
+          framework
+          code
+          notes
+          companion
+          keywords
+          reference
+        }
       }
     }
   }
 `;
+//

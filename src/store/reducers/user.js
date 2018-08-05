@@ -7,6 +7,30 @@ const initialState = {
     authToken: ''
 };
 
+const updateBOWAfterCreate = (state, action) => {
+  // here, action.snippits is snippits
+  console.log('updateBOW action', action)
+  const snips = action.snippits
+  const snipSoup = processSnipsForSearch(snips)
+
+  const toReturn  = updateObject(state, {
+    userInfo: {
+      ...state.userInfo,
+      snips,
+      snipSoup
+    }
+  })
+  clearLog('toReturn', toReturn)
+
+  return updateObject(state, {
+    userInfo: {
+      ...state.userInfo,
+      snips,
+      snipSoup
+    }
+  })
+}
+
 const setUserInfo = ( state, action ) => {
   clearLog('setUserInfo reducer', action)
 
@@ -32,6 +56,7 @@ const setUserInfo = ( state, action ) => {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
       case actionTypes.SET_USER_INFO : return setUserInfo(state, action)
+      case actionTypes.UPDATE_BOW_AFTER_CREATE : return updateBOWAfterCreate(state, action)
       default: return state;
     }
 }

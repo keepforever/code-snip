@@ -2,7 +2,7 @@ export const links = [
   {
     name: "logo-home",
     route: "/",
-    display: "KeepForever"
+    display: "Your Snips"
   },
   {
     name: "add-snip-page",

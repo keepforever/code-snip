@@ -36,7 +36,7 @@ class RandomSummaryMeta extends React.Component {
   render() {
     const { randOne, randTwo, randThree } = this.state;
     return (
-      <div style={{display: 'flex', justifyContent: 'flex-start', flewFlow: 'row wrap'}}>
+      <div style={styles.container}>
         <div style={styles.listMeta}>
           <Typography
             variant="body2"
@@ -70,6 +70,15 @@ export default RandomSummaryMeta;
 
 const styles = {
   listMeta: {
-    paddingRight: 15
+    paddingRight: 13
+  },
+  container:{
+    display: 'flex',
+    maxHeight: 30,
+    maxWidth: '100%',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    overflowX: 'hidden'
   }
 }

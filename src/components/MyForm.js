@@ -26,6 +26,10 @@ import { clearLog } from "../utils";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+// REDUX
+import { updateBOWAfterCreate } from "../store/actions/snippit";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 const formikEnhancer = withFormik({
   mapPropsToValues({
@@ -81,6 +85,7 @@ const formikEnhancer = withFormik({
       }
     });
     clearLog("response", response);
+    props.updateBOWAfterCreateAction(response.data.createSnippit.author.snippits)
     resetForm();
   }
 });
@@ -258,19 +263,44 @@ class MyForm extends Component {
   }
 }
 // export default formikEnhancer(MyForm);
-const Balls = formikEnhancer(MyForm);
+const MyFormEnhanced = formikEnhancer(MyForm);
 
-export default compose(
-  graphql(SNIPPITS_QUERY, {
-    options: {
-      fetchPolicy: "cache-and-network"
+const mapStateToProps = state => {
+  return {
+    user: state.user.userInfo,
+    snipp: state.snippit.snippits,
+    shouldShowLanding: state.landingPage.showLandingPage
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      updateBOWAfterCreateAction: updateBOWAfterCreate,
     },
-    name: "snippitsQuery"
-  }),
-  graphql(CREATE_SNIPPIT, {
-    options: {
-      fetchPolicy: "cache-and-network"
-    },
-    name: "createSnippit"
-  })
-)(Balls);
+    dispatch
+  );
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  compose(
+    graphql(SNIPPITS_QUERY, {
+      options: {
+        fetchPolicy: "cache-and-network",
+        variables: {
+          orderBy: "createdAt_ASC"
+        }
+      },
+      name: "snippitsQuery"
+    }),
+    graphql(CREATE_SNIPPIT, {
+      options: {
+        fetchPolicy: "cache-and-network"
+      },
+      name: "createSnippit"
+    })
+  )(MyFormEnhanced)
+);

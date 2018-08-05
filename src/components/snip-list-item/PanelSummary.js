@@ -22,18 +22,18 @@ const PanelSummary = props => {
                   <MyMaterialToolTip tipKey="expansionPanelSummary">
                   <div style={styles.c_Container}>
                       <div style={styles.d_Container}>
-                        <Typography variant="title" color="textPrimary">
+                        <Typography variant="subheading" color="default">
                           {name}
                         </Typography>
                       </div>
                     <div style={styles.g_Container}>
                       <div style={styles.d_Container}>
-                        <Typography variant="subheading" color="error">
+                        <Typography variant="body2" color="secondary">
                           {framework}
                         </Typography>
                       </div>
                       <div style={styles.e_Container}>
-                        <Typography variant="body2" color="secondary">
+                        <Typography variant="body1" color="error">
                           {language}
                         </Typography>
                       </div>
@@ -68,7 +68,7 @@ const styles = {
   c_Container: {
     display: "flex",
     flexFlow: "row wrap",
-    padding: 10
+    // padding: 10
   },
   d_Container: {
     flex: 1,
