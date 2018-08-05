@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject, clearLog, processSnipsForSearch } from '../../utils';
 
-
 const initialState = {
     userInfo:{},
     authToken: ''
@@ -9,18 +8,9 @@ const initialState = {
 
 const updateBOWAfterCreate = (state, action) => {
   // here, action.snippits is snippits
-  console.log('updateBOW action', action)
+  //console.log('updateBOW action', action)
   const snips = action.snippits
   const snipSoup = processSnipsForSearch(snips)
-
-  const toReturn  = updateObject(state, {
-    userInfo: {
-      ...state.userInfo,
-      snips,
-      snipSoup
-    }
-  })
-  clearLog('toReturn', toReturn)
 
   return updateObject(state, {
     userInfo: {
