@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import AppBar from "@material-ui/core/AppBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 // REDUX
 import { incrementCounter } from "../store/actions/counter";
 import { toggleLandingPage } from "../store/actions/landingPage";
@@ -20,6 +20,8 @@ import Portal from '../components/portals/portalTemplate'
 import { ContainerAlpha, ModalContainer, WelcomeContainer } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
 import LandingPage from '../components/landing/LandingPage'
+import MyMaterialToolTip from "../components/tool-tips/MyMaterialToolTip";
+
 
 
 class Search extends Component {
@@ -55,20 +57,20 @@ class Search extends Component {
 
     return (
       <ContainerAlpha>
-        <div>
-          <AppBar position="static" color="default">
-            <TextField
-              fullWidth
-              id="multiline-flexible"
-              label="Snarf for snips..."
-              multiline
-              rowsMax="1"
-              value={search}
-              onChange={this.handleTextChange("search")}
-              margin="normal"
-            />
-          </AppBar>
-        </div>
+
+          <div>
+            <AppBar position="static" color="default">
+              <TextField
+                fullWidth
+                id="multiline-flexible"
+                label="Snarf for snips..."
+                rowsMax="1"
+                value={search}
+                onChange={this.handleTextChange("search")}
+                margin="normal"
+              />
+            </AppBar>
+          </div>
         <div className="container">
           {match.map((item, index) => {
             return (
@@ -78,6 +80,11 @@ class Search extends Component {
             );
           })}
         </div>
+        <MyMaterialToolTip tipKey="searchBarGuidance">
+          <Typography variant="body2" color="secondary">
+            help
+          </Typography>
+        </MyMaterialToolTip>
       </ContainerAlpha>
     );
   }

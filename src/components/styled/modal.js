@@ -18,6 +18,6 @@ export const WelcomeContainer = styled.div`
   width: 65%;
   transform: translate(-50%, -50%);
   ${'' /* max-width: 75%; */}
-  max-height: 75%;
+  max-height: 85%;
   background: rgba(0,0,0,0.3);
 `;

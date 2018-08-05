@@ -19,6 +19,8 @@ import { LOGIN_MUTATION } from "../../graphql/mutations/LOGIN_MUTATION";
 import { clearLog } from "../../utils";
 // locals
 
+import MyMaterialToolTip from '../tool-tips/MyMaterialToolTip'
+
 
 const defaultState = {
   email: "b@b.com",
@@ -111,21 +113,23 @@ class LandingPage extends Component {
                 onChange={this.handleTextChange("password")}
                 margin="normal"
               />
-              <div style={styles.button} onClick={this.togglePortal}>
+              {/* <div style={styles.button} onClick={this.togglePortal}>
                 <Button color="secondary" disabled variant="raised" fullWidth>
                   Enter
                 </Button>
-              </div>
-              <div style={styles.button} onClick={this.loginSubmit}>
-                <Button
-                  color="primary"
-                  disabled={this.state.isSubmitting}
-                  variant="raised"
-                  fullWidth
-                >
-                  Login
-                </Button>
-              </div>
+              </div> */}
+              <MyMaterialToolTip tipKey="loginButton">
+                <div style={styles.button} onClick={this.loginSubmit}>
+                  <Button
+                    color="primary"
+                    disabled={this.state.isSubmitting}
+                    variant="raised"
+                    fullWidth
+                  >
+                    Login
+                  </Button>
+                </div>
+              </MyMaterialToolTip>
             </div>
           </WelcomeContainer>
         </OuterSpace>

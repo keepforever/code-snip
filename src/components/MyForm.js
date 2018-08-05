@@ -9,6 +9,7 @@ import { CREATE_SNIPPIT } from "../graphql/mutations/CREATE_SNIPPIT";
 // yup validation
 import { object, string, array } from "yup";
 // locals
+import MyMaterialToolTip from "./tool-tips/MyMaterialToolTip";
 import MyCodeInput from "./form-comps/MyCodeInput";
 import MyTypeSelect from "./form-comps/MyTypeSelect";
 import MyFrameSelect from "./form-comps/MyFrameSelect";
@@ -24,6 +25,7 @@ import { clearLog } from "../utils";
 // material-ui
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const formikEnhancer = withFormik({
   mapPropsToValues({
@@ -115,6 +117,11 @@ class MyForm extends Component {
             paddingRight: "5%"
           }}
         >
+          <MyMaterialToolTip tipKey="addSnippitHelp">
+            <Typography variant="subheading" color="secondary">
+              HELP
+            </Typography>
+          </MyMaterialToolTip>
           <form onSubmit={handleSubmit}>
             <Paper>
               <div

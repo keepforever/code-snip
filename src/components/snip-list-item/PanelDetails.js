@@ -8,22 +8,20 @@ import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 // utils
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import MyMaterialToolTip from "../tool-tips/MyMaterialToolTip";
 
 
-const PanelSummary = props => {
+const PanelDetails = props => {
   const { companion, notes, code, name, reference } = props.meta;
   return (
-    <div style={{ width: "100%"}} >
+    <div style={{ width: "100%" }}>
       <Typography color="error" variant="subheading">
         Tangent
       </Typography>
-      <div style={styles.a_Container} >
+      <div style={styles.a_Container}>
         {companion.map((c, index) => {
           return (
-            <div
-              key={index}
-              style={styles.b_Container}
-            >
+            <div key={index} style={styles.b_Container}>
               <Paper>
                 <Typography color="textSecondary" variant="body2">
                   {c}
@@ -37,17 +35,14 @@ const PanelSummary = props => {
         {notes}
       </Typography>
       <CodeBlock code={code} />
-      <CopyToClipboard
-        onCopy={() => alert(`copied ${name}!`)}
-        text={code}
-      >
-        <Button fullWidth color="primary" variant="raised">
-          Copy
-        </Button>
-      </CopyToClipboard>
-      <div
-        style={styles.c_Container}
-      >
+      <MyMaterialToolTip tipKey="copyToClipboardButton">
+        <CopyToClipboard onCopy={() => alert(`Snarfed ${name}!`)} text={code}>
+          <Button fullWidth color="primary" variant="raised">
+            Copy
+          </Button>
+        </CopyToClipboard>
+      </MyMaterialToolTip>
+      <div style={styles.c_Container}>
         {reference.map((k, index) => {
           return (
             <div key={index} style={{ marginTop: 7 }}>
@@ -57,10 +52,10 @@ const PanelSummary = props => {
         })}
       </div>
     </div>
-  )
+  );
 };
 
-export default PanelSummary;
+export default PanelDetails;
 
 const styles = {
   a_Container: {
@@ -81,5 +76,5 @@ const styles = {
     alignItems: "flex-start",
     display: "flex",
     flexFlow: "column wrap"
-  },
+  }
 };

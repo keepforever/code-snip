@@ -4,6 +4,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
+import MyMaterialToolTip from "../tool-tips/MyMaterialToolTip";
 
 const PanelSummary = props => {
   const { name, language, keywords, framework } = props.meta;
@@ -15,12 +16,13 @@ const PanelSummary = props => {
             <Paper
               component={() => {
                 return (
+                  <MyMaterialToolTip tipKey="expansionPanelSummary">
                   <div style={styles.c_Container}>
-                    <div style={styles.d_Container}>
-                      <Typography variant="title" color="textPrimary">
-                        {name}
-                      </Typography>
-                    </div>
+                      <div style={styles.d_Container}>
+                        <Typography variant="title" color="textPrimary">
+                          {name}
+                        </Typography>
+                      </div>
                     <div style={styles.g_Container}>
                       <div style={styles.d_Container}>
                         <Typography variant="subheading" color="textPrimary">
@@ -34,6 +36,7 @@ const PanelSummary = props => {
                       </div>
                     </div>
                   </div>
+                </MyMaterialToolTip>
                 );
               }}
             />
@@ -64,8 +67,8 @@ const styles = {
   b_Container: {
     flexFlow: "row wrap",
     width: "100%",
-    alignItems: 'space-between',
-    justifyContent: 'space-between',
+    alignItems: "space-between",
+    justifyContent: "space-between",
     backgroundImage: `linear-gradient(180deg, rgba(230, 81, 0, 0.1) 10%, rgba(230, 81, 0, 0.7))`
   },
   c_Container: {
@@ -95,10 +98,10 @@ const styles = {
     flexFlow: "row wrap"
   },
   g_Container: {
-    display: 'flex',
+    display: "flex",
     marginLeft: 10,
     flexDirection: "column",
-    justifyContent: 'space-between',
-    alignItems: 'space-between'
+    justifyContent: "space-between",
+    alignItems: "space-between"
   }
 };
