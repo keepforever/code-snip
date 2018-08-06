@@ -7,6 +7,12 @@ export {
 } from './drawer'
 
 export {
+  LayoutContainer_A,
+  LayoutContainer_B
+} from './layout'
+
+
+export {
   ToolbarLinks,
   ToolbarHeader
 }  from './toolbar'

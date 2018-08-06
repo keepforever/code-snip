@@ -3,19 +3,25 @@ export const processSnipsForSearch = (snips) => {
   let processedSnips = []
   snips.forEach(s => {
 
-    const name = [s.name]
-    const lang = [s.language]
-    const framework = [s.framework]
-    const type = [s.type]
-    const code = s.code.split(" ").map((w, index) => {
+    const name = [s.name.toLowerCase()]
+    const lang = [s.language.toLowerCase()]
+    const framework = [s.framework.toLowerCase()]
+    const type = [s.type.toLowerCase()]
+    const code = s.code.toLowerCase().trim().split(/\W+/).map((w, index) => {
       return w.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     })
-    const notes = s.notes.split(" ").map((w, index) => {
+    const notes = s.notes.toLowerCase().split(/\W+/).map((w, index) => {
       return w.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     })
-    const keywords = s.keywords
-    const companion = s.companion
-    const reference = s.reference
+    const keywords = s.keywords.map((k, index) => {
+      return k.toLowerCase()
+    })
+    const companion = s.companion.map((k, index) => {
+      return k.toLowerCase()
+    })
+    const reference = s.reference.map((k, index) => {
+      return k.toLowerCase()
+    })
 
     const soup = [...name, ...lang, ...framework, ...type, ...code, ...notes, ...keywords, ...companion, ...reference].filter(Boolean) //filter(Boolean) removes "" from array
     const id = s.id

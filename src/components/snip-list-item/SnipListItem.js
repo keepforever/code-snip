@@ -6,7 +6,7 @@ import PanelDetails from './PanelDetails';
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // utils
 //import { clearLog } from "../utils";
 
@@ -19,7 +19,7 @@ function newCodeBlockExpandable(props) {
   return (
     <div>
       <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<div />}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <PanelSummary meta={{soup, name, framework, language, keywords}}/>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>

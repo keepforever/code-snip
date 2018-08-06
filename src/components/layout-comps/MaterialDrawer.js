@@ -13,6 +13,9 @@ const styles = {
   fullList: {
     width: 'auto',
   },
+  paper: {
+    color: '#ffc107'
+  }
 };
 
 class TemporaryDrawer extends React.Component {
@@ -43,12 +46,14 @@ class TemporaryDrawer extends React.Component {
     return (
         <Drawer
           open={open}
-          onClose={() => this.props.closed()}>
+          onClose={() => this.props.closed()}
+          >
           <div
             tabIndex={0}
             role="button"
             onClick={() => this.props.closed()}
             onKeyDown={() => this.props.closed()}
+            style={{backgroundColor: '#ffc107'}}
           >
             {sideList}
           </div>

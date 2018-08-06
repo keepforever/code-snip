@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LayoutChildrenDiv } from "./styled";
+import { LayoutContainer_A,  } from "./styled";
 import MaterialToolbar from "./layout-comps/MaterialToolbar";
 import MaterialDrawer from "./layout-comps/MaterialDrawer";
 import { links } from '../constants'
@@ -34,10 +34,27 @@ class Layout extends Component {
           open={this.state.showSideDrawer}
           closed={this.sideDrawerClosedHandler}
         />
-        <div>{this.props.children}</div>
+        <LayoutContainer_A>
+          <div style={styles.squash}>
+            {this.props.children}
+          </div>
+        </LayoutContainer_A>
       </React.Fragment>
     );
   }
 }
 
 export default Layout;
+
+const styles = {
+  squish: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+
+  },
+  squash: {
+    maxWidth: '600px',
+
+  }
+}

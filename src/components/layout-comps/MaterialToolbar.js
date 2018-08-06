@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MaterialNavItem from "./MaterialNavItem";
 import { ToolbarLinks } from '../styled/toolbar'
 import lightBlue from '@material-ui/core/colors/lightBlue';
+import { LayoutContainer_B,  } from "../styled";
 
 const styles = {
   root: {
@@ -27,21 +28,27 @@ function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="error">
+      <AppBar position="static" color="default">
         <Toolbar >
-          <div onClick={props.drawerToggleClicked}>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-          </div>
           <Typography variant="subheading" color="default" className={classes.flex}>
             Snip Snarf <small>by keepforever</small>
           </Typography>
+          <LayoutContainer_B>
             <ToolbarLinks>
               {props.links.map((link, index) => {
                 return <MaterialNavItem key={index} config={link} />;
               })}
             </ToolbarLinks>
+          </LayoutContainer_B>
+            <div onClick={props.drawerToggleClicked}>
+              <IconButton
+                className={classes.menuButton}
+                color="secondary"
+                aria-label="Menu"
+                >
+                  <MenuIcon />
+                </IconButton>
+              </div>
         </Toolbar>
       </AppBar>
     </div>
