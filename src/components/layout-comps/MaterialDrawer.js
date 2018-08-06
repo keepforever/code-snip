@@ -53,7 +53,7 @@ class TemporaryDrawer extends React.Component {
             role="button"
             onClick={() => this.props.closed()}
             onKeyDown={() => this.props.closed()}
-            style={{backgroundColor: '#ffc107'}}
+            style={{backgroundColor: '#c85404', height: '100%', }}
           >
             {sideList}
           </div>
