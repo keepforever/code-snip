@@ -9,7 +9,8 @@ import { withStyles } from "@material-ui/core/styles";
 // locals
 import OuterSpace from "./outer-space";
 import { clearLog } from "../utils";
-import { tipLibrary } from "../constants"
+import { tipLibrary, helpSnippitDemo } from "../constants"
+import SnipListItem from './snip-list-item/SnipListItem'
 
 const defaultState = {
   email: "b@b.com"
@@ -36,11 +37,21 @@ class HomeHelp extends Component {
         <OuterSpace>
           <HelpContainer>
             <div style={styles.main}>
+              <div >
+                <Typography variant="title" color="secondary">
+                  This is a Snip
+                </Typography>
+              </div>
+              <br />
+              <SnipListItem
+                soup={helpSnippitDemo.bagOfWords}
+                snip={helpSnippitDemo} />
+              <br/>
               {tipLibrary.homeHelpText.map((t, index) => {
                 return (
-                  <div style={{marginBottom: 8}} key={index}>
+                  <div style={{marginBottom: 12}} key={index}>
                     <Typography variant="body2" color="secondary">
-                      {index + 1}. {t}
+                      {t}
                     </Typography>
                   </div>
                 )

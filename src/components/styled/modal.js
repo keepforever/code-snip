@@ -32,7 +32,7 @@ export const HelpContainer = styled.div`
   transform: translate(-50%, -50%);
   ${'' /* max-width: 75%; */}
   max-height: 89%;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.5);
   /* let it scroll */
   overflow: auto;
 

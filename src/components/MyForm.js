@@ -45,9 +45,9 @@ const formikEnhancer = withFormik({
   }) {
     return {
       snipName: snipName || "",
-      snipType: snipType || "boiler",
+      snipType: snipType || "",
       language: language || "",
-      framework: framework || "react",
+      framework: framework || "",
       code: code || "",
       notes: notes || "",
       companion: companion || [],
