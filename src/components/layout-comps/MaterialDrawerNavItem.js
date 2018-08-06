@@ -9,7 +9,7 @@ const NavigationItem = props => {
   return (
 
     <Link style={{all: 'unset', }} to={route}>
-      <Button color="secondary">
+      <Button color="inherit">
         {display}
       </Button>
     </Link>

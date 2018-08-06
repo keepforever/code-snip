@@ -22,6 +22,10 @@ export {
   WelcomeContainer
 } from './modal'
 
+export {
+  SearchTextContainer,
+} from './search'
+
 
 export const ContainerAlpha = styled.div`
   color: 'white';

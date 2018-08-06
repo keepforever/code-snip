@@ -14,7 +14,7 @@ const styles = {
     width: 'auto',
   },
   paper: {
-    color: '#ffc107'
+    color: '#b5b5b5'
   }
 };
 
@@ -53,7 +53,7 @@ class TemporaryDrawer extends React.Component {
             role="button"
             onClick={() => this.props.closed()}
             onKeyDown={() => this.props.closed()}
-            style={{backgroundColor: '#c85404', height: '100%', }}
+            style={{backgroundColor: '#727272', height: '100%', }}
           >
             {sideList}
           </div>

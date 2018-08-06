@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import OuterSpace from "../outer-space";
+import { withStyles } from '@material-ui/core/styles';
 // REDUX
 import { toggleLandingPage } from "../../store/actions/landingPage";
 import { setUserInfo } from "../../store/actions/user";
@@ -27,6 +28,15 @@ const defaultState = {
   password: "b",
   isSubmitting: false
 }
+
+const snipSnarf = {
+  root: {
+    background: "black"
+  },
+  input: {
+    color: "#0091EA"
+  }
+};
 
 class LandingPage extends Component {
   state = defaultState
@@ -70,7 +80,7 @@ class LandingPage extends Component {
   };
 
   render() {
-    const { togglePortal } = this.props;
+    const { togglePortal, classes } = this.props;
     const { email, password } = this.state;
 
     return (
@@ -89,7 +99,7 @@ class LandingPage extends Component {
                 </Typography>
               </div>
               <div >
-                <Typography variant="body2" color="primary">
+                <Typography variant="body2" color="secondary">
                   Login credentials prefilled, just click 'LOGIN'...
                 </Typography>
               </div>
@@ -102,6 +112,13 @@ class LandingPage extends Component {
                 value={email}
                 onChange={this.handleTextChange("email")}
                 margin="normal"
+                className={classes.root}
+                InputProps={{
+                  className: classes.input
+                }}
+                InputLabelProps={{
+                  className: classes.input
+                }}
               />
               <TextField
                 fullWidth
@@ -112,6 +129,13 @@ class LandingPage extends Component {
                 value={password}
                 onChange={this.handleTextChange("password")}
                 margin="normal"
+                className={classes.root}
+                InputProps={{
+                  className: classes.input
+                }}
+                InputLabelProps={{
+                  className: classes.input
+                }}
               />
               {/* <div style={styles.button} onClick={this.togglePortal}>
                 <Button color="secondary" disabled variant="raised" fullWidth>
@@ -170,7 +194,7 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(
+const EnhancedLandingPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(
@@ -190,3 +214,5 @@ export default connect(
     })
   )(LandingPage)
 );
+
+export default withStyles(snipSnarf)(EnhancedLandingPage);

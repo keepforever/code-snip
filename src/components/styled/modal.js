@@ -13,6 +13,7 @@ export const ModalContainer = styled.div`
 
 export const WelcomeContainer = styled.div`
   position: fixed;
+  max-width: 500px;
   top: 50%;
   left: 50%;
   width: 65%;

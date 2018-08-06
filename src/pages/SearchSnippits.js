@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 import { clearLog, processSnipsForSearch } from "../utils";
 // locals
 import Portal from '../components/portals/portalTemplate'
-import { ContainerAlpha, ModalContainer, WelcomeContainer } from "../components/styled";
+import { ContainerAlpha, ModalContainer, WelcomeContainer, SearchTextContainer } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
 import LandingPage from '../components/landing/LandingPage'
 import MyMaterialToolTip from "../components/tool-tips/MyMaterialToolTip";
@@ -63,7 +63,7 @@ class Search extends Component {
           </Typography>
         </AppBar>
 
-          <div>
+          <SearchTextContainer>
             <AppBar position="static" color="default">
               <TextField
                 fullWidth
@@ -75,7 +75,7 @@ class Search extends Component {
                 margin="normal"
               />
             </AppBar>
-          </div>
+          </SearchTextContainer>
         <div className="container">
           {match.map((item, index) => {
             return (
