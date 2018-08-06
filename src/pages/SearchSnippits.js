@@ -20,7 +20,7 @@ import Portal from '../components/portals/portalTemplate'
 import { ContainerAlpha, ModalContainer, WelcomeContainer, SearchTextContainer } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
 import LandingPage from '../components/landing/LandingPage'
-import MyMaterialToolTip from "../components/tool-tips/MyMaterialToolTip";
+import MyMaterialClickAwayToolTip from "../components/tool-tips/MyMaterialClickAwayToolTip";
 
 
 
@@ -88,11 +88,11 @@ class Search extends Component {
           })}
         </div>
           <div style={styles.container}>
-          <MyMaterialToolTip tipKey="searchBarGuidance">
+          <MyMaterialClickAwayToolTip tipKey="searchBarGuidance">
             <Typography variant="body2" color="secondary">
               help
             </Typography>
-          </MyMaterialToolTip>
+          </MyMaterialClickAwayToolTip>
         </div>
       </ContainerAlpha>
     );

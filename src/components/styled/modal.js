@@ -22,3 +22,21 @@ export const WelcomeContainer = styled.div`
   max-height: 85%;
   background: rgba(0,0,0,0.3);
 `;
+
+export const HelpContainer = styled.div`
+  position: fixed;
+  max-width: 700px;
+  top: 50%;
+  left: 50%;
+  width: 65%;
+  transform: translate(-50%, -50%);
+  ${'' /* max-width: 75%; */}
+  max-height: 89%;
+  background: rgba(0,0,0,0.3);
+  /* let it scroll */
+  overflow: auto;
+
+  @media (max-width: 455px) {
+    width: 92%;
+  }
+`;

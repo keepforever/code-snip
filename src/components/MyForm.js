@@ -46,7 +46,7 @@ const formikEnhancer = withFormik({
     return {
       snipName: snipName || "",
       snipType: snipType || "boiler",
-      language: language || "javascript",
+      language: language || "",
       framework: framework || "react",
       code: code || "",
       notes: notes || "",
@@ -57,9 +57,9 @@ const formikEnhancer = withFormik({
   },
   validationSchema: object().shape({
     snipName: string().required("You must name your snippit"),
-    snipType: string().required("Type is required"),
-    language: string().required("Language is required"),
-    framework: string().required("Framework is required"),
+    snipType: string(),
+    language: string(),
+    framework: string(),
     code: string().required("Code is required"),
     notes: string(),
     companion: array(),
@@ -254,9 +254,9 @@ class MyForm extends Component {
               </div>
             </Paper>
           </form>
-          {/* <div>
+          <div>
             <DisplayFormikState {...this.props} />
-          </div> */}
+          </div>
         </div>
       </Paper>
     );

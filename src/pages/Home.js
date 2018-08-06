@@ -20,8 +20,11 @@ import Portal from '../components/portals/portalTemplate'
 import { ContainerAlpha, ModalContainer, WelcomeContainer } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
 import LandingPage from '../components/landing/LandingPage'
+import HomeHelpPage from '../components/HomeHelpPage'
 // utils
 import { clearLog } from "../utils";
+import MyMaterialClickAwayToolTip from "../components/tool-tips/MyMaterialClickAwayToolTip";
+
 
 // TODO: ADD EXPORT DATA BUTTON SOMEWHERE
 
@@ -33,7 +36,8 @@ class Home extends Component {
   state = {
     age: "",
     currency: "EUR",
-    showPortal: false
+    showPortal: false,
+    showHelp: false
   };
 
   handleChange = name => event => {
@@ -45,13 +49,17 @@ class Home extends Component {
   };
 
   togglePortal = () => {
-    // this.setState(prevState => {
-    //   return {
-    //     showPortal: !prevState.showPortal
-    //   };
-    // });
+
     this.props.toggleLandingPageAction()
   };
+
+  toggleHelp = () => {
+    this.setState(prevState => {
+      return {
+        showHelp: !prevState.showHelp
+      };
+    });
+  }
 
   counterChangeHandler = () => {
     clearLog("counter");
@@ -77,22 +85,31 @@ class Home extends Component {
     if(this.props.shouldShowLanding) {
       return (
         <Portal>
-          <LandingPage togglePortal={this.togglePortal} />
+          <LandingPage togglePortal={this.togglePortal}/>
         </Portal>
       )
     }
-
+    if(this.state.showHelp) {
+      return (
+        <Portal>
+          <HomeHelpPage  toggleHelp={this.toggleHelp}/>
+        </Portal>
+      )
+    }
     return (
       <ContainerAlpha>
-        <div>
           <AppBar position="static" color="default">
+            <div style={styles.headerContainer} >
             <Typography variant="title" color="secondary">
-              <div style={styles.headerContainer} >
                 Your Snips
-              </div>
             </Typography>
+            <Typography variant="body2" color="secondary">
+                <div style={{cursor: 'pointer'}} onClick={this.toggleHelp}>
+                  help
+                </div>
+            </Typography>
+          </div>
           </AppBar>
-        </div>
         <div className="container">
           {snippits.map((item, index) => {
             const { snipSoup }  = this.props.user
@@ -100,7 +117,7 @@ class Home extends Component {
             const itemsSoup = snipSoup.filter(el => {
               return (el.id === item.id)
             })
-            
+
             return (
               <React.Fragment key={index}>
                 <SnipListItem
@@ -181,8 +198,9 @@ const styles = {
   headerContainer: {
     height: 50,
     display: "flex",
+    flexDirection: 'row',
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
     margin: "20 0"
   }
 };

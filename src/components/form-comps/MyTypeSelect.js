@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import {typeValueMap} from '../../constants'
 
 const styles = {
   root: {
@@ -12,8 +13,6 @@ const styles = {
   },
 };
 
-const valueMap = ["boiler", "algo", "view", "config"];
-
 class CenteredTabs extends React.Component {
   state = {
     value: 0
@@ -22,7 +21,7 @@ class CenteredTabs extends React.Component {
   handleChange = (event, value) => {
     //console.log('valueMap[value]', valueMap[value])
     this.setState({ value });
-    this.props.onChange("snipType", valueMap[value]);
+    this.props.onChange("snipType", typeValueMap[value]);
   };
 
   render() {
@@ -38,8 +37,10 @@ class CenteredTabs extends React.Component {
           scrollable
           scrollButtons="auto"
         >
-          {valueMap.map((val, index) => {
-            return <Tab label={val} key={index} />;
+          {typeValueMap.map((val, index) => {
+            return <Tab
+              label={val === "" ? 'none' : val}
+              key={index} />;
           })}
         </Tabs>
       </Paper>

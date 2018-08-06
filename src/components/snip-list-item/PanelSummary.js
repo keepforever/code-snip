@@ -5,7 +5,6 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 // locals
-import MyMaterialToolTip from "../tool-tips/MyMaterialToolTip";
 import RandomSummaryMeta from './RandomSummaryMeta'
 
 const PanelSummary = props => {
@@ -19,7 +18,6 @@ const PanelSummary = props => {
             <Paper
               component={() => {
                 return (
-                  <MyMaterialToolTip tipKey="expansionPanelSummary">
                   <div style={styles.c_Container}>
                       <div style={styles.d_Container}>
                         <Typography variant="subheading" color="default">
@@ -39,7 +37,6 @@ const PanelSummary = props => {
                       </div>
                     </div>
                   </div>
-                </MyMaterialToolTip>
                 );
               }}
             />

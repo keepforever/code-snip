@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import {framValueMap} from '../../constants'
 
 const styles = {
   root: {
@@ -11,8 +12,6 @@ const styles = {
     marginBottom: 5
   },
 };
-
-const valueMap = ["react", "react-native", "vue", "sage-maker"];
 
 class MyFrameSelect extends React.Component {
   state = {
@@ -23,7 +22,7 @@ class MyFrameSelect extends React.Component {
   handleChange = (event, value) => {
     //console.log('valueMap[value]', valueMap[value])
     this.setState({ value });
-    this.props.onChange("framework", valueMap[value]);
+    this.props.onChange("framework", framValueMap[value]);
   };
 
   render() {
@@ -39,8 +38,11 @@ class MyFrameSelect extends React.Component {
           scrollable
           scrollButtons="auto"
         >
-          {valueMap.map((val, index) => {
-            return <Tab label={val} key={index} />;
+          {framValueMap.map((val, index) => {
+            return <Tab
+              label={val === "" ? 'none' : val}
+              key={index}
+            />;
           })}
         </Tabs>
       </Paper>

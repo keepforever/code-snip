@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const SearchTextContainer = styled.div `
 
   @media (min-width: 632px) {
-    min-width: 500px;
+    min-width: 600px;
   }
 `;
 

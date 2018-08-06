@@ -19,7 +19,8 @@ export {
 
 export {
   ModalContainer,
-  WelcomeContainer
+  WelcomeContainer,
+  HelpContainer
 } from './modal'
 
 export {
