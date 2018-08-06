@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
+import { truncate } from "../../utils";
 
 class RandomSummaryMeta extends React.Component {
   constructor(props) {
@@ -35,6 +36,8 @@ class RandomSummaryMeta extends React.Component {
 
   render() {
     const { randOne, randTwo, randThree } = this.state;
+
+    const metaSentence = randOne + " " + randTwo + " " + randThree
     return (
       <div style={styles.container}>
         <div style={styles.listMeta}>
@@ -42,10 +45,10 @@ class RandomSummaryMeta extends React.Component {
             variant="body2"
             color="secondary"
           >
-            {randOne}
+            {truncate(metaSentence)}
           </Typography>
         </div>
-        <div style={styles.listMeta}>
+        {/* <div style={styles.listMeta}>
           <Typography
             variant="body2"
             color="secondary"
@@ -60,7 +63,7 @@ class RandomSummaryMeta extends React.Component {
             >
             {randThree}
           </Typography>
-        </div>
+        </div> */}
       </div>
     );
   }

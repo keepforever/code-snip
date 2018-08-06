@@ -32,7 +32,7 @@ class Search extends Component {
 
   handleTextChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value.toLowercase()
     });
   };
 

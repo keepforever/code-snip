@@ -1,3 +1,12 @@
+// truncate long text
+
+export const truncate = (string) => {
+   if (string.length > 45)
+      return string.substring(0, 45)+'...';
+   else
+      return string;
+};
+
 //search helper
 export const processSnipsForSearch = (snips) => {
   let processedSnips = []
