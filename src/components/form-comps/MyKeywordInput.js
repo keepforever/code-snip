@@ -71,13 +71,13 @@ class MyKeywordInput extends Component {
       <div>
         <TextField
           id="name"
-          label="type here to add a keyword..."
+          label="Enter a keyword..."
           value={this.state.pendingKeyword}
           fullWidth
           onChange={this.handleChange("pendingKeyword")}
           margin="normal"
           onKeyPress={ev => {
-            console.log(`Pressed keyCode ${ev.key}`);
+            //console.log(`Pressed keyCode ${ev.key}`);
             if (ev.key === "Enter") {
               this.addKeyword(this.state.pendingKeyword);
               ev.preventDefault();

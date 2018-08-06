@@ -78,7 +78,7 @@ class MyCompanionInput extends Component {
           onChange={this.handleChange("pendingCompanion")}
           margin="normal"
           onKeyPress={ev => {
-            console.log(`Pressed keyCode ${ev.key}`);
+            //console.log(`Pressed keyCode ${ev.key}`);
             if (ev.key === "Enter") {
               this.addCompanion(this.state.pendingCompanion);
               ev.preventDefault();

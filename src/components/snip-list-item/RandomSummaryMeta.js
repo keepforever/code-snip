@@ -38,6 +38,7 @@ class RandomSummaryMeta extends React.Component {
     const { randOne, randTwo, randThree } = this.state;
 
     const metaSentence = randOne + " " + randTwo + " " + randThree
+
     return (
       <div style={styles.container}>
         <div style={styles.listMeta}>

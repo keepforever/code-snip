@@ -95,11 +95,20 @@ class Home extends Component {
         </div>
         <div className="container">
           {snippits.map((item, index) => {
+            const { snipSoup }  = this.props.user
+            const desiredId = item.id
+            const itemsSoup = snipSoup.filter(el => {
+              return (el.id === item.id)
+            })
+            
             return (
               <React.Fragment key={index}>
                 <SnipListItem
-                  soup={this.props.user.snipSoup[index].bagOfWords}
+                  soup={itemsSoup[0].bagOfWords}
                   snip={item} />
+                {/* <SnipListItem
+                  soup={this.props.user.snipSoup[index].bagOfWords}
+                  snip={item} /> */}
               </React.Fragment>
             );
           })}
@@ -156,7 +165,7 @@ export default connect(
       options: {
         fetchPolicy: "cache-and-network",
         variables: {
-          orderBy: "createdAt_ASC"
+          orderBy: "createdAt_DESC"
         }
       },
       name: "listSnippits"

@@ -171,8 +171,8 @@ class MyForm extends Component {
             <Paper>
               <div
                 style={{
-                  marginTop: 8,
-                  padding: 10,
+                  marginTop: 0,
+                  padding: 0,
                 }}
               >
                 <MyReferenceInput

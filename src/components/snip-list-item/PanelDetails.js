@@ -15,8 +15,8 @@ const PanelDetails = props => {
   const { companion, notes, code, name, reference } = props.meta;
   return (
     <div style={{ width: "100%" }}>
-      <Typography color="error" variant="subheading">
-        Tangent
+      <Typography color="default" variant="subheading">
+        Companion
       </Typography>
       <div style={styles.a_Container}>
         {companion.map((c, index) => {
@@ -37,7 +37,7 @@ const PanelDetails = props => {
       <CodeBlock code={code} />
       <MyMaterialToolTip tipKey="copyToClipboardButton">
         <CopyToClipboard onCopy={() => alert(`Snarfed ${name}!`)} text={code}>
-          <Button fullWidth color="primary" variant="raised">
+          <Button fullWidth color="secondary" variant="raised">
             Copy
           </Button>
         </CopyToClipboard>

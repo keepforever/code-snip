@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const SNIPPITS_QUERY = gql`
-  query {
-    snippits {
+  query($orderBy: SnippitOrderByInput) {
+    snippits(orderBy: $orderBy) {
       id
       name
       type

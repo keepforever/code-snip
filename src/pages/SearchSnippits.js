@@ -32,7 +32,7 @@ class Search extends Component {
 
   handleTextChange = name => event => {
     this.setState({
-      [name]: event.target.value.toLowercase()
+      [name]: event.target.value
     });
   };
 
@@ -47,7 +47,7 @@ class Search extends Component {
     if(search.length > 1) {
       snipSoup.forEach((item, index) => {
         const bagToString = item.bagOfWords.join(" ")
-        if (bagToString.includes(search.trim())) {
+        if (bagToString.includes(search.trim().toLowerCase())) {
           match.push(index)
         }
       })

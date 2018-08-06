@@ -77,7 +77,7 @@ class MyReferenceInput extends Component {
           onChange={this.handleChange("pendingReference")}
           margin="normal"
           onKeyPress={ev => {
-            console.log(`Pressed keyCode ${ev.key}`);
+            //console.log(`Pressed keyCode ${ev.key}`);
             if (ev.key === "Enter") {
               this.addReference(this.state.pendingReference);
               ev.preventDefault();

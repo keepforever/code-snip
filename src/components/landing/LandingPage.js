@@ -203,7 +203,7 @@ const EnhancedLandingPage = connect(
       options: {
         fetchPolicy: "cache-and-network",
         variables: {
-          orderBy: "createdAt_ASC"
+          orderBy: "createdAt_DESC"
         }
       },
       name: "listSnippits"
