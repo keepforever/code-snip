@@ -160,7 +160,14 @@ class LandingPage extends Component {
                   </Button>
                 </div>
               </MyMaterialToolTip>
-                <Link style={{all: 'unset', }} to='/signup'>
+              <Link style={{all: 'unset', }} to='/signup'>
+                <Button fullWidth color="secondary">
+                    <div style={{marginTop: 25, color: 'white'}}>
+                      New? Create Account...
+                    </div>
+                </Button>
+              </Link>
+                {/* <Link style={{all: 'unset', }} to='/signup'>
                   <Button fullWidth color="secondary">
                     <Typography variant="button" color="inherit">
                       <div style={{marginTop: 25, color: 'white'}}>
@@ -168,7 +175,7 @@ class LandingPage extends Component {
                       </div>
                     </Typography>
                   </Button>
-                </Link>
+                </Link> */}
             </div>
           </HelpContainer>
         </OuterSpace>
