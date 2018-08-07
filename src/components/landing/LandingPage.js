@@ -17,7 +17,7 @@ import { graphql, compose } from "react-apollo";
 import { SNIPPITS_QUERY } from "../../graphql/queries/SNIPPITS_QUERY";
 import { LOGIN_MUTATION } from "../../graphql/mutations/LOGIN_MUTATION";
 // locals
-import { ModalContainer, WelcomeContainer } from "../styled";
+import { ModalContainer, WelcomeContainer, HelpContainer } from "../styled";
 import OuterSpace from "../outer-space";
 import MyMaterialToolTip from '../tool-tips/MyMaterialToolTip'
 //utils
@@ -25,8 +25,8 @@ import { clearLog } from "../../utils";
 
 
 const defaultState = {
-  email: "b@b.com",
-  password: "b",
+  email: "",
+  password: "",
   isSubmitting: false,
   redirectToReferrer: false
 }
@@ -97,7 +97,7 @@ class LandingPage extends Component {
     return (
       <ModalContainer>
         <OuterSpace>
-          <WelcomeContainer>
+          <HelpContainer>
             <div style={styles.main}>
               <div>
                 <Typography variant="title" color="secondary">
@@ -109,11 +109,11 @@ class LandingPage extends Component {
                   <strong>Snip Snarf</strong>
                 </Typography>
               </div>
-              <div >
+              {/* <div >
                 <Typography variant="body2" color="secondary">
                   Login credentials prefilled, just click 'LOGIN'...
                 </Typography>
-              </div>
+              </div> */}
               <TextField
                 fullWidth
                 id="multiline-flexible"
@@ -162,13 +162,15 @@ class LandingPage extends Component {
               </MyMaterialToolTip>
                 <Link style={{all: 'unset', }} to='/signup'>
                   <Button fullWidth color="inherit">
-                    <Typography variant="button" color="default">
-                      Create Account
+                    <Typography variant="button" color="secondary">
+                      <div style={{marginTop: 25}}>
+                        New? Create Account...
+                      </div>
                     </Typography>
                   </Button>
                 </Link>
             </div>
-          </WelcomeContainer>
+          </HelpContainer>
         </OuterSpace>
       </ModalContainer>
     );

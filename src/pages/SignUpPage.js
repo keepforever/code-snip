@@ -19,7 +19,7 @@ import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 import { SIGNUP_MUTATION } from "../graphql/mutations/SIGNUP_MUTATION";
 import { CREATE_SNIPPIT } from "../graphql/mutations/CREATE_SNIPPIT";
 // locals
-import { ModalContainer, WelcomeContainer } from "../components/styled";
+import { ModalContainer, WelcomeContainer, HelpContainer } from "../components/styled";
 import OuterSpace from "../components/outer-space";
 //utils
 import { emailRegex, starterSnippitsArray } from '../constants'
@@ -169,7 +169,7 @@ class SignUpPage extends Component {
     return (
       <ModalContainer>
         <OuterSpace>
-          <WelcomeContainer>
+          <HelpContainer>
             <div style={styles.main}>
               <div>
                 <Typography variant="title" color="primary">
@@ -249,13 +249,15 @@ class SignUpPage extends Component {
               </div>
               <Link style={{all: 'unset', }} to='/login'>
                 <Button fullWidth color="inherit">
-                  <Typography variant="button" color="default">
-                    Login Instead
+                  <Typography variant="button" color="secondary">
+                    <div style={{marginTop: 25}}>
+                      Login Instead
+                    </div>
                   </Typography>
                 </Button>
               </Link>
             </div>
-          </WelcomeContainer>
+          </HelpContainer>
         </OuterSpace>
       </ModalContainer>
     );

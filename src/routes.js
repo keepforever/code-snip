@@ -61,7 +61,7 @@ const Routes = props => {
               key={index}
               path={route.path}
               render={() =>
-                props.shouldShowLanding ? <Redirect to="/signup" /> : <Route
+                props.shouldShowLanding ? <Redirect to="/login" /> : <Route
                   key={index}
                   path={route.path}
                   exact={route.exact}
