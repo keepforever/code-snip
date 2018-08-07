@@ -8,7 +8,6 @@ import { withStyles } from "@material-ui/core/styles";
 import OuterSpace from "./outer-space";
 import { tipLibrary } from "../constants"
 
-
 const snipSnarf = {
   root: {
     background: "black"
@@ -18,7 +17,7 @@ const snipSnarf = {
   }
 };
 
-class AddSnipHelp extends Component {
+class SearchSnipHelp extends Component {
 
 
   render() {
@@ -40,11 +39,11 @@ class AddSnipHelp extends Component {
               </div>
               <div >
                 <Typography variant="title" color="secondary">
-                  Adding a Snip
+                  About Search
                 </Typography>
               </div>
               <br/>
-              {tipLibrary.addSnipHelpText.map((t, index) => {
+              {tipLibrary.searchSnipHelpText.map((t, index) => {
                 return (
                   <div style={{marginBottom: 12}} key={index}>
                     <Typography variant="body2" color="secondary">
@@ -74,4 +73,4 @@ const styles = {
   }
 };
 
-export default withStyles(snipSnarf)(AddSnipHelp);
+export default withStyles(snipSnarf)(SearchSnipHelp);

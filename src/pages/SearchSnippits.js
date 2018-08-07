@@ -20,14 +20,23 @@ import { clearLog, } from "../utils";
 import { ContainerAlpha, SearchTextContainer } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
 import MyMaterialClickAwayToolTip from "../components/tool-tips/MyMaterialClickAwayToolTip";
-
-
+import SearchSnipHelpPage from '../components/SearchSnipHelpPage'
+import Portal from '../components/portals/portalTemplate'
 
 class Search extends Component {
 
   state = {
     search: '',
+    showHelp: false,
   };
+
+  toggleHelp = () => {
+    this.setState(prevState => {
+      return {
+        showHelp: !prevState.showHelp
+      };
+    });
+  }
 
   handleTextChange = name => event => {
     this.setState({
@@ -40,7 +49,13 @@ class Search extends Component {
     const {  user: { snips, snipSoup },  } = this.props;
     const { search } = this.state
 
-    //const processedSnips = processSnipsForSearch(snips)
+    if(this.state.showHelp) {
+      return (
+        <Portal>
+          <SearchSnipHelpPage  toggleHelp={this.toggleHelp}/>
+        </Portal>
+      )
+    }
 
     let match = [];
     if(search.length > 1) {
@@ -52,16 +67,22 @@ class Search extends Component {
       })
     }
 
-    clearLog('snipSoup', snipSoup)
+    //clearLog('snipSoup', snipSoup)
 
     return (
       <ContainerAlpha>
         <AppBar position="static" color="default">
+          <div style={styles.headerContainer} >
           <Typography variant="title" color="secondary">
-            <div style={styles.container}>Search Snips</div>
+              Search Snips
           </Typography>
+          <Typography variant="body2" color="secondary">
+              <div style={{cursor: 'pointer'}} onClick={this.toggleHelp}>
+                help
+              </div>
+          </Typography>
+        </div>
         </AppBar>
-
           <SearchTextContainer>
             <AppBar position="static" color="default">
               <TextField
@@ -85,13 +106,6 @@ class Search extends Component {
               </React.Fragment>
             );
           })}
-        </div>
-          <div style={styles.container}>
-          <MyMaterialClickAwayToolTip tipKey="searchBarGuidance">
-            <Typography variant="body2" color="secondary">
-              help
-            </Typography>
-          </MyMaterialClickAwayToolTip>
         </div>
       </ContainerAlpha>
     );
@@ -128,15 +142,24 @@ const styles = {
   headerContainer: {
     height: 50,
     display: "flex",
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "space-around",
+    margin: "20 0"
+  },
+  helpContainer: {
+    height: 50,
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    margin: "20 0"
+    margin: "20 0",
+    cursor: 'pointer'
   },
   container: {
     height: 50,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    margin: "20 0"
+    margin: "20 0",
   }
 };

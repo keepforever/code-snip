@@ -32,7 +32,11 @@ export const tipLibrary = {
   expansionPanelSummary: "Click here for more details",
   copyToClipboardButton: "Snarf snip to clipboard",
   addSnippitHelp: "Ok, here's the gist...",
-  searchBarGuidance: "Scans every line of text you entered into or about a code snippit then returns exact or partial matches.  i.e. search = ' worl ' would match ' world ', but not ' wor ' ",
+  searchSnipHelpText: [
+    `Scans every line of text you entered at code snip creation for every snippit in your catalog.`,
+     `Returns exact or partial matches.`,
+     `i.e. search = ' worl ' would match ' world ', but not ' wor ' `
+  ],
   homeHelpText: [
     `On the "Your Snips" page your snip records are fetched from the database.`,
     `Starting in the top left and going clockwise, you have snippit “name”, “framework”(if any), “language”(if any), and some randomly extracted, periodically changing “word soup”.`,
@@ -53,7 +57,7 @@ export const tipLibrary = {
      `Reference: Links or reminders of where an example of the code snippet lives in the wild and is functioning as intended.`,
      `Keyword: any words you would like associated with the snippet to help you search for it later.`,
      `Companion: If your code Snip has any common dependencies or imports it cannot run without, indicate here`
-  ]
+  ],
 }
 
 export const helpSnippitDemo = {
@@ -63,7 +67,7 @@ export const helpSnippitDemo = {
   id: "cjkglhyx65iww0b78a501j2oa",
   keywords:["some", "keywords"],
   language:"language",
-  name:"Name",
+  name:`Name        (CLICK HERE!!!)`,
   notes:"Notes about snippit",
   reference:["link to examples"],
   bagOfWords: ['the', 'code', 'you', 'entered', 'dependencies', 'companion', 'libs', 'framework', 'some', 'keywords', 'language','Name', 'notes', 'about', 'snippit', 'link', 'to', 'examples'],

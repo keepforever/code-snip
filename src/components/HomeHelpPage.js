@@ -29,6 +29,15 @@ class HomeHelp extends Component {
         <OuterSpace>
           <HelpContainer>
             <div style={styles.main}>
+              <div style={{marginBottom: 15}} onClick={toggleHelp}>
+                <Button
+                  color="secondary"
+                  variant="raised"
+                  fullWidth
+                >
+                  Back to App
+                </Button>
+              </div>
               <div >
                 <Typography variant="title" color="secondary">
                   This is a Snip
@@ -48,15 +57,6 @@ class HomeHelp extends Component {
                   </div>
                 )
               })}
-              <div onClick={toggleHelp}>
-                <Button
-                  color="secondary"
-                  variant="raised"
-                  fullWidth
-                >
-                  Back to App...
-                </Button>
-              </div>
             </div>
           </HelpContainer>
         </OuterSpace>
