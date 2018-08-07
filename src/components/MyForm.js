@@ -71,9 +71,10 @@ const formikEnhancer = withFormik({
     //clearLog("form submitted with values", values);
     //clearLog("handleSubmit props", props);
     let response;
+
     response = await props.createSnippit({
       variables: {
-        author: 'cjkc9mzt28ts70b12f0w7qh7g',
+        author: props.user.meta.id,
         name: values.snipName,
         language: values.language,
         code: values.code,

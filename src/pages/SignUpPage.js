@@ -99,9 +99,9 @@ class SignUpPage extends Component {
        });
        return;
      }
-     console.log('signup response.data', response.data)
-     console.log('signup response.data.signup', response.data.signup)
-     console.log('signup response.data.signup.token', response.data.signup.token)
+     // console.log('signup response.data', response.data)
+     // console.log('signup response.data.signup', response.data.signup)
+     // console.log('signup response.data.signup.token', response.data.signup.token)
 
      //const { token, user: { newId, newName, newEmail } } = response.data.signup
      // here we rename the destructured vars to avoid colision.
