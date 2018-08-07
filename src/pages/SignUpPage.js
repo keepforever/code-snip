@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 // material-ui
 import TextField from "@material-ui/core/TextField";
@@ -247,15 +247,15 @@ class SignUpPage extends Component {
                   SignUp
                 </Button>
               </div>
-              <Link style={{all: 'unset', }} to='/login'>
-                <Button fullWidth color="inherit">
-                  <Typography variant="button" color="secondary">
-                    <div style={{marginTop: 25}}>
-                      Login Instead
+              <NavLink to='/login'>
+                <Button fullWidth color="secondary">
+                  <Typography variant="button" color="inherit">
+                    <div style={{marginTop: 25, color: 'white'}}>
+                      Have Account?  Sign in...
                     </div>
                   </Typography>
                 </Button>
-              </Link>
+              </NavLink>
             </div>
           </HelpContainer>
         </OuterSpace>
