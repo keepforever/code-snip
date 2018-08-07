@@ -36,9 +36,23 @@ export const tipLibrary = {
   homeHelpText: [
     `On the "Your Snips" page your snip records are fetched from the database.`,
     `Starting in the top left and going clockwise, you have snippit “name”, “framework”(if any), “language”(if any), and some randomly extracted, periodically changing “word soup”.`,
-    `The “word soup” is intended to help jog your memory as to what the snip might contains.`,
+    `The “word soup” is intended to help jog your memory as to the snip's contents.`,
     `For example, if you’re trying to remember how to use toLowerCase() and you can’t remember if it’s ‘arg.toLowerCase()’ or ‘toLowerCase(arg)’, the soup might tell you at a glance if the snippit is a good place to look.`,
     `Press a list item to expand it’s contents.  Click copy to snarf the snip to your clipboard.`,
+  ],
+  addSnipHelpText: [
+    `There are TWO required pieces of info for a new snip:`,
+    `Name: a name for you snip`,
+    `Code: the code you would like to save`,
+    `All other pieces of metadata are optional. How you use them is up to you.`,
+    `Some Guidance for the optional metadata:`,
+    `Type: describes a broad categorization of the Snip`,
+     `ALGO = algorithm, BOILER = boiler plate code, VISUAL = a visual element like a div, CONFIG = a configuration object.`,
+     `Language: code Snip's syntax language`,
+     `Framework: if your code typically applies to a specific framework's design pattern, indicate by selection`,
+     `Reference: Links or reminders of where an example of the code snippet lives in the wild and is functioning as intended.`,
+     `Keyword: any words you would like associated with the snippet to help you search for it later.`,
+     `Companion: If your code Snip has any common dependencies or imports it cannot run without, indicate here`
   ]
 }
 

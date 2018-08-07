@@ -19,6 +19,7 @@ import MyKeywordInput from "./form-comps/MyKeywordInput";
 import MyCompanionInput from "./form-comps/MyCompanionInput";
 import MyReferenceInput from "./form-comps/MyReferenceInput";
 import MyNameInput from "./form-comps/MyNameInput";
+import { KeepFormWidthDiv } from "./styled";
 // utils
 import DisplayFormikState from "./form-comps/DisplayFormikState";
 import { clearLog } from "../utils";
@@ -26,6 +27,10 @@ import { clearLog } from "../utils";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // REDUX
 import { updateBOWAfterCreate } from "../store/actions/snippit";
 import { bindActionCreators } from "redux";
@@ -92,13 +97,22 @@ const formikEnhancer = withFormik({
 
 class MyForm extends Component {
   state = {
-    clearChips: false
+    clearChips: false,
+    shouldShowMeta: false,
   };
 
   clearChips = () => {
     const flip = !this.state.clearChips;
     this.setState({ clearChips: flip });
   };
+
+  toggleShowMeta = () => {
+    this.setState(prevState => {
+      return {
+        shouldShowMeta: !prevState.shouldShowMeta
+      };
+    });
+  }
 
   render() {
     const {
@@ -110,6 +124,18 @@ class MyForm extends Component {
       isSubmitting
       //touched, errors, setFieldTouched, handleChange, handleBlur,
     } = this.props;
+
+    const { shouldShowMeta } = this.state
+
+    let metaDisplay = {}
+    if(shouldShowMeta) {
+      metaDisplay = {
+        display: 'none'
+      }
+    } else {
+      metaDisplay = {}
+    }
+
 
     //clearLog("MyForm props", this.props);
 
@@ -141,103 +167,19 @@ class MyForm extends Component {
             <Paper>
               <div
                 style={{
-                  padding: 10,
-                }}
-              >
-                <MyTypeSelect
-                  value={values.snipType}
-                  onChange={setFieldValue}
-                />
-                <MyLangSelect
-                  value={values.language}
-                  onChange={setFieldValue}
-                />
-                <MyFrameSelect
-                  value={values.framework}
-                  onChange={setFieldValue}
-                />
-              </div>
-            </Paper>
-            <Paper>
-              <div
-                style={{
                   marginTop: 8,
                   padding: 10,
                 }}
-              >
+                >
+                <Typography variant="body1" color="default">
+                  Snarf Your Code:
+                </Typography>
                 <MyCodeInput value={values.code} onChange={setFieldValue} />
               </div>
             </Paper>
-            <Paper>
+            <div>
               <div
-                style={{
-                  marginTop: 0,
-                  padding: 0,
-                }}
-              >
-                <MyReferenceInput
-                  onChange={setFieldValue}
-                  shouldClear={this.state.clearChips}
-                />
-              </div>
-            </Paper>
-            <Paper>
-              <div
-                style={{
-                  marginTop: 8,
-                  padding: 10,
-                }}
-              >
-                <MyKeywordInput
-                  onChange={setFieldValue}
-                  shouldClear={this.state.clearChips}
-                />
-              </div>
-            </Paper>
-            <Paper>
-              <div
-                style={{
-                  marginTop: 8,
-                  padding: 10,
-                }}
-              >
-                <MyCompanionInput
-                  onChange={setFieldValue}
-                  shouldClear={this.state.clearChips}
-                />
-              </div>
-            </Paper>
-            <Paper>
-              <div
-                style={{
-                  marginTop: 8,
-                  padding: 10,
-                }}
-              >
-                <MyNotesInput value={values.notes} onChange={setFieldValue} />
-              </div>
-            </Paper>
-            <Paper>
-              <div
-                onClick={handleReset}
-                style={{
-                  marginTop: 8,
-                  padding: 10
-                }}
-              >
-                <Button
-                  disabled={!dirty || isSubmitting}
-                  fullWidth={true}
-                  color="default"
-                  variant="raised"
-                >
-                  Reset
-                </Button>
-              </div>
-            </Paper>
-            <Paper>
-              <div
-                onClick={() => this.clearChips()}
+                onClick={() => this.toggleShowMeta()}
                 style={{
                   marginTop: 8,
                   padding: 10
@@ -245,14 +187,122 @@ class MyForm extends Component {
               >
                 <Button
                   fullWidth={true}
-                  type="submit"
-                  color="primary"
+                  color="secondary"
                   variant="raised"
                 >
-                  Submit
+                  Add Optional Metadata
                 </Button>
               </div>
-            </Paper>
+              {shouldShowMeta && (
+                <div >
+                  <Paper>
+                    <div
+                      style={{
+                        padding: 10,
+                      }}
+                    >
+                      <MyTypeSelect
+                        value={values.snipType}
+                        onChange={setFieldValue}
+                      />
+                      <MyLangSelect
+                        value={values.language}
+                        onChange={setFieldValue}
+                      />
+                      <MyFrameSelect
+                        value={values.framework}
+                        onChange={setFieldValue}
+                      />
+                    </div>
+                  </Paper>
+                  <Paper>
+                    <div
+                      style={{
+                        marginTop: 0,
+                        padding: 0,
+                      }}
+                    >
+                      <MyReferenceInput
+                        onChange={setFieldValue}
+                        shouldClear={this.state.clearChips}
+                      />
+                    </div>
+                  </Paper>
+                  <Paper>
+                    <div
+                      style={{
+                        marginTop: 8,
+                        padding: 10,
+                      }}
+                    >
+                      <MyKeywordInput
+                        onChange={setFieldValue}
+                        shouldClear={this.state.clearChips}
+                      />
+                    </div>
+                  </Paper>
+                  <Paper>
+                    <div
+                      style={{
+                        marginTop: 8,
+                        padding: 10,
+                      }}
+                    >
+                      <MyCompanionInput
+                        onChange={setFieldValue}
+                        shouldClear={this.state.clearChips}
+                      />
+                    </div>
+                  </Paper>
+                  <Paper>
+                    <div
+                      style={{
+                        marginTop: 8,
+                        padding: 10,
+                      }}
+                    >
+                      <MyNotesInput value={values.notes} onChange={setFieldValue} />
+                    </div>
+                  </Paper>
+                </div>
+              )}
+              <Paper>
+                <div
+                  onClick={handleReset}
+                  style={{
+                    marginTop: 8,
+                    padding: 10
+                  }}
+                >
+                  <Button
+                    disabled={!dirty || isSubmitting}
+                    fullWidth={true}
+                    color="default"
+                    variant="raised"
+                  >
+                    Reset
+                  </Button>
+                </div>
+              </Paper>
+              <Paper>
+                <div
+                  onClick={() => this.clearChips()}
+                  style={{
+                    marginTop: 8,
+                    padding: 10
+                  }}
+                >
+                  <Button
+                    fullWidth={true}
+                    type="submit"
+                    color="primary"
+                    variant="raised"
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </Paper>
+            </div>
           </form>
           <div>
             <DisplayFormikState {...this.props} />

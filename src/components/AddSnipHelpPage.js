@@ -10,7 +10,7 @@ import { withStyles } from "@material-ui/core/styles";
 import OuterSpace from "./outer-space";
 import { clearLog } from "../utils";
 import { tipLibrary, helpSnippitDemo } from "../constants"
-import SnipListItem from './snip-list-item/SnipListItem'
+
 
 const snipSnarf = {
   root: {
@@ -21,7 +21,8 @@ const snipSnarf = {
   }
 };
 
-class HomeHelp extends Component {
+class AddSnipHelp extends Component {
+
 
   render() {
     const { togglePortal, classes } = this.props;
@@ -33,15 +34,11 @@ class HomeHelp extends Component {
             <div style={styles.main}>
               <div >
                 <Typography variant="title" color="secondary">
-                  This is a Snip
+                  Adding a Snip
                 </Typography>
               </div>
-              <br />
-              <SnipListItem
-                soup={helpSnippitDemo.bagOfWords}
-                snip={helpSnippitDemo} />
               <br/>
-              {tipLibrary.homeHelpText.map((t, index) => {
+              {tipLibrary.addSnipHelpText.map((t, index) => {
                 return (
                   <div style={{marginBottom: 12}} key={index}>
                     <Typography variant="body2" color="secondary">
@@ -80,4 +77,4 @@ const styles = {
   }
 };
 
-export default withStyles(snipSnarf)(HomeHelp);
+export default withStyles(snipSnarf)(AddSnipHelp);
