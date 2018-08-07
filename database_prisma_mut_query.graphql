@@ -426,3 +426,26 @@ mutation zSignIntoApp {
     }
   }
 }
+
+query($orderBy: SnippitOrderByInput, $id: ID!) {
+    snippits(
+      orderBy: $orderBy,
+      where: { id: $id }
+    ) {
+      id
+      name
+      type
+      language
+      framework
+      code
+      notes
+      companion
+      keywords
+      reference
+      createdAt
+      author {
+        id
+        name
+      }
+    }
+  }

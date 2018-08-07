@@ -14,7 +14,12 @@ import { connect } from "react-redux";
 //import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
-import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
+import {
+  SNIPPITS_QUERY
+} from "../graphql/queries/SNIPPITS_QUERY";
+import {
+  SPECIFIC_USERS_SNIPPITS_QUERY
+} from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
 //import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
 // locals
 import Portal from '../components/portals/portalTemplate'
@@ -67,12 +72,13 @@ class Home extends Component {
 
     const {
       listSnippits: { loading, snippits },
+      listSpecificUserSnippits: { snippits: newSnippits, loading: newLoading}
       //userId,
       //specificSnippit
     } = this.props;
     //clearLog('HomeProps', this.props)
 
-    if (loading) {
+    if (loading || newLoading) {
       return (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 400}}>
           <CircularProgress thickness={7} />;
@@ -87,6 +93,9 @@ class Home extends Component {
         </Portal>
       )
     }
+    clearLog('snippits from Home', snippits)
+    clearLog('newSnippits from Home', newSnippits)
+    clearLog('this.props.user HOME', this.props.user)
     return (
       <ContainerAlpha>
           <AppBar position="static" color="default">
@@ -110,7 +119,7 @@ class Home extends Component {
           </div>
           </AppBar>
         <div className="container">
-          {snippits.map((item, index) => {
+          {newSnippits.map((item, index) => {
             const { snipSoup }  = this.props.user
             const itemsSoup = snipSoup.filter(el => {
               return (el.id === item.id)
@@ -161,7 +170,14 @@ export default connect(
         }
       },
       name: "listSnippits"
-    })
+    }),
+    graphql(SPECIFIC_USERS_SNIPPITS_QUERY, {
+    options: (props) => ({ variables: {
+      id: props.user.meta.id,
+      orderBy: "createdAt_DESC"
+     } }),
+    name: "listSpecificUserSnippits"
+  })
   )(Home)
 );
 

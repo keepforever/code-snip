@@ -21,7 +21,7 @@ import { ModalContainer, WelcomeContainer } from "../styled";
 import OuterSpace from "../outer-space";
 import MyMaterialToolTip from '../tool-tips/MyMaterialToolTip'
 //utils
-//import { clearLog } from "../../utils";
+import { clearLog } from "../../utils";
 
 
 const defaultState = {
@@ -67,7 +67,7 @@ class LandingPage extends Component {
       console.log(error);
       return;
     }
-    //clearLog("LOGIN_MUTATION response", response.data.login.payload);
+    clearLog("LOGIN_MUTATION response", response.data.login.payload);
     this.setState({
       ...defaultState,
     });

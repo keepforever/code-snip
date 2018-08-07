@@ -47,7 +47,7 @@ const PanelDetails = props => {
       <div style={styles.c_Container}>
         {reference.map((k, index) => {
           return (
-            <div key={index} style={{ marginTop: 7 }}>
+            <div key={index} style={{ marginTop: 7, marginRight: 7 }}>
               <Chip label={k} />
             </div>
           );
@@ -61,7 +61,7 @@ export default PanelDetails;
 
 const styles = {
   a_Container: {
-    marginRight: 7,
+    paddingLeft: 7,
     justifyContent: "flex-start",
     alignItems: "flex-start",
     display: "flex",
@@ -73,10 +73,10 @@ const styles = {
     display: "inline-block"
   },
   c_Container: {
-    margin: 15,
+    marginRight: 7,
     justifyContent: "flex-start",
     alignItems: "flex-start",
     display: "flex",
-    flexFlow: "column wrap"
+    flexFlow: "row wrap"
   }
 };

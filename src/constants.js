@@ -69,3 +69,67 @@ export const helpSnippitDemo = {
   reference:["link to examples"],
   bagOfWords: ['the', 'code', 'you', 'entered', 'dependencies', 'companion', 'libs', 'framework', 'some', 'keywords', 'language','Name', 'notes', 'about', 'snippit', 'link', 'to', 'examples'],
 }
+
+export const starterSnippitsArray = [
+  {
+    "id": "cjkk3wmvb47kc0b77p53xeo5x",
+    "name": "Add A Snip! ",
+    "type": "",
+    "language": "",
+    "framework": "",
+    "code":
+      "const addYourOwnSnip = (user) => {\n  navigatesTo('Add Snip Page')\n    .then('enters you snip')\n    .then('hit submit')\n    \n    alert('SNARF!, You did it!')\n}",
+    "notes": "",
+    "companion": [],
+    "keywords": [],
+    "reference": [],
+    "createdAt": "2018-08-07T19:37:29.546Z",
+    "author": {
+      "id": "cjkc9mzt28ts70b12f0w7qh7g",
+      "name": "b",
+      "__typename": "User"
+    },
+    "__typename": "Snippit"
+  },
+  {
+    "id": "cjkk3r3z8470a0b777wckswh7",
+    "name": "Destructuring Complex Object ",
+    "type": "",
+    "language": "javascript",
+    "framework": "",
+    "code":
+      "// response.data.signup looks like: \r\n  {\r\n    token: 'xx',\r\n    user: {\r\n      name: 'string',\r\n      id: 'string',\r\n      email: 'string',\r\n    }\r\n  } \r\n// we can Destructur it and extract the variables\r\n// for cleaner code.  \r\n// We can take it one step further and rename\r\n// a variable.  In this snip, we are renaming the\r\n// incoming 'name' variable to 'newName' with\r\n// the following code: \r\nconst {\r\n   token,\r\n   user: {\r\n     name: newName,\r\n     email,\r\n     id,\r\n   }\r\n } = response.data.signup",
+    "notes": "Make your code more elegant, easier to write and read. ",
+    "companion": [],
+    "keywords": ["destructuring"],
+    "reference": [],
+    "createdAt": "2018-08-07T19:33:11.782Z",
+    "author": {
+      "id": "cjkc9mzt28ts70b12f0w7qh7g",
+      "name": "b",
+      "__typename": "User"
+    },
+    "__typename": "Snippit"
+  },
+  {
+    "id": "cjkk2zodb44my0b77lszkjs7w",
+    "name": "Hello Snip Snarf",
+    "type": "algo",
+    "language": "javascript",
+    "framework": "",
+    "code":
+      "//helper function to display console logs with more clairity\r\nexport const clearLog = (title, varToLog) => {\r\n  console.log(`\r\n    #########################################################\r\n                    ${title}\r\n    #########################################################\r\n\r\n  `, varToLog, `\r\n\r\n\r\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n    #########################################################\r\n\r\n  `, `\r\n\r\n  `)\r\n}",
+    "notes":
+      "Welcome to Snip Snarf.  This is a simple helper function by the creator of Snip Snarf to use in place of console.log(). It leverages a template literal which preserves white space and makes console readout easier to decipher.  ",
+    "companion": [],
+    "keywords": ["console", "log", "display"],
+    "reference": ["console", "log", "error"],
+    "createdAt": "2018-08-07T19:11:51.842Z",
+    "author": {
+      "id": "cjkc9mzt28ts70b12f0w7qh7g",
+      "name": "b",
+      "__typename": "User"
+    },
+    "__typename": "Snippit"
+  }
+]

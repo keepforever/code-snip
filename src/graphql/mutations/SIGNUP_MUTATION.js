@@ -11,6 +11,7 @@ export const SIGNUP_MUTATION = gql`
       user {
         id
         name
+        email
       }
     }
   }

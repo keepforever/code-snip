@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 // REDUX
 import { toggleLandingPage } from "../store/actions/landingPage";
 import { setUserInfo } from "../store/actions/user";
+import { updateBOWAfterCreate } from "../store/actions/snippit";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
@@ -16,12 +17,19 @@ import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 import { SIGNUP_MUTATION } from "../graphql/mutations/SIGNUP_MUTATION";
+import { CREATE_SNIPPIT } from "../graphql/mutations/CREATE_SNIPPIT";
 // locals
 import { ModalContainer, WelcomeContainer } from "../components/styled";
 import OuterSpace from "../components/outer-space";
 //utils
-import { emailRegex } from '../constants'
+import { emailRegex, starterSnippitsArray } from '../constants'
 import { clearLog } from "../utils";
+
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array)
+  }
+}
 
 const defaultState = {
   name: '',
@@ -43,6 +51,10 @@ const snipSnarf = {
 
 class SignUpPage extends Component {
   state = defaultState
+
+  // seedNewUser = async (info) => {
+  //
+  // }
 
   signupSubmit = async () => {
     const { name, email, password } = this.state;
@@ -80,7 +92,56 @@ class SignUpPage extends Component {
        return;
      }
      console.log('signup response.data', response.data)
-     this.props.setUserInfoAction(response.data.signup.payload);
+     console.log('signup response.data.signup', response.data.signup)
+     console.log('signup response.data.signup.token', response.data.signup.token)
+
+     //const { token, user: { newId, newName, newEmail } } = response.data.signup
+     // here we rename the destructured vars to avoid colision.
+     // e.g. incoming var = name, renamed to newName
+     const {
+       token,
+       user: {
+         name: newName,
+         email: newEmail,
+         id: newId
+       }
+     } = response.data.signup
+
+     const setUserInfoWelcomePackage = {
+       token: token,
+       user: {
+         email: newEmail,
+         id: newId,
+         name: newName,
+         snippits: starterSnippitsArray,
+       }
+     }
+     clearLog('setUserInfoWelcomePackage', setUserInfoWelcomePackage)
+     this.props.setUserInfoAction(setUserInfoWelcomePackage);
+
+     let seedResponse;
+
+    await asyncForEach(starterSnippitsArray, async (s) => {
+      seedResponse = await this.props.createSnippit({
+        variables: {
+          author: newId,
+          name: s.name,
+          language: s.language,
+          code: s.code,
+          type: s.type,
+          framework: s.framework,
+          notes: s.notes,
+          companion: s.companion,
+          keywords: s.keywords,
+          reference: s.reference
+        }
+      });
+      clearLog(`seedResponse index: `, seedResponse)
+      const bOWPayload  = seedResponse.data.createSnippit.author.snippits
+      this.props.updateBOWAfterCreateAction(bOWPayload)
+      clearLog('snipp from store', this.props.snipp)
+    })
+
      this.props.toggleLandingPageAction();
      this.setState({
        redirectToReferrer: true
@@ -227,7 +288,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       toggleLandingPageAction: toggleLandingPage,
-      setUserInfoAction: setUserInfo
+      setUserInfoAction: setUserInfo,
+      updateBOWAfterCreateAction: updateBOWAfterCreate,
     },
     dispatch
   );
@@ -250,6 +312,16 @@ const EnhancedSignUpPage = connect(
     graphql(SIGNUP_MUTATION, {
       options: { fetchPolicy: "cache-and-network" },
       name: "createUser"
+    }),
+    graphql(SIGNUP_MUTATION, {
+      options: { fetchPolicy: "cache-and-network" },
+      name: "createUser"
+    }),
+    graphql(CREATE_SNIPPIT, {
+      options: {
+        fetchPolicy: "cache-and-network"
+      },
+      name: "createSnippit"
     })
   )(SignUpPage)
 );
