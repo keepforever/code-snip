@@ -163,7 +163,7 @@ class LandingPage extends Component {
                 <Link style={{all: 'unset', }} to='/signup'>
                   <Button fullWidth color="inherit">
                     <Typography variant="button" color="secondary">
-                      <div style={{marginTop: 25}}>
+                      <div style={{marginTop: 25, color: 'white'}}>
                         New? Create Account...
                       </div>
                     </Typography>
