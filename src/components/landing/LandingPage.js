@@ -54,6 +54,14 @@ class LandingPage extends Component {
 
     const { email, password } = this.state;
 
+    if(email.length === 0 || password.length === 0) {
+      alert('cannot have email, name or passowrd be of lenth 0')
+      this.setState({
+        ...defaultState
+      });
+      return
+    }
+
     this.setState({ isSubmitting: true });
     let response;
     try {
