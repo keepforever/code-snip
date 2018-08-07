@@ -7,7 +7,7 @@ import { clearLog, } from '../../utils'
 import { tipLibrary } from '../../constants'
 
 const styles = (theme) => {
-  clearLog('theme', theme)
+  //clearLog('theme', theme)
   return (
     {
       lightTooltip: {

@@ -1,3 +1,5 @@
+export const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
 export const links = [
   {
     name: "logo-home",
@@ -8,11 +10,6 @@ export const links = [
     name: "add-snip-page",
     route: "/add-snip",
     display: "Add Snip"
-  },
-  {
-    name: "data-viz",
-    route: "/data-viz",
-    display: "Data Viz"
   },
   {
     name: "search-snip",

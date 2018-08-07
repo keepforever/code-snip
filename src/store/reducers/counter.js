@@ -1,12 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject, clearLog } from '../../utils';
+import { updateObject,} from '../../utils';
 
 const initialState = {
     count: 42
 };
 
 const incrementCounter = (state, action) => {
-  clearLog('counter reducer', action)
+  //clearLog('counter reducer', action)
   const newCount = state.count + 1
   return updateObject(state, {
     count: newCount

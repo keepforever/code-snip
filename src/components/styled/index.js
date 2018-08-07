@@ -13,7 +13,9 @@ export {
 
 export {
   LayoutContainer_A,
-  LayoutContainer_B
+  LayoutContainer_B,
+  HideDivWhenSmall,
+  ShowDivWhenSmall
 } from './layout'
 
 

@@ -10,7 +10,7 @@ const initialState = {
 };
 
 const setSpecificSnippit = (state, action) => {
-  clearLog("setSpecificSnippit(),  snippit.js reducer", 'xxxx')
+  //clearLog("setSpecificSnippit(),  snippit.js reducer", 'xxxx')
   // return updateObject(state, {
   //   specificSnippit: action.specificSnippit
   // })

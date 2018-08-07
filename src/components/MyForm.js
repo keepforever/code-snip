@@ -21,7 +21,7 @@ import MyReferenceInput from "./form-comps/MyReferenceInput";
 import MyNameInput from "./form-comps/MyNameInput";
 // utils
 //import DisplayFormikState from "./form-comps/DisplayFormikState";
-import { clearLog } from "../utils";
+//import { clearLog } from "../utils";
 // material-ui
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
@@ -68,8 +68,8 @@ const formikEnhancer = withFormik({
     keywords: array()
   }),
   async handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    clearLog("form submitted with values", values);
-    clearLog("handleSubmit props", props);
+    //clearLog("form submitted with values", values);
+    //clearLog("handleSubmit props", props);
     let response;
     response = await props.createSnippit({
       variables: {
@@ -85,7 +85,7 @@ const formikEnhancer = withFormik({
         reference: values.reference
       }
     });
-    clearLog("response", response);
+    //clearLog("response", response);
     props.updateBOWAfterCreateAction(response.data.createSnippit.author.snippits)
     resetForm();
   }

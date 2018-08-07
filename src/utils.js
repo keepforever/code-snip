@@ -1,5 +1,5 @@
+//
 // truncate long text
-
 export const truncate = (string) => {
    if (string.length > 45)
       return string.substring(0, 45)+'...';

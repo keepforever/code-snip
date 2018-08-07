@@ -11,10 +11,9 @@ import { toggleLandingPage } from "../store/actions/landingPage";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
-
 //import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
 // utils
-import { clearLog, } from "../utils";
+//import { clearLog, } from "../utils";
 // locals
 //import Portal from '../components/portals/portalTemplate'
 import { ContainerAlpha, SearchTextContainer } from "../components/styled";

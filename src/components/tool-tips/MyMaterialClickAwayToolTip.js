@@ -6,11 +6,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from "@material-ui/core/Typography";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 //locals
-import { clearLog } from '../../utils'
+//import { clearLog } from '../../utils'
 import { tipLibrary } from '../../constants'
 
 const styles = (theme) => {
-  clearLog('theme', theme)
+  //clearLog('theme', theme)
   return (
     {
       lightTooltip: {

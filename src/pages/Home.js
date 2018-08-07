@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import ArchiveIcon from '@material-ui/icons/Archive';
 // REDUX
 import { incrementCounter } from "../store/actions/counter";
 import { toggleLandingPage } from "../store/actions/landingPage";
@@ -17,19 +18,12 @@ import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 //import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
 // locals
 import Portal from '../components/portals/portalTemplate'
-import { ContainerAlpha, } from "../components/styled";
+import { ContainerAlpha, HideDivWhenSmall, ShowDivWhenSmall } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
-import LandingPage from '../components/landing/LandingPage'
 import HomeHelpPage from '../components/HomeHelpPage'
 // utils
 import { clearLog } from "../utils";
-
-
-// TODO: ADD EXPORT DATA BUTTON SOMEWHERE
-
-//import fileDownload  from 'js-file-download';
-// const snippitDownload = JSON.stringify(snippits);
-// fileDownload(snippitDownload, 'your-snips-history.json')
+import fileDownload  from 'js-file-download';
 
 class Home extends Component {
   state = {
@@ -48,7 +42,6 @@ class Home extends Component {
   };
 
   togglePortal = () => {
-
     this.props.toggleLandingPageAction()
   };
 
@@ -61,8 +54,13 @@ class Home extends Component {
   }
 
   counterChangeHandler = () => {
-    clearLog("counter");
+    //clearLog("counter");
     this.props.onIncrementCounter();
+  };
+
+  downloadSnippitLibrary = (snippits) => {
+    const snippitDownload = JSON.stringify(snippits);
+    fileDownload(snippitDownload, 'your_snip_lib.json')
   };
 
   render() {
@@ -72,7 +70,7 @@ class Home extends Component {
       //userId,
       //specificSnippit
     } = this.props;
-    clearLog('HomeProps', this.props)
+    //clearLog('HomeProps', this.props)
 
     if (loading) {
       return (
@@ -81,13 +79,7 @@ class Home extends Component {
         </div>
       )
     }
-    // if(this.props.shouldShowLanding) {
-    //   return (
-    //     <Portal>
-    //       <LandingPage togglePortal={this.togglePortal}/>
-    //     </Portal>
-    //   )
-    // }
+
     if(this.state.showHelp) {
       return (
         <Portal>
@@ -102,8 +94,13 @@ class Home extends Component {
             <Typography variant="title" color="secondary">
                 Your Snips
             </Typography>
-            <Button color="secondary" variant="outlined" >
-              Download Snip Library
+            <Button onClick={() => this.downloadSnippitLibrary(snippits)} color="secondary" >
+              <HideDivWhenSmall>
+                <ArchiveIcon />
+              </HideDivWhenSmall>
+              <ShowDivWhenSmall>
+                Download Snip Library
+              </ShowDivWhenSmall>
             </Button>
             <Typography variant="body2" color="secondary">
                 <div style={{cursor: 'pointer'}} onClick={this.toggleHelp}>
@@ -222,3 +219,11 @@ const styles = {
 //     Portal
 //   </Button>
 // </div>
+
+// if(this.props.shouldShowLanding) {
+//   return (
+//     <Portal>
+//       <LandingPage togglePortal={this.togglePortal}/>
+//     </Portal>
+//   )
+// }

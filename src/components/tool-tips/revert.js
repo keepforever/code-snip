@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { clearLog } from '../../utils'
 
 const styles = (theme) => {
-  clearLog('theme', theme)
+  //clearLog('theme', theme)
   return (
     {
       lightTooltip: {

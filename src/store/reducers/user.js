@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject, clearLog, processSnipsForSearch } from '../../utils';
+import { updateObject, processSnipsForSearch } from '../../utils';
 
 const initialState = {
     userInfo:{},
@@ -22,7 +22,7 @@ const updateBOWAfterCreate = (state, action) => {
 }
 
 const setUserInfo = ( state, action ) => {
-  clearLog('setUserInfo reducer', action)
+  //clearLog('setUserInfo reducer', action)
 
   const token = action.payload.token
   const meta = {

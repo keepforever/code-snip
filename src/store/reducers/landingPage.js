@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const toggleLandingPage = (state, action) => {
-  clearLog('toggleLandingPage reducer', action)
+  //clearLog('toggleLandingPage reducer', action)
   const currentLandingStatus = state.showLandingPage
   return updateObject(state, {
     showLandingPage: !currentLandingStatus

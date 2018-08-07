@@ -8,6 +8,7 @@ import AddSnip from "./pages/AddSnip";
 import DataViz from "./pages/DataViz";
 import SearchSnippits from "./pages/SearchSnippits";
 import LandingPage from './components/landing/LandingPage'
+import SignUpPage from "./pages/SignUpPage";
 
 const routes = [
   {
@@ -39,11 +40,17 @@ const routes = [
     exact: true,
     main: () => <LandingPage />,
     protected: false
+  },
+  {
+    path: "/signup",
+    exact: true,
+    main: () => <SignUpPage />,
+    protected: false
   }
 ];
 
 const Routes = props => {
-  console.log("routs props", props);
+  //console.log("routs props", props);
   return (
     <Switch>
       {routes.map((route, index) => {
@@ -54,7 +61,7 @@ const Routes = props => {
               key={index}
               path={route.path}
               render={() =>
-                props.shouldShowLanding ? <Redirect to="/login" /> : <Route
+                props.shouldShowLanding ? <Redirect to="/signup" /> : <Route
                   key={index}
                   path={route.path}
                   exact={route.exact}

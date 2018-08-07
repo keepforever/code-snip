@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
 // material-ui
 import TextField from "@material-ui/core/TextField";
@@ -21,7 +21,7 @@ import { ModalContainer, WelcomeContainer } from "../styled";
 import OuterSpace from "../outer-space";
 import MyMaterialToolTip from '../tool-tips/MyMaterialToolTip'
 //utils
-//import { clearLog } from "../../utils";
+import { clearLog } from "../../utils";
 
 
 const defaultState = {
@@ -160,13 +160,6 @@ class LandingPage extends Component {
                   </Button>
                 </div>
               </MyMaterialToolTip>
-                <Link style={{all: 'unset', }} to='/signup'>
-                  <Button fullWidth color="inherit">
-                    <Typography variant="button" color="default">
-                      Create Account
-                    </Typography>
-                  </Button>
-                </Link>
             </div>
           </WelcomeContainer>
         </OuterSpace>
