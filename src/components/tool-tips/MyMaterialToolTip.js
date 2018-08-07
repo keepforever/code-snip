@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from "@material-ui/core/Typography";
-import { clearLog } from '../../utils'
+import { clearLog, } from '../../utils'
+import { tipLibrary } from '../../constants'
 
 const styles = (theme) => {
   clearLog('theme', theme)
@@ -81,15 +81,6 @@ const styles = (theme) => {
         maxWidth: 300,
       },
 })};
-
-const tipLibrary = {
-  loginButton: " 1. Send login mutation to GraphQL server 2. Server processes login, fetches user data from Prisma database. 3. Responds with auth token, user info, (snips, name, id, ), then saves to redux store.",
-  expansionPanelSummary: "Click here for more details",
-  copyToClipboardButton: "Snarf snip  to clipboard",
-  addSnippitHelp: "Ok, here's the gist...",
-  searchBarGuidance: "Scans every line of text you entered into or about a code snippit then returns exact or partial matches.  i.e. search = ' worl ' would match ' world ', but not ' wor ' ",
-
-}
 
 class CustomizedTooltips extends React.Component {
   state = {

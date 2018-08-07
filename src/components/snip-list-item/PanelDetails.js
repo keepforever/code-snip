@@ -15,9 +15,11 @@ const PanelDetails = props => {
   const { companion, notes, code, name, reference } = props.meta;
   return (
     <div style={{ width: "100%" }}>
-      <Typography color="default" variant="subheading">
-        Companion
-      </Typography>
+      {companion.length > 0 && (
+        <Typography color="default" variant="subheading">
+          Companion
+        </Typography>
+      )}
       <div style={styles.a_Container}>
         {companion.map((c, index) => {
           return (

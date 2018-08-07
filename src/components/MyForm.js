@@ -19,17 +19,13 @@ import MyKeywordInput from "./form-comps/MyKeywordInput";
 import MyCompanionInput from "./form-comps/MyCompanionInput";
 import MyReferenceInput from "./form-comps/MyReferenceInput";
 import MyNameInput from "./form-comps/MyNameInput";
-import { KeepFormWidthDiv } from "./styled";
 // utils
-import DisplayFormikState from "./form-comps/DisplayFormikState";
+//import DisplayFormikState from "./form-comps/DisplayFormikState";
 import { clearLog } from "../utils";
 // material-ui
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // REDUX
 import { updateBOWAfterCreate } from "../store/actions/snippit";
@@ -127,18 +123,6 @@ class MyForm extends Component {
 
     const { shouldShowMeta } = this.state
 
-    let metaDisplay = {}
-    if(shouldShowMeta) {
-      metaDisplay = {
-        display: 'none'
-      }
-    } else {
-      metaDisplay = {}
-    }
-
-
-    //clearLog("MyForm props", this.props);
-
     return (
       <Paper>
         <div
@@ -190,7 +174,7 @@ class MyForm extends Component {
                   color="secondary"
                   variant="raised"
                 >
-                  Add Optional Metadata
+                  Add Optional Metadata <ExpandMoreIcon />
                 </Button>
               </div>
               {shouldShowMeta && (
@@ -304,9 +288,9 @@ class MyForm extends Component {
               </Paper>
             </div>
           </form>
-          <div>
+          {/* <div>
             <DisplayFormikState {...this.props} />
-          </div>
+          </div> */}
         </div>
       </Paper>
     );

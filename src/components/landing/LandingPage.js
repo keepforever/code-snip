@@ -4,7 +4,6 @@ import { ModalContainer, WelcomeContainer } from "../styled";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import OuterSpace from "../outer-space";
 import { withStyles } from '@material-ui/core/styles';
 // REDUX
@@ -80,7 +79,7 @@ class LandingPage extends Component {
   };
 
   render() {
-    const { togglePortal, classes } = this.props;
+    const { classes } = this.props;
     const { email, password } = this.state;
 
     return (

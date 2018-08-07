@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //material-ui
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from "@material-ui/core/Typography";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -132,7 +131,7 @@ class MyMaterialClickAwayToolTip extends React.Component {
                    tooltip: classes.customWidth
                  }}
                  onClose={this.handleTooltipClose}
-                 open={this.state.open}
+                 open={open}
                  disableFocusListener
                  disableHoverListener
                  disableTouchListener

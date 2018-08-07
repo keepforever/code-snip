@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { ModalContainer, HelpContainer } from "./styled";
 // material-ui
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 // locals
 import OuterSpace from "./outer-space";
@@ -24,7 +22,7 @@ const snipSnarf = {
 class HomeHelp extends Component {
 
   render() {
-    const { togglePortal, classes } = this.props;
+    const { toggleHelp } = this.props;
 
     return (
       <ModalContainer>
@@ -50,7 +48,7 @@ class HomeHelp extends Component {
                   </div>
                 )
               })}
-              <div onClick={this.props.toggleHelp}>
+              <div onClick={toggleHelp}>
                 <Button
                   color="secondary"
                   variant="raised"

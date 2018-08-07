@@ -17,13 +17,12 @@ import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 //import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
 // locals
 import Portal from '../components/portals/portalTemplate'
-import { ContainerAlpha, ModalContainer, WelcomeContainer } from "../components/styled";
+import { ContainerAlpha, } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
 import LandingPage from '../components/landing/LandingPage'
 import HomeHelpPage from '../components/HomeHelpPage'
 // utils
 import { clearLog } from "../utils";
-import MyMaterialClickAwayToolTip from "../components/tool-tips/MyMaterialClickAwayToolTip";
 
 
 // TODO: ADD EXPORT DATA BUTTON SOMEWHERE
@@ -67,7 +66,7 @@ class Home extends Component {
   };
 
   render() {
-    const { ctr } = this.props;
+
     const {
       listSnippits: { loading, snippits },
       //userId,
@@ -113,7 +112,6 @@ class Home extends Component {
         <div className="container">
           {snippits.map((item, index) => {
             const { snipSoup }  = this.props.user
-            const desiredId = item.id
             const itemsSoup = snipSoup.filter(el => {
               return (el.id === item.id)
             })

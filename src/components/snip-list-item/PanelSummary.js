@@ -1,14 +1,12 @@
 import React from "react";
 // material-ui
-import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Chip from "@material-ui/core/Chip";
 // locals
 import RandomSummaryMeta from './RandomSummaryMeta'
 
 const PanelSummary = props => {
-  const { soup, name, language, keywords, framework } = props.meta;
+  const { soup, name, language, framework } = props.meta;
 
   return (
     <Paper

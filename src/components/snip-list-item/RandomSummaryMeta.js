@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
 import { truncate } from "../../utils";
 
-class RandomSummaryMeta extends React.Component {
+class RandomSummaryMeta extends Component {
   constructor(props) {
     super(props);
     this.state = {
