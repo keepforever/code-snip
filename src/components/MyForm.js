@@ -155,8 +155,8 @@ class MyForm extends Component {
                   padding: 10,
                 }}
                 >
-                <Typography variant="body1" color="default">
-                  Snarf Your Code:
+                <Typography variant="subheading" color="default">
+                  CODE
                 </Typography>
                 <MyCodeInput value={values.code} onChange={setFieldValue} />
               </div>

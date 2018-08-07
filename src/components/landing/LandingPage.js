@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { ModalContainer, WelcomeContainer } from "../styled";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { withRouter } from "react-router";
 // material-ui
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import OuterSpace from "../outer-space";
 import { withStyles } from '@material-ui/core/styles';
 // REDUX
 import { toggleLandingPage } from "../../store/actions/landingPage";
@@ -16,16 +16,19 @@ import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../../graphql/queries/SNIPPITS_QUERY";
 import { LOGIN_MUTATION } from "../../graphql/mutations/LOGIN_MUTATION";
-import { clearLog } from "../../utils";
 // locals
-
+import { ModalContainer, WelcomeContainer } from "../styled";
+import OuterSpace from "../outer-space";
 import MyMaterialToolTip from '../tool-tips/MyMaterialToolTip'
+//utils
+import { clearLog } from "../../utils";
 
 
 const defaultState = {
   email: "b@b.com",
   password: "b",
-  isSubmitting: false
+  isSubmitting: false,
+  redirectToReferrer: false
 }
 
 const snipSnarf = {
@@ -70,6 +73,9 @@ class LandingPage extends Component {
     });
     this.props.setUserInfoAction(response.data.login.payload);
     this.props.toggleLandingPageAction();
+    this.setState({
+      redirectToReferrer: true
+    })
   };
 
   handleTextChange = name => event => {
@@ -80,7 +86,13 @@ class LandingPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { email, password } = this.state;
+    const { email, password, redirectToReferrer } = this.state;
+
+    if(redirectToReferrer) {
+      return (
+        <Redirect to='/'/>
+      )
+    }
 
     return (
       <ModalContainer>
@@ -136,17 +148,12 @@ class LandingPage extends Component {
                   className: classes.input
                 }}
               />
-              {/* <div style={styles.button} onClick={this.togglePortal}>
-                <Button color="secondary" disabled variant="raised" fullWidth>
-                  Enter
-                </Button>
-              </div> */}
               <MyMaterialToolTip tipKey="loginButton">
                 <div style={styles.button} onClick={this.loginSubmit}>
                   <Button
                     color="secondary"
                     disabled={this.state.isSubmitting}
-                    variant="raised"
+                    variant="outlined"
                     fullWidth
                   >
                     Login
@@ -214,4 +221,4 @@ const EnhancedLandingPage = connect(
   )(LandingPage)
 );
 
-export default withStyles(snipSnarf)(EnhancedLandingPage);
+export default withRouter(withStyles(snipSnarf)(EnhancedLandingPage));

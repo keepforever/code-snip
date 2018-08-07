@@ -7,14 +7,13 @@ import Home from "./pages/Home";
 import AddSnip from "./pages/AddSnip";
 import DataViz from "./pages/DataViz";
 import SearchSnippits from "./pages/SearchSnippits";
-import LandingPage from './components/landing/LandingPage'
 
 const routes = [
   {
     path: "/",
     exact: true,
     main: () => <Home />,
-    protected: true
+    protected: false
   },
   {
     path: "/add-snip",
@@ -33,12 +32,6 @@ const routes = [
     exact: true,
     main: () => <SearchSnippits />,
     protected: true
-  },
-  {
-    path: "/login",
-    exact: true,
-    main: () => <LandingPage />,
-    protected: false
   }
 ];
 
@@ -54,7 +47,7 @@ const Routes = props => {
               key={index}
               path={route.path}
               render={() =>
-                props.shouldShowLanding ? <Redirect to="/login" /> : <Route
+                props.shouldShowLanding ? <Redirect to="/" /> : <Route
                   key={index}
                   path={route.path}
                   exact={route.exact}

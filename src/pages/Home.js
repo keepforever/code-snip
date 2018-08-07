@@ -81,13 +81,13 @@ class Home extends Component {
         </div>
       )
     }
-    if(this.props.shouldShowLanding) {
-      return (
-        <Portal>
-          <LandingPage togglePortal={this.togglePortal}/>
-        </Portal>
-      )
-    }
+    // if(this.props.shouldShowLanding) {
+    //   return (
+    //     <Portal>
+    //       <LandingPage togglePortal={this.togglePortal}/>
+    //     </Portal>
+    //   )
+    // }
     if(this.state.showHelp) {
       return (
         <Portal>
@@ -102,6 +102,9 @@ class Home extends Component {
             <Typography variant="title" color="secondary">
                 Your Snips
             </Typography>
+            <Button color="secondary" variant="outlined" >
+              Download Snip Library
+            </Button>
             <Typography variant="body2" color="secondary">
                 <div style={{cursor: 'pointer'}} onClick={this.toggleHelp}>
                   help
@@ -115,38 +118,15 @@ class Home extends Component {
             const itemsSoup = snipSoup.filter(el => {
               return (el.id === item.id)
             })
-
             return (
               <React.Fragment key={index}>
                 <SnipListItem
                   soup={itemsSoup[0].bagOfWords}
                   snip={item} />
-                {/* <SnipListItem
-                  soup={this.props.user.snipSoup[index].bagOfWords}
-                  snip={item} /> */}
               </React.Fragment>
             );
           })}
         </div>
-        {/*
-        <div
-          style={styles.button}
-          onClick={() => this.props.incrementCounterAction()}
-        >
-          <Button color="primary" variant="raised" fullWidth>
-            Counter
-          </Button>
-        </div>
-         <div onChange={() => this.counterChangeHandler(this.props.ctr)}>
-          <Typography variant="subheading" color="secondary">
-            Counter value: {ctr}
-          </Typography>
-        </div>
-        <div style={styles.button} onClick={() => this.togglePortal()} >
-          <Button color="primary" variant="raised" fullWidth>
-            Portal
-          </Button>
-        </div> */}
       </ContainerAlpha>
     );
   }
@@ -202,6 +182,8 @@ const styles = {
     margin: "20 0"
   }
 };
+
+
 //
 //
 // {this.state.showPortal && (
@@ -219,3 +201,24 @@ const styles = {
 //     </ModalContainer>
 //   </Portal>
 // )}
+
+
+//
+// <div
+//   style={styles.button}
+//   onClick={() => this.props.incrementCounterAction()}
+// >
+//   <Button color="primary" variant="raised" fullWidth>
+//     Counter
+//   </Button>
+// </div>
+//  <div onChange={() => this.counterChangeHandler(this.props.ctr)}>
+//   <Typography variant="subheading" color="secondary">
+//     Counter value: {ctr}
+//   </Typography>
+// </div>
+// <div style={styles.button} onClick={() => this.togglePortal()} >
+//   <Button color="primary" variant="raised" fullWidth>
+//     Portal
+//   </Button>
+// </div>
