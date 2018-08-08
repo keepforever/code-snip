@@ -6,10 +6,8 @@ export const FormInputDiv = styled.div `
     padding: 10;
 `;
 
-export const FromOuterContainer = styled.div`
-style={{
+export const FormOuterContainer = styled.div`
   padding-top: 10;
   padding-left: 5%;
   padding-right: 5%;
-}}
-`
+`;

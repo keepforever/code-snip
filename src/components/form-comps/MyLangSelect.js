@@ -13,8 +13,6 @@ const styles = {
   },
 };
 
-
-
 class MyLangSelect extends React.Component {
   state = {
     value: 0

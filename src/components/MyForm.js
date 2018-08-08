@@ -9,7 +9,7 @@ import { CREATE_SNIPPIT } from "../graphql/mutations/CREATE_SNIPPIT";
 // yup validation
 import { object, string, array } from "yup";
 // locals
-import { FormInputDiv, FromOuterContainer } from "./styled";
+import { FormInputDiv, FormOuterContainer } from "./styled";
 import MyMaterialToolTip from "./tool-tips/MyMaterialToolTip";
 import MyCodeInput from "./form-comps/MyCodeInput";
 import MyTypeSelect from "./form-comps/MyTypeSelect";
@@ -50,7 +50,7 @@ const formikEnhancer = withFormik({
       snipType: snipType || "",
       language: language || "",
       framework: framework || "",
-      code: code || "",
+      code: code || "code...",
       notes: notes || "",
       companion: companion || [],
       keywords: keywords || [],
@@ -88,17 +88,12 @@ const formikEnhancer = withFormik({
         reference: values.reference
       },
       update: (store, { data: { createSnippit } }) => {
-        clearLog("createSnippit", createSnippit);
-
-        clearLog("MY_FORM store", store);
-
+        // clearLog("createSnippit", createSnippit);
+        // clearLog("MY_FORM store", store);
         const data = store.readQuery({ query: SNIPPITS_QUERY_SIMPLE });
-
-        clearLog("MY_FORM data  2", data);
-
+        //clearLog("MY_FORM data  2", data);
         data.snippits.push(createSnippit);
-
-        clearLog("MY_FORM data  3", data);
+        //clearLog("MY_FORM data  3", data);
         store.writeQuery({ query: SNIPPITS_QUERY_SIMPLE, data });
       }
     });
@@ -144,7 +139,7 @@ class MyForm extends Component {
 
     return (
       <Paper>
-        <FromOuterContainer>
+        <FormOuterContainer>
           <MyMaterialToolTip tipKey="addSnippitHelp">
             <Typography variant="subheading" color="secondary">
               HELP
@@ -158,104 +153,93 @@ class MyForm extends Component {
             </Paper>
             <Paper>
               <FormInputDiv>
-                <Typography variant="subheading" color="default">
-                  CODE
-                </Typography>
                 <MyCodeInput value={values.code} onChange={setFieldValue} />
               </FormInputDiv>
             </Paper>
-            <div>
-              <FormInputDiv onClick={() => this.toggleShowMeta()}>
-                <Button fullWidth={true} color="secondary" variant="raised">
-                  Add Optional Metadata <ExpandMoreIcon />
+            <FormInputDiv onClick={() => this.toggleShowMeta()}>
+              <Button fullWidth={true} color="secondary" variant="raised">
+                Add Optional Metadata <ExpandMoreIcon />
+              </Button>
+            </FormInputDiv>
+            {shouldShowMeta && (
+              <React.Fragment>
+                <Paper>
+                  <FormInputDiv>
+                    <MyTypeSelect
+                      value={values.snipType}
+                      onChange={setFieldValue}
+                    />
+                    <MyLangSelect
+                      value={values.language}
+                      onChange={setFieldValue}
+                    />
+                    <MyFrameSelect
+                      value={values.framework}
+                      onChange={setFieldValue}
+                    />
+                  </FormInputDiv>
+                </Paper>
+                <Paper>
+                  <MyReferenceInput
+                    onChange={setFieldValue}
+                    shouldClear={this.state.clearChips}
+                  />
+                </Paper>
+                <Paper>
+                  <FormInputDiv>
+                    <MyKeywordInput
+                      onChange={setFieldValue}
+                      shouldClear={this.state.clearChips}
+                    />
+                  </FormInputDiv>
+                </Paper>
+                <Paper>
+                  <FormInputDiv>
+                    <MyCompanionInput
+                      onChange={setFieldValue}
+                      shouldClear={this.state.clearChips}
+                    />
+                  </FormInputDiv>
+                </Paper>
+                <Paper>
+                  <FormInputDiv>
+                    <MyNotesInput
+                      value={values.notes}
+                      onChange={setFieldValue}
+                    />
+                  </FormInputDiv>
+                </Paper>
+              </React.Fragment>
+            )}
+            <Paper>
+              <FormInputDiv onClick={handleReset}>
+                <Button
+                  disabled={!dirty || isSubmitting}
+                  fullWidth={true}
+                  color="default"
+                  variant="raised"
+                >
+                  Reset
                 </Button>
               </FormInputDiv>
-              {shouldShowMeta && (
-                <div>
-                  <Paper>
-                    <FormInputDiv
-                      style={{
-                        padding: 10
-                      }}
-                    >
-                      <MyTypeSelect
-                        value={values.snipType}
-                        onChange={setFieldValue}
-                      />
-                      <MyLangSelect
-                        value={values.language}
-                        onChange={setFieldValue}
-                      />
-                      <MyFrameSelect
-                        value={values.framework}
-                        onChange={setFieldValue}
-                      />
-                    </FormInputDiv>
-                  </Paper>
-                  <Paper>
-                    <div>
-                      <MyReferenceInput
-                        onChange={setFieldValue}
-                        shouldClear={this.state.clearChips}
-                      />
-                    </div>
-                  </Paper>
-                  <Paper>
-                    <FormInputDiv>
-                      <MyKeywordInput
-                        onChange={setFieldValue}
-                        shouldClear={this.state.clearChips}
-                      />
-                    </FormInputDiv>
-                  </Paper>
-                  <Paper>
-                    <FormInputDiv>
-                      <MyCompanionInput
-                        onChange={setFieldValue}
-                        shouldClear={this.state.clearChips}
-                      />
-                    </FormInputDiv>
-                  </Paper>
-                  <Paper>
-                    <FormInputDiv>
-                      <MyNotesInput
-                        value={values.notes}
-                        onChange={setFieldValue}
-                      />
-                    </FormInputDiv>
-                  </Paper>
-                </div>
-              )}
-              <Paper>
-                <FormInputDiv onClick={handleReset}>
-                  <Button
-                    disabled={!dirty || isSubmitting}
-                    fullWidth={true}
-                    color="default"
-                    variant="raised"
-                  >
-                    Reset
-                  </Button>
-                </FormInputDiv>
-              </Paper>
-              <Paper>
-                <FormInputDiv onClick={() => this.clearChips()}>
-                  <Button
-                    fullWidth={true}
-                    type="submit"
-                    color="primary"
-                    variant="raised"
-                  >
-                    Submit
-                  </Button>
-                </FormInputDiv>
-              </Paper>
-            </div>
+            </Paper>
+            <Paper>
+              <FormInputDiv onClick={() => this.clearChips()}>
+                <Button
+                  fullWidth={true}
+                  type="submit"
+                  color="primary"
+                  variant="raised"
+                >
+                  Submit
+                </Button>
+              </FormInputDiv>
+            </Paper>
           </form>
           {/* <div>
             <DisplayFormikState {...this.props} />
           </div> */}
-        </FromOuterContainer>
+        </FormOuterContainer>
       </Paper>
     );
   }

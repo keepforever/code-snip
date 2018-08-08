@@ -24,6 +24,7 @@ import OuterSpace from "../components/outer-space";
 import { emailRegex, starterSnippitsArray } from '../constants'
 import { clearLog } from "../utils";
 
+// helper function to send multiple mutations async'sly
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array)
@@ -50,10 +51,6 @@ const snipSnarf = {
 
 class SignUpPage extends Component {
   state = defaultState
-
-  // seedNewUser = async (info) => {
-  //
-  // }
 
   signupSubmit = async () => {
     const { name, email, password } = this.state;
@@ -96,11 +93,6 @@ class SignUpPage extends Component {
        });
        return;
      }
-     // console.log('signup response.data', response.data)
-     // console.log('signup response.data.signup', response.data.signup)
-     // console.log('signup response.data.signup.token', response.data.signup.token)
-
-     //const { token, user: { newId, newName, newEmail } } = response.data.signup
      // here we rename the destructured vars to avoid colision.
      // e.g. incoming var = name, renamed to newName
      const {

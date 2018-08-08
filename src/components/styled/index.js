@@ -12,7 +12,7 @@ export {
 
 export {
   FormInputDiv,
-  FromOuterContainer
+  FormOuterContainer
 } from './form'
 
 export {

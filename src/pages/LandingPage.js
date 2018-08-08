@@ -75,7 +75,7 @@ class LandingPage extends Component {
       console.log(error);
       return;
     }
-    clearLog("LOGIN_MUTATION response", response.data.login.payload);
+    //clearLog("LOGIN_MUTATION response", response.data.login.payload);
     if(!response.data.login.payload) {
       this.setState({
         ...defaultState,

@@ -58,8 +58,6 @@ class Search extends Component {
       })
     }
 
-    //clearLog('snipSoup', snipSoup)
-
     return (
       <ContainerAlpha>
         <AppBar position="static" color="default">

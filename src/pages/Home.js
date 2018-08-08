@@ -11,19 +11,18 @@ import { toggleLandingPage } from "../store/actions/landingPage";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
-//import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 import { SPECIFIC_USERS_SNIPPITS_QUERY } from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
 // locals
 import Portal from "../components/portals/portalTemplate";
+import HomePageSnippitList from '../components/HomePageSnippitList';
 import {
   ContainerAlpha,
   HideDivWhenSmall,
   ShowDivWhenSmall
 } from "../components/styled";
-import SnipListItem from "../components/snip-list-item/SnipListItem";
 import HomeHelpPage from "./help/HomeHelpPage";
 // utils
 import { clearLog } from "../utils";
@@ -38,8 +37,6 @@ class Home extends Component {
   };
 
   handleChange = name => event => {
-    // console.log('name', name)
-    // console.log('value', event.target.value)
     this.setState({
       [name]: event.target.value
     });
@@ -99,9 +96,6 @@ class Home extends Component {
         </Portal>
       );
     }
-    // clearLog("snippits from Home", snippits);
-    // clearLog("newSnippits from Home", newSnippits);
-    // clearLog("this.props.user HOME", this.props.user);
     return (
       <ContainerAlpha>
         <AppBar position="static" color="default">
@@ -116,7 +110,9 @@ class Home extends Component {
               <HideDivWhenSmall>
                 <ArchiveIcon />
               </HideDivWhenSmall>
-              <ShowDivWhenSmall>Download Snip Library</ShowDivWhenSmall>
+              <ShowDivWhenSmall>
+                Download Snip Library
+              </ShowDivWhenSmall>
             </Button>
             <Typography variant="body2" color="secondary">
               <div style={{ cursor: "pointer" }} onClick={this.toggleHelp}>
@@ -125,7 +121,11 @@ class Home extends Component {
             </Typography>
           </div>
         </AppBar>
-        <div className="container">
+        <HomePageSnippitList
+          soup={this.props.user.snipSoup}
+          snips={newSnippits}
+        />
+        {/* <div className="container">
           {newSnippits.map((item, index) => {
             const { snipSoup } = this.props.user;
             const itemsSoup = snipSoup.filter(el => {
@@ -137,7 +137,7 @@ class Home extends Component {
               </React.Fragment>
             );
           })}
-        </div>
+        </div> */}
       </ContainerAlpha>
     );
   }
