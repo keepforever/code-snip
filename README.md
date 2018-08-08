@@ -25,9 +25,11 @@
 
 ## How Snip Snarf is intended to be used:
 
-### The basic architecture is simple. The 'Your Snips' page library of snips, an 'Add Snip' page, and a 'Search Snip' page.  All of which function exactly how you would expect.  
+### The basic architecture is simple. The 'Your Snips' page is a scrollable library of the snips you've entered. The 'Add Snip' and 'Search Snip' pages are self explanatory.
 
-### The one feature that makes this program unique is the display of the metadata that you have the option to decorate each snippet you add to your library.  When the application spins up, it takes every word entered for a snippet, code, name, keywords, etc. and creates a 'word soup' array, which is then used by a rudimentary searching algorithm I wrote to scan each word for exact or partial matches and displays the relevant snips.  
+### The one feature that makes this program unique is the display of the metadata that you have the option to decorate each snippet you add to your library.  
+
+### When the application spins up, it takes every word entered for a snippet, code, name, keywords, etc. and creates a 'word soup' array, which is then used by a rudimentary searching algorithm I wrote to scan each word for exact or partial matches and displays the relevant snips.  
 
 ## What's Next?
 
