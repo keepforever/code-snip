@@ -15,7 +15,6 @@ import { connect } from "react-redux";
 // graphql dependencies
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
-import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 import { SIGNUP_MUTATION } from "../graphql/mutations/SIGNUP_MUTATION";
 import { CREATE_SNIPPIT } from "../graphql/mutations/CREATE_SNIPPIT";
 // locals
@@ -72,8 +71,6 @@ class SignUpPage extends Component {
      }
 
      // const isEmailValid = emailRegex.test(email)
-     // clearLog('isEmailValid', isEmailValid)
-     //
      // if(!isEmailValid) {
      //   alert("Please Enter a Valid Email")
      //   this.setState({
@@ -310,19 +307,6 @@ const EnhancedSignUpPage = connect(
   mapDispatchToProps
 )(
   compose(
-    graphql(SNIPPITS_QUERY, {
-      options: {
-        fetchPolicy: "cache-and-network",
-        variables: {
-          orderBy: "createdAt_DESC"
-        }
-      },
-      name: "listSnippits"
-    }),
-    graphql(SIGNUP_MUTATION, {
-      options: { fetchPolicy: "cache-and-network" },
-      name: "createUser"
-    }),
     graphql(SIGNUP_MUTATION, {
       options: { fetchPolicy: "cache-and-network" },
       name: "createUser"

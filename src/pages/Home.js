@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import ArchiveIcon from '@material-ui/icons/Archive';
+import ArchiveIcon from "@material-ui/icons/Archive";
 // REDUX
 import { incrementCounter } from "../store/actions/counter";
 import { toggleLandingPage } from "../store/actions/landingPage";
@@ -14,21 +14,21 @@ import { connect } from "react-redux";
 //import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
-import {
-  SNIPPITS_QUERY
-} from "../graphql/queries/SNIPPITS_QUERY";
-import {
-  SPECIFIC_USERS_SNIPPITS_QUERY
-} from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
+import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
+import { SPECIFIC_USERS_SNIPPITS_QUERY } from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
 //import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
 // locals
-import Portal from '../components/portals/portalTemplate'
-import { ContainerAlpha, HideDivWhenSmall, ShowDivWhenSmall } from "../components/styled";
+import Portal from "../components/portals/portalTemplate";
+import {
+  ContainerAlpha,
+  HideDivWhenSmall,
+  ShowDivWhenSmall
+} from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
-import HomeHelpPage from '../components/HomeHelpPage'
+import HomeHelpPage from "../components/HomeHelpPage";
 // utils
 import { clearLog } from "../utils";
-import fileDownload  from 'js-file-download';
+import fileDownload from "js-file-download";
 
 class Home extends Component {
   state = {
@@ -47,7 +47,7 @@ class Home extends Component {
   };
 
   togglePortal = () => {
-    this.props.toggleLandingPageAction()
+    this.props.toggleLandingPageAction();
   };
 
   toggleHelp = () => {
@@ -56,23 +56,22 @@ class Home extends Component {
         showHelp: !prevState.showHelp
       };
     });
-  }
+  };
 
   counterChangeHandler = () => {
     //clearLog("counter");
     this.props.onIncrementCounter();
   };
 
-  downloadSnippitLibrary = (snippits) => {
+  downloadSnippitLibrary = snippits => {
     const snippitDownload = JSON.stringify(snippits);
-    fileDownload(snippitDownload, 'your_snip_lib.json')
+    fileDownload(snippitDownload, "your_snip_lib.json");
   };
 
   render() {
-
     const {
       listSnippits: { loading, snippits },
-      listSpecificUserSnippits: { snippits: newSnippits, loading: newLoading}
+      listSpecificUserSnippits: { snippits: newSnippits, loading: newLoading }
       //userId,
       //specificSnippit
     } = this.props;
@@ -80,55 +79,62 @@ class Home extends Component {
 
     if (loading || newLoading) {
       return (
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: 400}}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: 400
+          }}
+        >
           <CircularProgress thickness={7} />;
         </div>
-      )
+      );
     }
 
-    if(this.state.showHelp) {
+    if (this.state.showHelp) {
       return (
         <Portal>
-          <HomeHelpPage  toggleHelp={this.toggleHelp}/>
+          <HomeHelpPage toggleHelp={this.toggleHelp} />
         </Portal>
-      )
+      );
     }
-    clearLog('snippits from Home', snippits)
-    clearLog('newSnippits from Home', newSnippits)
-    clearLog('this.props.user HOME', this.props.user)
+    clearLog("snippits from Home", snippits);
+    clearLog("newSnippits from Home", newSnippits);
+    clearLog("this.props.user HOME", this.props.user);
     return (
       <ContainerAlpha>
-          <AppBar position="static" color="default">
-            <div style={styles.headerContainer} >
+        <AppBar position="static" color="default">
+          <div style={styles.headerContainer}>
             <Typography variant="title" color="secondary">
-                Your Snips
+              Your Snips
             </Typography>
-            <Button onClick={() => this.downloadSnippitLibrary(snippits)} color="secondary" >
+            <Button
+              onClick={() => this.downloadSnippitLibrary(snippits)}
+              color="secondary"
+            >
               <HideDivWhenSmall>
                 <ArchiveIcon />
               </HideDivWhenSmall>
-              <ShowDivWhenSmall>
-                Download Snip Library
-              </ShowDivWhenSmall>
+              <ShowDivWhenSmall>Download Snip Library</ShowDivWhenSmall>
             </Button>
             <Typography variant="body2" color="secondary">
-                <div style={{cursor: 'pointer'}} onClick={this.toggleHelp}>
-                  help
-                </div>
+              <div style={{ cursor: "pointer" }} onClick={this.toggleHelp}>
+                help
+              </div>
             </Typography>
           </div>
-          </AppBar>
+        </AppBar>
         <div className="container">
           {newSnippits.map((item, index) => {
-            const { snipSoup }  = this.props.user
+            const { snipSoup } = this.props.user;
             const itemsSoup = snipSoup.filter(el => {
-              return (el.id === item.id)
-            })
+              return el.id === item.id;
+            });
             return (
               <React.Fragment key={index}>
-                <SnipListItem
-                  soup={itemsSoup[0].bagOfWords}
-                  snip={item} />
+                <SnipListItem soup={itemsSoup[0].bagOfWords} snip={item} />
               </React.Fragment>
             );
           })}
@@ -151,7 +157,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       incrementCounterAction: incrementCounter,
-      toggleLandingPageAction: toggleLandingPage,
+      toggleLandingPageAction: toggleLandingPage
     },
     dispatch
   );
@@ -172,12 +178,15 @@ export default connect(
       name: "listSnippits"
     }),
     graphql(SPECIFIC_USERS_SNIPPITS_QUERY, {
-    options: (props) => ({ variables: {
-      id: props.user.meta.id,
-      orderBy: "createdAt_DESC"
-     } }),
-    name: "listSpecificUserSnippits"
-  })
+      options: props => ({
+        fetchPolicy: "cache-and-network",
+        variables: {
+          id: props.user.meta.id,
+          orderBy: "createdAt_DESC"
+        }
+      }),
+      name: "listSpecificUserSnippits"
+    })
   )(Home)
 );
 
@@ -189,57 +198,9 @@ const styles = {
   headerContainer: {
     height: 50,
     display: "flex",
-    flexDirection: 'row',
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
     margin: "20 0"
   }
 };
-
-
-//
-//
-// {this.state.showPortal && (
-//   <Portal>
-//     <ModalContainer>
-//       <OuterSpace>
-//         <WelcomeContainer>
-//           <div style={styles.button} onClick={() => this.togglePortal()} >
-//             <Button color="primary" variant="raised" fullWidth>
-//               Portal
-//             </Button>
-//           </div>
-//         </WelcomeContainer>
-//       </OuterSpace>
-//     </ModalContainer>
-//   </Portal>
-// )}
-
-
-//
-// <div
-//   style={styles.button}
-//   onClick={() => this.props.incrementCounterAction()}
-// >
-//   <Button color="primary" variant="raised" fullWidth>
-//     Counter
-//   </Button>
-// </div>
-//  <div onChange={() => this.counterChangeHandler(this.props.ctr)}>
-//   <Typography variant="subheading" color="secondary">
-//     Counter value: {ctr}
-//   </Typography>
-// </div>
-// <div style={styles.button} onClick={() => this.togglePortal()} >
-//   <Button color="primary" variant="raised" fullWidth>
-//     Portal
-//   </Button>
-// </div>
-
-// if(this.props.shouldShowLanding) {
-//   return (
-//     <Portal>
-//       <LandingPage togglePortal={this.togglePortal}/>
-//     </Portal>
-//   )
-// }

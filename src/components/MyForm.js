@@ -4,8 +4,15 @@ import { withFormik } from "formik";
 // graphql
 //import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
-import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
-import { CREATE_SNIPPIT } from "../graphql/mutations/CREATE_SNIPPIT";
+import {
+  SPECIFIC_USERS_SNIPPITS_QUERY
+} from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
+import {
+  SNIPPITS_QUERY_SIMPLE
+} from "../graphql/queries/SNIPPITS_QUERY_SIMPLE";
+import {
+  CREATE_SNIPPIT
+} from "../graphql/mutations/CREATE_SNIPPIT";
 // yup validation
 import { object, string, array } from "yup";
 // locals
@@ -21,7 +28,7 @@ import MyReferenceInput from "./form-comps/MyReferenceInput";
 import MyNameInput from "./form-comps/MyNameInput";
 // utils
 //import DisplayFormikState from "./form-comps/DisplayFormikState";
-//import { clearLog } from "../utils";
+import { clearLog } from "../utils";
 // material-ui
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
@@ -70,8 +77,9 @@ const formikEnhancer = withFormik({
   async handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
     //clearLog("form submitted with values", values);
     //clearLog("handleSubmit props", props);
-    let response;
+    const { variables } = props.snippitsQuery
 
+    let response;
     response = await props.createSnippit({
       variables: {
         author: props.user.meta.id,
@@ -84,7 +92,22 @@ const formikEnhancer = withFormik({
         companion: values.companion,
         keywords: values.keywords,
         reference: values.reference
-      }
+      },
+      update: (store, { data: { createSnippit } }) => {
+
+        clearLog('createSnippit', createSnippit)
+
+        clearLog('MY_FORM store', store )
+
+        const data = store.readQuery({ query: SNIPPITS_QUERY_SIMPLE });
+
+        clearLog('MY_FORM data  2', data)
+
+        data.snippits.push(createSnippit)
+
+        clearLog('MY_FORM data  3', data)
+        store.writeQuery({ query: SNIPPITS_QUERY_SIMPLE, data });
+      },
     });
     //clearLog("response", response);
     props.updateBOWAfterCreateAction(response.data.createSnippit.author.snippits)
@@ -322,13 +345,13 @@ export default connect(
   mapDispatchToProps
 )(
   compose(
-    graphql(SNIPPITS_QUERY, {
-      options: {
-        fetchPolicy: "cache-and-network",
+    graphql(SNIPPITS_QUERY_SIMPLE, {
+      options: props => ({
         variables: {
-          orderBy: "createdAt_ASC"
-        }
-      },
+          orderBy: "createdAt_DESC"
+        },
+        fetchPolicy: "cache-and-network",
+      }),
       name: "snippitsQuery"
     }),
     graphql(CREATE_SNIPPIT, {

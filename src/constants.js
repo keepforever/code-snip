@@ -78,7 +78,7 @@ export const starterSnippitsArray = [
     "language": "",
     "framework": "",
     "code":
-      "const addYourOwnSnip = (user) => {\n  navigatesTo('Add Snip Page')\n    .then('enters you snip')\n    .then('hit submit')\n    \n    alert('SNARF!, You did it!')\n}",
+      "const addYourOwnSnip = (user) => {\n  navigatesTo('Add Snip Page')\n    .then('enter your snip's details')\n    .then('hit submit')\n    \n    alert('Eureka!, you did it!')\n}",
     "notes": "",
     "companion": [],
     "keywords": [],

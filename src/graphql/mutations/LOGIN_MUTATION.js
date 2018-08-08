@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const LOGIN_MUTATION = gql`
-  mutation zSignIntoApp {
-    login(email: "b@b.com", password: "b") {
+  mutation ($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       payload {
         token
         user {

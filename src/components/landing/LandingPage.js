@@ -76,6 +76,13 @@ class LandingPage extends Component {
       return;
     }
     clearLog("LOGIN_MUTATION response", response.data.login.payload);
+    if(!response.data.login.payload) {
+      this.setState({
+        ...defaultState,
+      });
+      alert('Sorry, try again')
+      return
+    }
     this.setState({
       ...defaultState,
     });
@@ -117,11 +124,6 @@ class LandingPage extends Component {
                   <strong>Snip Snarf</strong>
                 </Typography>
               </div>
-              {/* <div >
-                <Typography variant="body2" color="secondary">
-                  Login credentials prefilled, just click 'LOGIN'...
-                </Typography>
-              </div> */}
               <TextField
                 fullWidth
                 id="multiline-flexible"
