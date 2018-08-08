@@ -1,6 +1,20 @@
 # Welcome to Snip Snarf!
 ### Designed to help you be a faster developer.
 
+# The NERP Stack:
+## Node, Express, React, Prisma(SQL Database wrapped in Prisma's GraphQL service)
+
+#### client - React, Apollo, material-ui, styled-components, Redux, Formik/Yup
+#### server - graphql-yoga, prisma-bindings, code:
+### https://github.com/keepforever/code-snip-server
+#### database - Prisma hosted GraphQL wrapped SQL relational Database
+### https://www.prisma.io/
+
+### Try the Demo!: www.snipsnarf.com
+#### (note, because this is in constant development and hosted on free services, it's not quite intended to be something the world at large can depend on, i.e. I Sometimes still wipe the database when I want to update the data model)
+
+#### (note: this project is currently hosted on the free tier sever services and, as a result, is subject to some spotty performance.  If you encounter a hiccup, just refresh the page.)
+
 #### This application was designed with the Full Stack Developer in mind. Specifically, a developer, like myself, with a broad, diverse set of interests that always wants to try new technologies and adopt newly discovered best practices.  
 
 #### The motivation for this project stems from an engineering credo coined by one of the 20th centuries most influential scientists:
