@@ -1,3 +1,32 @@
+# Welcome to Snip Snarf!
+### Designed to help you be a faster developer.
+
+#### This application was designed with the Full Stack Developer in mind. Specifically, a developer, like myself, with a broad, diverse set of interests that always wants to try new technologies and best practices.  
+
+#### The motivation for this project stems from an engineering credo coined by one of the 20th centuries most influential scientists:
+
+## “Never memorize something that you can look up.”
+### - Albert Einstein
+
+##### Having obtained a B.S. in Mechanical Engineering, one common feature of examinations was the ability to have a 'cheat sheet' on hand for applicable equations and formulas.  I consistently found myself digging into past projects for small bits of code I couldn't remember the precise syntax of.  The process of opening a code editor and hunting through folders/files for small bits of code takes time and I wanted to start cataloging the code which I found myself hunting for.  Time is money.
+
+## How Snip Snarf is intended to be used:
+
+##### The basic architecture is simple. The 'Your Snips' page library of snips, an 'Add Snip' page, and a 'Search Snip' page.  All of which function exactly how you would expect.  
+
+##### The one feature that makes this program unique is the display of the metadata that you have the option to decorate each snippet you add to your library.  When the application spins up, it takes every word entered for a snippet, code, name, keywords, etc. and creates a 'word soup' array, which is then used by a rudimentary searching algorithm I wrote to scan each word for exact or partial matches and displays the relevant snips.  
+
+## What's Next?
+
+##### It's obvious that the application is missing some common features you would expect, but, being a portfolio project that is intended to hopefully land me a job, I wanted to get the MVP out the door and deployed to start pointing potential employers too. And, also to actually start using this myself.  I wanted to get this tool implemented before I began digging into some newer interests, namely React360 (formerly ReactVR) and Tensorflow (Python and JS), so I can begin to catalog and annotate the code I use the most and, ultimately, become a faster develper.  
+
+# Stay Tuned for Updates!
+
+
+<hr>
+## Everything below this line is from the boiler create-react-app README.MD
+<hr>
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -300,7 +329,7 @@ In the WebStorm menu `Run` select `Edit Configurations...`. Then click `+` and s
 
 Start your app by running `npm start`, then press `^D` on macOS or `F9` on Windows and Linux or click the green debug icon to start debugging in WebStorm.
 
-The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine. 
+The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine.
 
 ## Formatting Code Automatically
 
@@ -1989,7 +2018,7 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
     RewriteRule ^ index.html [QSA,L]
 ```
 
-It will get copied to the `build` folder when you run `npm run build`. 
+It will get copied to the `build` folder when you run `npm run build`.
 
 If you’re using [Apache Tomcat](http://tomcat.apache.org/), you need to follow [this Stack Overflow answer](https://stackoverflow.com/a/41249464/4878474).
 
@@ -2429,7 +2458,7 @@ To resolve this:
 1. Open an issue on the dependency's issue tracker and ask that the package be published pre-compiled.
   * Note: Create React App can consume both CommonJS and ES modules. For Node.js compatibility, it is recommended that the main entry point is CommonJS. However, they can optionally provide an ES module entry point with the `module` field in `package.json`. Note that **even if a library provides an ES Modules version, it should still precompile other ES6 features to ES5 if it intends to support older browsers**.
 
-2. Fork the package and publish a corrected version yourself. 
+2. Fork the package and publish a corrected version yourself.
 
 3. If the dependency is small enough, copy it to your `src/` folder and treat it as application code.
 
