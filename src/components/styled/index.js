@@ -10,6 +10,10 @@ export {
   KeepFormWidthDiv
 } from './addSnip'
 
+export {
+  FormInputDiv,
+  FromOuterContainer
+} from './form'
 
 export {
   LayoutContainer_A,

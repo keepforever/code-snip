@@ -16,7 +16,6 @@ import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 import { SPECIFIC_USERS_SNIPPITS_QUERY } from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
-//import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
 // locals
 import Portal from "../components/portals/portalTemplate";
 import {
@@ -25,7 +24,7 @@ import {
   ShowDivWhenSmall
 } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
-import HomeHelpPage from "../components/HomeHelpPage";
+import HomeHelpPage from "./help/HomeHelpPage";
 // utils
 import { clearLog } from "../utils";
 import fileDownload from "js-file-download";
@@ -100,9 +99,9 @@ class Home extends Component {
         </Portal>
       );
     }
-    clearLog("snippits from Home", snippits);
-    clearLog("newSnippits from Home", newSnippits);
-    clearLog("this.props.user HOME", this.props.user);
+    // clearLog("snippits from Home", snippits);
+    // clearLog("newSnippits from Home", newSnippits);
+    // clearLog("this.props.user HOME", this.props.user);
     return (
       <ContainerAlpha>
         <AppBar position="static" color="default">

@@ -2,20 +2,14 @@ import React, { Component } from "react";
 // Formik
 import { withFormik } from "formik";
 // graphql
-//import gql from "graphql-tag";
 import { graphql, compose } from "react-apollo";
-import {
-  SPECIFIC_USERS_SNIPPITS_QUERY
-} from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
-import {
-  SNIPPITS_QUERY_SIMPLE
-} from "../graphql/queries/SNIPPITS_QUERY_SIMPLE";
-import {
-  CREATE_SNIPPIT
-} from "../graphql/mutations/CREATE_SNIPPIT";
+import { SPECIFIC_USERS_SNIPPITS_QUERY } from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
+import { SNIPPITS_QUERY_SIMPLE } from "../graphql/queries/SNIPPITS_QUERY_SIMPLE";
+import { CREATE_SNIPPIT } from "../graphql/mutations/CREATE_SNIPPIT";
 // yup validation
 import { object, string, array } from "yup";
 // locals
+import { FormInputDiv, FromOuterContainer } from "./styled";
 import MyMaterialToolTip from "./tool-tips/MyMaterialToolTip";
 import MyCodeInput from "./form-comps/MyCodeInput";
 import MyTypeSelect from "./form-comps/MyTypeSelect";
@@ -33,7 +27,7 @@ import { clearLog } from "../utils";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // REDUX
 import { updateBOWAfterCreate } from "../store/actions/snippit";
 import { bindActionCreators } from "redux";
@@ -49,7 +43,7 @@ const formikEnhancer = withFormik({
     notes,
     companion,
     keywords,
-    reference,
+    reference
   }) {
     return {
       snipName: snipName || "",
@@ -77,7 +71,7 @@ const formikEnhancer = withFormik({
   async handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
     //clearLog("form submitted with values", values);
     //clearLog("handleSubmit props", props);
-    const { variables } = props.snippitsQuery
+    const { variables } = props.snippitsQuery;
 
     let response;
     response = await props.createSnippit({
@@ -94,23 +88,24 @@ const formikEnhancer = withFormik({
         reference: values.reference
       },
       update: (store, { data: { createSnippit } }) => {
+        clearLog("createSnippit", createSnippit);
 
-        clearLog('createSnippit', createSnippit)
-
-        clearLog('MY_FORM store', store )
+        clearLog("MY_FORM store", store);
 
         const data = store.readQuery({ query: SNIPPITS_QUERY_SIMPLE });
 
-        clearLog('MY_FORM data  2', data)
+        clearLog("MY_FORM data  2", data);
 
-        data.snippits.push(createSnippit)
+        data.snippits.push(createSnippit);
 
-        clearLog('MY_FORM data  3', data)
+        clearLog("MY_FORM data  3", data);
         store.writeQuery({ query: SNIPPITS_QUERY_SIMPLE, data });
-      },
+      }
     });
     //clearLog("response", response);
-    props.updateBOWAfterCreateAction(response.data.createSnippit.author.snippits)
+    props.updateBOWAfterCreateAction(
+      response.data.createSnippit.author.snippits
+    );
     resetForm();
   }
 });
@@ -118,7 +113,7 @@ const formikEnhancer = withFormik({
 class MyForm extends Component {
   state = {
     clearChips: false,
-    shouldShowMeta: false,
+    shouldShowMeta: false
   };
 
   clearChips = () => {
@@ -132,7 +127,7 @@ class MyForm extends Component {
         shouldShowMeta: !prevState.shouldShowMeta
       };
     });
-  }
+  };
 
   render() {
     const {
@@ -145,17 +140,11 @@ class MyForm extends Component {
       //touched, errors, setFieldTouched, handleChange, handleBlur,
     } = this.props;
 
-    const { shouldShowMeta } = this.state
+    const { shouldShowMeta } = this.state;
 
     return (
       <Paper>
-        <div
-          style={{
-            paddingTop: 10,
-            paddingLeft: "5%",
-            paddingRight: "5%"
-          }}
-        >
+        <FromOuterContainer>
           <MyMaterialToolTip tipKey="addSnippitHelp">
             <Typography variant="subheading" color="secondary">
               HELP
@@ -163,50 +152,30 @@ class MyForm extends Component {
           </MyMaterialToolTip>
           <form onSubmit={handleSubmit}>
             <Paper>
-              <div
-                style={{
-                  marginTop: 8,
-                  padding: 10,
-                }}
-              >
+              <FormInputDiv>
                 <MyNameInput value={values.snipName} onChange={setFieldValue} />
-              </div>
+              </FormInputDiv>
             </Paper>
             <Paper>
-              <div
-                style={{
-                  marginTop: 8,
-                  padding: 10,
-                }}
-                >
+              <FormInputDiv>
                 <Typography variant="subheading" color="default">
                   CODE
                 </Typography>
                 <MyCodeInput value={values.code} onChange={setFieldValue} />
-              </div>
+              </FormInputDiv>
             </Paper>
             <div>
-              <div
-                onClick={() => this.toggleShowMeta()}
-                style={{
-                  marginTop: 8,
-                  padding: 10
-                }}
-              >
-                <Button
-                  fullWidth={true}
-                  color="secondary"
-                  variant="raised"
-                >
+              <FormInputDiv onClick={() => this.toggleShowMeta()}>
+                <Button fullWidth={true} color="secondary" variant="raised">
                   Add Optional Metadata <ExpandMoreIcon />
                 </Button>
-              </div>
+              </FormInputDiv>
               {shouldShowMeta && (
-                <div >
+                <div>
                   <Paper>
-                    <div
+                    <FormInputDiv
                       style={{
-                        padding: 10,
+                        padding: 10
                       }}
                     >
                       <MyTypeSelect
@@ -221,15 +190,10 @@ class MyForm extends Component {
                         value={values.framework}
                         onChange={setFieldValue}
                       />
-                    </div>
+                    </FormInputDiv>
                   </Paper>
                   <Paper>
-                    <div
-                      style={{
-                        marginTop: 0,
-                        padding: 0,
-                      }}
-                    >
+                    <div>
                       <MyReferenceInput
                         onChange={setFieldValue}
                         shouldClear={this.state.clearChips}
@@ -237,51 +201,33 @@ class MyForm extends Component {
                     </div>
                   </Paper>
                   <Paper>
-                    <div
-                      style={{
-                        marginTop: 8,
-                        padding: 10,
-                      }}
-                    >
+                    <FormInputDiv>
                       <MyKeywordInput
                         onChange={setFieldValue}
                         shouldClear={this.state.clearChips}
                       />
-                    </div>
+                    </FormInputDiv>
                   </Paper>
                   <Paper>
-                    <div
-                      style={{
-                        marginTop: 8,
-                        padding: 10,
-                      }}
-                    >
+                    <FormInputDiv>
                       <MyCompanionInput
                         onChange={setFieldValue}
                         shouldClear={this.state.clearChips}
                       />
-                    </div>
+                    </FormInputDiv>
                   </Paper>
                   <Paper>
-                    <div
-                      style={{
-                        marginTop: 8,
-                        padding: 10,
-                      }}
-                    >
-                      <MyNotesInput value={values.notes} onChange={setFieldValue} />
-                    </div>
+                    <FormInputDiv>
+                      <MyNotesInput
+                        value={values.notes}
+                        onChange={setFieldValue}
+                      />
+                    </FormInputDiv>
                   </Paper>
                 </div>
               )}
               <Paper>
-                <div
-                  onClick={handleReset}
-                  style={{
-                    marginTop: 8,
-                    padding: 10
-                  }}
-                >
+                <FormInputDiv onClick={handleReset}>
                   <Button
                     disabled={!dirty || isSubmitting}
                     fullWidth={true}
@@ -290,16 +236,10 @@ class MyForm extends Component {
                   >
                     Reset
                   </Button>
-                </div>
+                </FormInputDiv>
               </Paper>
               <Paper>
-                <div
-                  onClick={() => this.clearChips()}
-                  style={{
-                    marginTop: 8,
-                    padding: 10
-                  }}
-                >
+                <FormInputDiv onClick={() => this.clearChips()}>
                   <Button
                     fullWidth={true}
                     type="submit"
@@ -308,14 +248,14 @@ class MyForm extends Component {
                   >
                     Submit
                   </Button>
-                </div>
+                </FormInputDiv>
               </Paper>
             </div>
           </form>
           {/* <div>
             <DisplayFormikState {...this.props} />
           </div> */}
-        </div>
+        </FromOuterContainer>
       </Paper>
     );
   }
@@ -334,7 +274,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      updateBOWAfterCreateAction: updateBOWAfterCreate,
+      updateBOWAfterCreateAction: updateBOWAfterCreate
     },
     dispatch
   );
@@ -350,7 +290,7 @@ export default connect(
         variables: {
           orderBy: "createdAt_DESC"
         },
-        fetchPolicy: "cache-and-network",
+        fetchPolicy: "cache-and-network"
       }),
       name: "snippitsQuery"
     }),

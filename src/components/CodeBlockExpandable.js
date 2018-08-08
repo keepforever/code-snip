@@ -14,8 +14,6 @@ function CodeBlockExpandable(props) {
           className={classes.summaryMeta}
           expandIcon={<div />}
         >
-          <div>snip meta</div>
-          {/* <Typography className={classes.heading}>Expansion Panel 1</Typography> */}
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.details}>
           <CodeBlock code={snip} />

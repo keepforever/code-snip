@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { ModalContainer, HelpContainer } from "./styled";
 // material-ui
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 // locals
-import OuterSpace from "./outer-space";
-import { clearLog } from "../utils";
-import { tipLibrary, helpSnippitDemo } from "../constants"
-import SnipListItem from './snip-list-item/SnipListItem'
+import OuterSpace from "../../components/outer-space";
+import { tipLibrary, helpSnippitDemo,} from "../../constants"
+import SnipListItem from '../../components/snip-list-item/SnipListItem'
+import { ModalContainer, HelpContainer } from "../../components/styled";
+import { clearLog } from "../../utils";
 
 const snipSnarf = {
   root: {

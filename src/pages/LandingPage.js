@@ -7,21 +7,21 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { withStyles } from '@material-ui/core/styles';
 // REDUX
-import { toggleLandingPage } from "../../store/actions/landingPage";
-import { setUserInfo } from "../../store/actions/user";
+import { toggleLandingPage } from "../store/actions/landingPage";
+import { setUserInfo } from "../store/actions/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
-import { SNIPPITS_QUERY } from "../../graphql/queries/SNIPPITS_QUERY";
-import { LOGIN_MUTATION } from "../../graphql/mutations/LOGIN_MUTATION";
+import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
+import { LOGIN_MUTATION } from "../graphql/mutations/LOGIN_MUTATION";
 // locals
-import { ModalContainer, WelcomeContainer, HelpContainer } from "../styled";
-import OuterSpace from "../outer-space";
-import MyMaterialToolTip from '../tool-tips/MyMaterialToolTip'
+import { ModalContainer, WelcomeContainer, HelpContainer } from "../components/styled";
+import OuterSpace from "../components/outer-space";
+import MyMaterialToolTip from '../components/tool-tips/MyMaterialToolTip'
 //utils
-import { clearLog } from "../../utils";
+import { clearLog } from "../utils";
 
 
 const defaultState = {

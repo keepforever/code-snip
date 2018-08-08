@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import AddSnip from "./pages/AddSnip";
 import DataViz from "./pages/DataViz";
 import SearchSnippits from "./pages/SearchSnippits";
-import LandingPage from './components/landing/LandingPage'
+import LandingPage from './pages/LandingPage'
 import SignUpPage from "./pages/SignUpPage";
 
 const routes = [

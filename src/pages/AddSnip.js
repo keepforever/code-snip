@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 //locals
 import { KeepFormWidthDiv } from "../components/styled";
 import MyForm from "../components/MyForm";
-import AddSnipHelpPage from '../components/AddSnipHelpPage'
+import AddSnipHelpPage from './help/AddSnipHelpPage'
 import Portal from '../components/portals/portalTemplate'
 
 class AddSnip extends Component {

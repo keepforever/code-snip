@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { ModalContainer, HelpContainer } from "./styled";
+import {  ModalContainer,  HelpContainer} from "../../components/styled";
 // material-ui
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 // locals
-import OuterSpace from "./outer-space";
-import { tipLibrary } from "../constants"
+import OuterSpace from "../../components/outer-space";
+import { tipLibrary } from "../../constants"
 
 const snipSnarf = {
   root: {

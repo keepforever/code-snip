@@ -2,24 +2,16 @@ import React, { Component } from "react";
 //material-ui
 import TextField from "@material-ui/core/TextField";
 import AppBar from "@material-ui/core/AppBar";
-//import CircularProgress from "@material-ui/core/CircularProgress";
-//import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 // REDUX
 import { incrementCounter } from "../store/actions/counter";
 import { toggleLandingPage } from "../store/actions/landingPage";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-// graphql dependencies
-//import { DELETE_OFFER } from "../graphql/mutations/DELETE_OFFER";
-// utils
-//import { clearLog, } from "../utils";
-// locals
-//import Portal from '../components/portals/portalTemplate'
+//locals
 import { ContainerAlpha, SearchTextContainer } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
-import MyMaterialClickAwayToolTip from "../components/tool-tips/MyMaterialClickAwayToolTip";
-import SearchSnipHelpPage from '../components/SearchSnipHelpPage'
+import SearchSnipHelpPage from './help/SearchSnipHelpPage'
 import Portal from '../components/portals/portalTemplate'
 
 class Search extends Component {
