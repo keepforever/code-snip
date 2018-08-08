@@ -158,7 +158,6 @@ class LandingPage extends Component {
                   className: classes.input
                 }}
               />
-              <MyMaterialToolTip tipKey="loginButton">
                 <div style={styles.button} onClick={this.loginSubmit}>
                   <Button
                     color="secondary"
@@ -169,7 +168,6 @@ class LandingPage extends Component {
                     Login
                   </Button>
                 </div>
-              </MyMaterialToolTip>
                 <NavLink to='/signup'>
                   <Button fullWidth color="secondary">
                     <Typography variant="button" color="inherit">
@@ -241,3 +239,7 @@ const EnhancedLandingPage = connect(
 );
 
 export default withRouter(withStyles(snipSnarf)(EnhancedLandingPage));
+
+// 
+// <MyMaterialToolTip tipKey="loginButton">
+// </MyMaterialToolTip>
