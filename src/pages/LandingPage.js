@@ -114,13 +114,8 @@ class LandingPage extends Component {
         <OuterSpace>
           <HelpContainer>
             <div style={styles.main}>
-              <div>
-                <Typography variant="title" color="secondary">
-                  Welcome to
-                </Typography>
-              </div>
               <div style={styles.welcomeText}>
-                <Typography variant="headline" color="secondary">
+                <Typography variant="display1" color="secondary">
                   <strong>Snip Snarf</strong>
                 </Typography>
               </div>
@@ -184,7 +179,10 @@ class LandingPage extends Component {
 
 const styles = {
   main: {
-    padding: 15
+    padding: 15,
+    flexFlow: 'column wrap',
+    display: 'flex',
+    alignItems: 'center'
   },
   welcomeText: {
     paddingBottom: 10

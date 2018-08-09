@@ -45,6 +45,7 @@ class TemporaryDrawer extends React.Component {
 
     return (
         <Drawer
+          anchor="right"
           open={open}
           onClose={() => this.props.closed()}
           >

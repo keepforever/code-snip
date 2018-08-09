@@ -25,7 +25,7 @@ export const WelcomeContainer = styled.div`
 
 export const HelpContainer = styled.div`
   position: fixed;
-  max-width: 700px;
+  max-width: 400px;
   top: 50%;
   left: 50%;
   width: 65%;
