@@ -13,6 +13,8 @@ import { ContainerAlpha, SearchTextContainer } from "../components/styled";
 import SnipListItem from "../components/snip-list-item/SnipListItem";
 import SearchSnipHelpPage from './help/SearchSnipHelpPage'
 import Portal from '../components/portals/portalTemplate'
+// utils
+import { clearLog } from '../utils'
 
 class Search extends Component {
 
@@ -48,6 +50,9 @@ class Search extends Component {
       )
     }
 
+    //console.log('snips', snips)
+    //console.log('soup', snipSoup)
+
     let match = [];
     if(search.length > 1) {
       snipSoup.forEach((item, index) => {
@@ -76,6 +81,7 @@ class Search extends Component {
             <AppBar position="static" color="default">
               <TextField
                 fullWidth
+                autoFocus
                 id="multiline-flexible"
                 label="Snarf for snips..."
                 rowsMax="1"
@@ -86,12 +92,12 @@ class Search extends Component {
             </AppBar>
           </SearchTextContainer>
         <div className="container">
-          {match.map((item, index) => {
+          {match.map((matchIndex, index) => {
             return (
               <React.Fragment key={index}>
                 <SnipListItem
-                  soup={this.props.user.snipSoup[index].bagOfWords}
-                  snip={snips[item]} />
+                  soup={snipSoup[matchIndex].bagOfWords}
+                  snip={snips[matchIndex]} />
               </React.Fragment>
             );
           })}

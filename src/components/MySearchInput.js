@@ -24,10 +24,10 @@ class MySearchInput extends React.Component {
     return (
       <Paper>
         <TextField
+          autoFocus
           fullWidth
           id="multiline-flexible"
           label='Name your snippit'
-          multiline
           rowsMax="1"
           value={searchText}
           onChange={this.handleTextChange('snipName')}

@@ -126,10 +126,9 @@ class LandingPage extends Component {
               </div>
               <TextField
                 fullWidth
-                id="multiline-flexible"
+                autoFocus
+                id="email-input"
                 label="Email..."
-                multiline
-                rowsMax="1"
                 value={email}
                 onChange={this.handleTextChange("email")}
                 margin="normal"
@@ -143,10 +142,8 @@ class LandingPage extends Component {
               />
               <TextField
                 fullWidth
-                id="multiline-flexible"
+                id="password-input"
                 label="Password..."
-                multiline
-                rowsMax="1"
                 value={password}
                 onChange={this.handleTextChange("password")}
                 margin="normal"
@@ -240,6 +237,6 @@ const EnhancedLandingPage = connect(
 
 export default withRouter(withStyles(snipSnarf)(EnhancedLandingPage));
 
-// 
+//
 // <MyMaterialToolTip tipKey="loginButton">
 // </MyMaterialToolTip>
