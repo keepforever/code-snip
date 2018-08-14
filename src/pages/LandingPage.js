@@ -9,12 +9,14 @@ import { withStyles } from '@material-ui/core/styles';
 // REDUX
 import { toggleLandingPage } from "../store/actions/landingPage";
 import { setUserInfo } from "../store/actions/user";
+import { setUserInfoRefresh } from "../store/actions/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
+import { ME_QUERY } from "../graphql/queries/ME_QUERY";
 import { LOGIN_MUTATION } from "../graphql/mutations/LOGIN_MUTATION";
 import { REFRESH_TOKEN_MUTATION } from "../graphql/mutations/REFRESH_TOKEN_MUTATION";
 // locals
@@ -42,19 +44,30 @@ const snipSnarf = {
 };
 
 class LandingPage extends Component {
-  constructor(props) {
-    super(props);
-    this._bootstrapAsync();
-    this.state = defaultState
+  // constructor(props) {
+  //   super(props);
+  //   this._bootstrapAsync();
+  //   this.state = defaultState
+  // }
+
+  state = defaultState
+
+  async componentDidMount() {
+    this._bootstrapAsync()
   }
 
-
-  // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
+    let oldToken = null
+    try {
+      oldToken = localStorage.getItem('snarfToken')
+    } catch(error) {
+      console.log(error)
+    }
 
-    const oldToken = localStorage.getItem('snarfToken')
-
-    clearLog('oldToken', oldToken)
+    if(!oldToken){
+      console.log('oldToken balls')
+      return
+    }
 
     let response;
     try {
@@ -65,20 +78,19 @@ class LandingPage extends Component {
       return;
     }
 
-    clearLog('_bootstrapAsync RES', response)
-
     const { refreshToken: {token: newToken, userId} } = response.data;
 
-    localStorage.setItem('snarfToken', newToken);
+    let meQueryResponse = await this.props.meQuery.refetch()
 
-    clearLog('newToken', newToken)
+    this.props.setUserInfoRefreshAction(meQueryResponse.data);
+
+    localStorage.setItem('snarfToken', newToken);
+    // clearLog('newToken', newToken)
 
     this.setState({
       redirectToReferrer: true
     })
 
-    clearLog('redirectToReferrer', this.state.redirectToReferrer)
-    
   };
 
   togglePortal = () => {
@@ -149,7 +161,6 @@ class LandingPage extends Component {
     const { email, password, redirectToReferrer } = this.state;
 
     if(redirectToReferrer) {
-      clearLog('redirect if block reached', 'bleh')
       return (
         <Redirect to='/'/>
       )
@@ -252,7 +263,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       toggleLandingPageAction: toggleLandingPage,
-      setUserInfoAction: setUserInfo
+      setUserInfoAction: setUserInfo,
+      setUserInfoRefreshAction: setUserInfoRefresh,
     },
     dispatch
   );
@@ -280,11 +292,11 @@ const EnhancedLandingPage = connect(
       options: { fetchPolicy: "cache-and-network" },
       name: "refreshTokenMutation"
     }),
+    graphql(ME_QUERY, {
+      options: { fetchPolicy: "cache-and-network" },
+      name: "meQuery"
+    }),
   )(LandingPage)
 );
 
 export default withRouter(withStyles(snipSnarf)(EnhancedLandingPage));
-
-//
-// <MyMaterialToolTip tipKey="loginButton">
-// </MyMaterialToolTip>
