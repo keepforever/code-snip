@@ -33,10 +33,7 @@ const theme = createMuiTheme({
 // apollo
 const authLink = setContext(async (_, { headers }) => {
   const token = localStorage.getItem("snarfToken");
-  console.log('token from authLink', token)
-  // hard coded temporarily
-  // const token =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamtjOW16dDI4dHM3MGIxMmYwdzdxaDdnIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1MzMyMzU4MjV9.V8opCDwDdC8KT0SFyVt5Q3ZdXtgyGecEMc0xo35Ltrc";
+  //console.log('token from authLink', token)
   return {
     headers: {
       ...headers,

@@ -61,11 +61,11 @@ class LandingPage extends Component {
     try {
       oldToken = localStorage.getItem('snarfToken')
     } catch(error) {
-      console.log(error)
+      console.log("There has been an error", error)
     }
 
     if(!oldToken){
-      console.log('oldToken balls')
+      //console.log('oldToken balls')
       return
     }
 
