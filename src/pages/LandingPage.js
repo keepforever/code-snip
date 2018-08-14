@@ -16,6 +16,7 @@ import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 import { LOGIN_MUTATION } from "../graphql/mutations/LOGIN_MUTATION";
+import { REFRESH_TOKEN_MUTATION } from "../graphql/mutations/REFRESH_TOKEN_MUTATION";
 // locals
 import { ModalContainer, WelcomeContainer, HelpContainer } from "../components/styled";
 import OuterSpace from "../components/outer-space";
@@ -41,7 +42,45 @@ const snipSnarf = {
 };
 
 class LandingPage extends Component {
-  state = defaultState
+  constructor(props) {
+    super(props);
+    this._bootstrapAsync();
+    this.state = defaultState
+  }
+
+
+  // Fetch the token from storage then navigate to our appropriate place
+  _bootstrapAsync = async () => {
+
+    const oldToken = localStorage.getItem('snarfToken')
+
+    clearLog('oldToken', oldToken)
+
+    let response;
+    try {
+      response = await this.props.refreshTokenMutation();
+      this.props.toggleLandingPageAction();
+    } catch (err) {
+      console.log("Refresh Token Mutation Error: ", "\n", err)
+      return;
+    }
+
+    clearLog('_bootstrapAsync RES', response)
+
+    const { refreshToken: {token: newToken, userId} } = response.data;
+
+    localStorage.setItem('snarfToken', newToken);
+
+    clearLog('newToken', newToken)
+
+    this.setState({
+      redirectToReferrer: true
+    })
+
+    clearLog('redirectToReferrer', this.state.redirectToReferrer)
+    
+  };
+
   togglePortal = () => {
     this.props.toggleLandingPageAction();
   };
@@ -83,11 +122,17 @@ class LandingPage extends Component {
       alert('Sorry, try again')
       return
     }
+
     this.setState({
       ...defaultState,
     });
+
     this.props.setUserInfoAction(response.data.login.payload);
+
+    localStorage.setItem('snarfToken', response.data.login.payload.token);
+
     this.props.toggleLandingPageAction();
+
     this.setState({
       redirectToReferrer: true
     })
@@ -104,6 +149,7 @@ class LandingPage extends Component {
     const { email, password, redirectToReferrer } = this.state;
 
     if(redirectToReferrer) {
+      clearLog('redirect if block reached', 'bleh')
       return (
         <Redirect to='/'/>
       )
@@ -229,7 +275,11 @@ const EnhancedLandingPage = connect(
     graphql(LOGIN_MUTATION, {
       options: { fetchPolicy: "cache-and-network" },
       name: "loginSubmitMutation"
-    })
+    }),
+    graphql(REFRESH_TOKEN_MUTATION, {
+      options: { fetchPolicy: "cache-and-network" },
+      name: "refreshTokenMutation"
+    }),
   )(LandingPage)
 );
 

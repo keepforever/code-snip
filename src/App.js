@@ -25,26 +25,18 @@ const theme = createMuiTheme({
     primary: deepOrange,
     secondary: lightBlue,
     error: amber,
-    // Used by `getContrastText()` to maximize the contrast between the background and
-    // the text.
     contrastThreshold: 99,
-    // Used to shift a color's luminance by approximately
-    // two indexes within its tonal palette.
-    // E.g., shift from Red 500 to Red 300 or Red 700.
     tonalOffset: 0.9,
   },
 });
 
-
-// util
-//import { clearLog } from "./utils";
-
-//apollo
+// apollo
 const authLink = setContext(async (_, { headers }) => {
-  //const token = await AsyncStorage.getItem(TOKEN_KEY);
+  const token = localStorage.getItem("snarfToken");
+  console.log('token from authLink', token)
   // hard coded temporarily
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamtjOW16dDI4dHM3MGIxMmYwdzdxaDdnIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1MzMyMzU4MjV9.V8opCDwDdC8KT0SFyVt5Q3ZdXtgyGecEMc0xo35Ltrc";
+  // const token =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamtjOW16dDI4dHM3MGIxMmYwdzdxaDdnIiwiZXhwaXJlc0luIjoiN2QiLCJpYXQiOjE1MzMyMzU4MjV9.V8opCDwDdC8KT0SFyVt5Q3ZdXtgyGecEMc0xo35Ltrc";
   return {
     headers: {
       ...headers,
@@ -65,6 +57,9 @@ const client = new ApolloClient({
 const store = createStore(rootReducer);
 
 class App extends Component {
+  componentDidMount() {
+    console.log('app comp did mount ')
+  }
   render() {
     return (
       <Provider store={store}>
