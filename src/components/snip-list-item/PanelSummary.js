@@ -2,11 +2,14 @@ import React from "react";
 // material-ui
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+// icons
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
+
 // locals
 import RandomSummaryMeta from './RandomSummaryMeta'
 
 const PanelSummary = props => {
-  const { soup, name, language, framework } = props.meta;
+  const { id, soup, name, language, framework } = props.meta;
 
   return (
     <Paper
@@ -21,6 +24,9 @@ const PanelSummary = props => {
                         <Typography variant="subheading" color="default">
                           {name}
                         </Typography>
+                        <div style={{marginLeft: 5}}onClick={() => props.delSnippo(id)}>
+                          <DeleteForeverOutlinedIcon color='secondary'/>
+                        </div>
                       </div>
                     <div style={styles.g_Container}>
                       <div style={styles.d_Container}>

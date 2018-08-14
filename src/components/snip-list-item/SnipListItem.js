@@ -6,21 +6,25 @@ import PanelDetails from './PanelDetails';
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+// material ICONS
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // utils
-//import { clearLog } from "../utils";
+import { clearLog } from "../../utils";
 
 
 function newCodeBlockExpandable(props) {
-  const { soup, snip: {framework, name, language, keywords, companion, reference, notes, code } } = props;
+  const { delSnippo, soup, snip: {id, framework, name, language, keywords, companion, reference, notes, code } } = props;
 
-  //clearLog("NEW_CODE_BLOCK_EXPANDABLE", props);
+  //clearLog("SNIP_LIST_ITEM", props);
 
   return (
     <div>
       <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <PanelSummary meta={{soup, name, framework, language, keywords}}/>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon /> }>
+          <PanelSummary
+            delSnippo={delSnippo}
+            meta={{id, soup, name, framework, language, keywords}}
+          />
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <PanelDetails meta={{companion, notes, code, name, reference}} />

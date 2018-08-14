@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import ArchiveIcon from "@material-ui/icons/Archive";
 // REDUX
 import { incrementCounter } from "../store/actions/counter";
+import { setUserInfo } from "../store/actions/user";
 import { toggleLandingPage } from "../store/actions/landingPage";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -15,6 +16,8 @@ import { graphql, compose } from "react-apollo";
 //import Q's and M's
 import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
 import { SPECIFIC_USERS_SNIPPITS_QUERY } from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
+import { DELETE_SNIP } from "../graphql/mutations/DELETE_SNIP";
+import { SNIPPITS_QUERY_SIMPLE } from "../graphql/queries/SNIPPITS_QUERY_SIMPLE";
 // locals
 import Portal from "../components/portals/portalTemplate";
 import HomePageSnippitList from '../components/HomePageSnippitList';
@@ -24,16 +27,26 @@ import {
   ShowDivWhenSmall
 } from "../components/styled";
 import HomeHelpPage from "./help/HomeHelpPage";
+import ConfirmDeletePage from "./deleteSnip/ConfirmDeletePage";
 // utils
 import { clearLog } from "../utils";
 import fileDownload from "js-file-download";
 
+const defaultState = {
+  showPortal: false,
+  showHelp: false,
+  showConfirmDelete: false,
+  idToDelete: '',
+  deleteSnipConfirmed: false,
+};
+
 class Home extends Component {
   state = {
-    age: "",
-    currency: "EUR",
     showPortal: false,
-    showHelp: false
+    showHelp: false,
+    showConfirmDelete: false,
+    idToDelete: '',
+    deleteSnipConfirmed: false,
   };
 
   handleChange = name => event => {
@@ -64,13 +77,48 @@ class Home extends Component {
     fileDownload(snippitDownload, "your_snip_lib.json");
   };
 
+  handleConfirmDelete = async () => {
+    const { idToDelete } = this.state
+    //clearLog('handleConfirmDelete id: ', idToDelete)
+
+    let response;
+    response = await this.props.deleteSnippitMutation({
+      variables: {
+        id: idToDelete,
+      },
+    });
+    // updates data in query to remove newly deleted list item
+    this.props.listSpecificUserSnippits.refetch()
+
+    this.setState({
+      ...defaultState
+    })
+  }
+
+  handleAbortDelete = async (id) => {
+    this.setState({
+      ...defaultState
+    })
+  }
+
+  handleDelSnippo = (id) => {
+    this.setState(prevState => {
+      return {
+        showConfirmDelete: !prevState.showConfirmDelete,
+        idToDelete: id
+      };
+    });
+  }
+
   render() {
     const {
       listSnippits: { loading, snippits },
-      listSpecificUserSnippits: { snippits: newSnippits, loading: newLoading }
+      listSpecificUserSnippits: { snippits: newSnippits, loading: newLoading },
+      deleteSnippitMutation,
       //userId,
       //specificSnippit
     } = this.props;
+
     //clearLog('HomeProps', this.props)
 
     if (loading || newLoading) {
@@ -93,6 +141,17 @@ class Home extends Component {
       return (
         <Portal>
           <HomeHelpPage toggleHelp={this.toggleHelp} />
+        </Portal>
+      );
+    }
+
+    if (this.state.showConfirmDelete) {
+      return (
+        <Portal>
+          <ConfirmDeletePage
+            confirm={this.handleConfirmDelete}
+            abort={this.handleAbortDelete}
+          />
         </Portal>
       );
     }
@@ -124,20 +183,8 @@ class Home extends Component {
         <HomePageSnippitList
           soup={this.props.user.snipSoup}
           snips={newSnippits}
+          delSnippo={this.handleDelSnippo}
         />
-        {/* <div className="container">
-          {newSnippits.map((item, index) => {
-            const { snipSoup } = this.props.user;
-            const itemsSoup = snipSoup.filter(el => {
-              return el.id === item.id;
-            });
-            return (
-              <React.Fragment key={index}>
-                <SnipListItem soup={itemsSoup[0].bagOfWords} snip={item} />
-              </React.Fragment>
-            );
-          })}
-        </div> */}
       </ContainerAlpha>
     );
   }
@@ -156,7 +203,8 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       incrementCounterAction: incrementCounter,
-      toggleLandingPageAction: toggleLandingPage
+      toggleLandingPageAction: toggleLandingPage,
+      setUserInfoAction: setUserInfo
     },
     dispatch
   );
@@ -176,6 +224,15 @@ export default connect(
       },
       name: "listSnippits"
     }),
+    graphql(SNIPPITS_QUERY_SIMPLE, {
+      options: props => ({
+        variables: {
+          orderBy: "createdAt_DESC"
+        },
+        fetchPolicy: "cache-and-network"
+      }),
+      name: "snippitsQuery"
+    }),
     graphql(SPECIFIC_USERS_SNIPPITS_QUERY, {
       options: props => ({
         fetchPolicy: "cache-and-network",
@@ -185,6 +242,12 @@ export default connect(
         }
       }),
       name: "listSpecificUserSnippits"
+    }),
+    graphql(DELETE_SNIP, {
+      options: props => ({
+        fetchPolicy: "cache-and-network",
+      }),
+      name: "deleteSnippitMutation"
     })
   )(Home)
 );
