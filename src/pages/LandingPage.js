@@ -57,12 +57,19 @@ class LandingPage extends Component {
   }
 
   _bootstrapAsync = async () => {
+
+    this.setState({ isSubmitting: true });
+
     let oldToken = null
     try {
       oldToken = localStorage.getItem('snarfToken')
     } catch(error) {
       console.log("There has been an error", error)
     }
+    setTimeout(() => {
+      this.setState({ isSubmitting: false });
+      return
+    }, 6000 )
 
     if(!oldToken){
       //console.log('oldToken balls')
@@ -102,6 +109,11 @@ class LandingPage extends Component {
     if (this.state.isSubmitting) {
       return;
     }
+
+    setTimeout(() => {
+      this.setState({ isSubmitting: false });
+      return
+    }, 6000 )
 
     const { email, password } = this.state;
 
