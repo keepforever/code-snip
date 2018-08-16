@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 // REDUX
 import { toggleLandingPage } from "../store/actions/landingPage";
 import { setUserInfo } from "../store/actions/user";
@@ -20,19 +20,22 @@ import { ME_QUERY } from "../graphql/queries/ME_QUERY";
 import { LOGIN_MUTATION } from "../graphql/mutations/LOGIN_MUTATION";
 import { REFRESH_TOKEN_MUTATION } from "../graphql/mutations/REFRESH_TOKEN_MUTATION";
 // locals
-import { ModalContainer, WelcomeContainer, HelpContainer } from "../components/styled";
+import {
+  ModalContainer,
+  WelcomeContainer,
+  HelpContainer
+} from "../components/styled";
 import OuterSpace from "../components/outer-space";
-import MyMaterialToolTip from '../components/tool-tips/MyMaterialToolTip'
+import MyMaterialToolTip from "../components/tool-tips/MyMaterialToolTip";
 //utils
 import { clearLog } from "../utils";
-
 
 const defaultState = {
   email: "",
   password: "",
   isSubmitting: false,
   redirectToReferrer: false
-}
+};
 
 const snipSnarf = {
   root: {
@@ -44,60 +47,55 @@ const snipSnarf = {
 };
 
 class LandingPage extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this._bootstrapAsync();
-  //   this.state = defaultState
-  // }
-
-  state = defaultState
+  state = defaultState;
 
   async componentDidMount() {
-    this._bootstrapAsync()
+    this._bootstrapAsync();
   }
 
   _bootstrapAsync = async () => {
-
     this.setState({ isSubmitting: true });
 
-    let oldToken = null
+    let oldToken = null;
     try {
-      oldToken = localStorage.getItem('snarfToken')
-    } catch(error) {
-      console.log("There has been an error", error)
+      oldToken = localStorage.getItem("snarfToken");
+    } catch (error) {
+      console.log("There has been an error", error);
     }
+
+    if (!oldToken) {
+      return;
+    }
+
+    // start timer to abort refresh after 6 seconds
     setTimeout(() => {
       this.setState({ isSubmitting: false });
-      return
-    }, 6000 )
-
-    if(!oldToken){
-      //console.log('oldToken balls')
-      return
-    }
+      return;
+    }, 6000);
 
     let response;
     try {
       response = await this.props.refreshTokenMutation();
       this.props.toggleLandingPageAction();
     } catch (err) {
-      console.log("Refresh Token Mutation Error: ", "\n", err)
+      console.log("Refresh Token Mutation Error: ", "\n", err);
       return;
     }
 
-    const { refreshToken: {token: newToken, userId} } = response.data;
+    const {
+      refreshToken: { token: newToken, userId }
+    } = response.data;
 
-    let meQueryResponse = await this.props.meQuery.refetch()
+    let meQueryResponse = await this.props.meQuery.refetch();
 
     this.props.setUserInfoRefreshAction(meQueryResponse.data);
 
-    localStorage.setItem('snarfToken', newToken);
+    localStorage.setItem("snarfToken", newToken);
     // clearLog('newToken', newToken)
 
     this.setState({
       redirectToReferrer: true
-    })
-
+    });
   };
 
   togglePortal = () => {
@@ -112,17 +110,17 @@ class LandingPage extends Component {
 
     setTimeout(() => {
       this.setState({ isSubmitting: false });
-      return
-    }, 6000 )
+      return;
+    }, 6000);
 
     const { email, password } = this.state;
 
-    if(email.length === 0 || password.length === 0) {
-      alert('cannot have email, name or passowrd be of lenth 0')
+    if (email.length === 0 || password.length === 0) {
+      alert("cannot have email, name or passowrd be of lenth 0");
       this.setState({
         ...defaultState
       });
-      return
+      return;
     }
 
     this.setState({ isSubmitting: true });
@@ -132,34 +130,34 @@ class LandingPage extends Component {
         variables: {
           email,
           password
-        },
+        }
       });
     } catch (error) {
       console.log(error);
       return;
     }
     //clearLog("LOGIN_MUTATION response", response.data.login.payload);
-    if(!response.data.login.payload) {
+    if (!response.data.login.payload) {
       this.setState({
-        ...defaultState,
+        ...defaultState
       });
-      alert('Sorry, try again')
-      return
+      alert("Sorry, try again");
+      return;
     }
 
     this.setState({
-      ...defaultState,
+      ...defaultState
     });
 
     this.props.setUserInfoAction(response.data.login.payload);
 
-    localStorage.setItem('snarfToken', response.data.login.payload.token);
+    localStorage.setItem("snarfToken", response.data.login.payload.token);
 
     this.props.toggleLandingPageAction();
 
     this.setState({
       redirectToReferrer: true
-    })
+    });
   };
 
   handleTextChange = name => event => {
@@ -172,10 +170,8 @@ class LandingPage extends Component {
     const { classes } = this.props;
     const { email, password, redirectToReferrer } = this.state;
 
-    if(redirectToReferrer) {
-      return (
-        <Redirect to='/'/>
-      )
+    if (redirectToReferrer) {
+      return <Redirect to="/" />;
     }
 
     return (
@@ -219,25 +215,25 @@ class LandingPage extends Component {
                   className: classes.input
                 }}
               />
-                <div style={styles.button} onClick={this.loginSubmit}>
-                  <Button
-                    color="secondary"
-                    disabled={this.state.isSubmitting}
-                    variant="outlined"
-                    fullWidth
-                  >
-                    Login
-                  </Button>
-                </div>
-                <NavLink to='/signup'>
-                  <Button fullWidth color="secondary">
-                    <Typography variant="button" color="inherit">
-                      <div style={{marginTop: 25, color: 'white'}}>
-                        New? Create Account...
-                      </div>
-                    </Typography>
-                  </Button>
-                </NavLink>
+              <div style={styles.button} onClick={this.loginSubmit}>
+                <Button
+                  color="secondary"
+                  disabled={this.state.isSubmitting}
+                  variant="outlined"
+                  fullWidth
+                >
+                  Login
+                </Button>
+              </div>
+              <NavLink to="/signup">
+                <Button fullWidth color="secondary">
+                  <Typography variant="button" color="inherit">
+                    <div style={{ marginTop: 25, color: "white" }}>
+                      New? Create Account...
+                    </div>
+                  </Typography>
+                </Button>
+              </NavLink>
             </div>
           </HelpContainer>
         </OuterSpace>
@@ -249,9 +245,9 @@ class LandingPage extends Component {
 const styles = {
   main: {
     padding: 15,
-    flexFlow: 'column wrap',
-    display: 'flex',
-    alignItems: 'center'
+    flexFlow: "column wrap",
+    display: "flex",
+    alignItems: "center"
   },
   welcomeText: {
     paddingBottom: 10
@@ -276,7 +272,7 @@ const mapDispatchToProps = dispatch => {
     {
       toggleLandingPageAction: toggleLandingPage,
       setUserInfoAction: setUserInfo,
-      setUserInfoRefreshAction: setUserInfoRefresh,
+      setUserInfoRefreshAction: setUserInfoRefresh
     },
     dispatch
   );
@@ -307,7 +303,7 @@ const EnhancedLandingPage = connect(
     graphql(ME_QUERY, {
       options: { fetchPolicy: "cache-and-network" },
       name: "meQuery"
-    }),
+    })
   )(LandingPage)
 );
 
