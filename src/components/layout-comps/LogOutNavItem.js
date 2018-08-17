@@ -11,7 +11,7 @@ class LogoutNavItem extends Component {
   }
 
   logOut = () => {
-    localStorage.setItem("snarfToken", 'done-wit-dis');
+    localStorage.clear();
     this.setState({
       shouldLogout: true
     })

@@ -54,7 +54,8 @@ class LandingPage extends Component {
   }
 
   _bootstrapAsync = async () => {
-    if(localStorage.getItem("snarfToken") === 'done-wit-dis') {
+    if(!localStorage.getItem("snarfToken")) {
+      console.log('abort')
       return
     }
 
@@ -72,20 +73,23 @@ class LandingPage extends Component {
       return;
     }
 
-    // start timer to abort refresh after 6 seconds
-    setTimeout(() => {
-      this.setState({ isSubmitting: false });
-      return;
-    }, 3000);
+    // start timer to abort refresh after 3 seconds
+    // setTimeout(() => {
+    //   this.setState({ isSubmitting: false });
+    //   return;
+    // }, 3000);
 
     let response;
     try {
       response = await this.props.refreshTokenMutation();
-      this.props.toggleLandingPageAction();
     } catch (err) {
       console.log("Refresh Token Mutation Error: ", "\n", err);
-      return;
+      setTimeout(() => {
+        this.setState({ isSubmitting: false });
+        return;
+      }, 3000);
     }
+    this.props.toggleLandingPageAction();
 
     const {
       refreshToken: { token: newToken, userId }
@@ -113,11 +117,6 @@ class LandingPage extends Component {
       return;
     }
 
-    setTimeout(() => {
-      this.setState({ isSubmitting: false });
-      return;
-    }, 6000);
-
     const { email, password } = this.state;
 
     if (email.length === 0 || password.length === 0) {
@@ -139,6 +138,10 @@ class LandingPage extends Component {
       });
     } catch (error) {
       console.log(error);
+      setTimeout(() => {
+        this.setState({ isSubmitting: false });
+        return;
+      }, 2000);
       return;
     }
     //clearLog("LOGIN_MUTATION response", response.data.login.payload);
@@ -288,15 +291,6 @@ const EnhancedLandingPage = connect(
   mapDispatchToProps
 )(
   compose(
-    graphql(SNIPPITS_QUERY, {
-      options: {
-        fetchPolicy: "cache-and-network",
-        variables: {
-          orderBy: "createdAt_DESC"
-        }
-      },
-      name: "listSnippits"
-    }),
     graphql(LOGIN_MUTATION, {
       options: { fetchPolicy: "cache-and-network" },
       name: "loginSubmitMutation"

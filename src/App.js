@@ -33,7 +33,7 @@ const theme = createMuiTheme({
 // apollo
 const authLink = setContext(async (_, { headers }) => {
   const token = localStorage.getItem("snarfToken");
-  //console.log('token from authLink', token)
+  console.log('token from authLink', token)
   return {
     headers: {
       ...headers,

@@ -5,6 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 // import Divider from '@material-ui/core/Divider';
 import MaterialDrawerNavItem from './MaterialDrawerNavItem';
+import LogOutNavItem from './LogOutNavItem'
 
 const styles = {
   list: {
@@ -37,7 +38,10 @@ class TemporaryDrawer extends React.Component {
       <div className={classes.list}>
         <br/>
         <br/>
-        <List>{sideDrawerListItems}</List>
+        <List>
+          <LogOutNavItem />
+          {sideDrawerListItems}
+        </List>
 
         {/* <List>{sideDrawerListItems}</List> */}
       </div>
