@@ -54,6 +54,10 @@ class LandingPage extends Component {
   }
 
   _bootstrapAsync = async () => {
+    if(localStorage.getItem("snarfToken") === 'done-wit-dis') {
+      return
+    }
+
     this.setState({ isSubmitting: true });
 
     let oldToken = null;
@@ -64,6 +68,7 @@ class LandingPage extends Component {
     }
 
     if (!oldToken) {
+      console.log('no old token')
       return;
     }
 
@@ -71,7 +76,7 @@ class LandingPage extends Component {
     setTimeout(() => {
       this.setState({ isSubmitting: false });
       return;
-    }, 6000);
+    }, 3000);
 
     let response;
     try {

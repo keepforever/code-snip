@@ -54,9 +54,7 @@ const client = new ApolloClient({
 const store = createStore(rootReducer);
 
 class App extends Component {
-  componentDidMount() {
-    console.log('app comp did mount ')
-  }
+
   render() {
     return (
       <Provider store={store}>

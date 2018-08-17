@@ -113,31 +113,31 @@ class SignUpPage extends Component {
          snippits: starterSnippitsArray,
        }
      }
-     clearLog('setUserInfoWelcomePackage', setUserInfoWelcomePackage)
-     this.props.setUserInfoAction(setUserInfoWelcomePackage);
-
-     let seedResponse;
-
-    await asyncForEach(starterSnippitsArray, async (s) => {
-      seedResponse = await this.props.createSnippit({
-        variables: {
-          author: newId,
-          name: s.name,
-          language: s.language,
-          code: s.code,
-          type: s.type,
-          framework: s.framework,
-          notes: s.notes,
-          companion: s.companion,
-          keywords: s.keywords,
-          reference: s.reference
-        }
-      });
-      clearLog(`seedResponse index: `, seedResponse)
-      const bOWPayload  = seedResponse.data.createSnippit.author.snippits
-      this.props.updateBOWAfterCreateAction(bOWPayload)
-      clearLog('snipp from store', this.props.snipp)
-    })
+    //  clearLog('setUserInfoWelcomePackage', setUserInfoWelcomePackage)
+    this.props.setUserInfoAction(setUserInfoWelcomePackage);
+    //
+    //  let seedResponse;
+    //
+    // await asyncForEach(starterSnippitsArray, async (s) => {
+    //   seedResponse = await this.props.createSnippit({
+    //     variables: {
+    //       author: newId,
+    //       name: s.name,
+    //       language: s.language,
+    //       code: s.code,
+    //       type: s.type,
+    //       framework: s.framework,
+    //       notes: s.notes,
+    //       companion: s.companion,
+    //       keywords: s.keywords,
+    //       reference: s.reference
+    //     }
+    //   });
+    //   clearLog(`seedResponse index: `, seedResponse)
+    //   const bOWPayload  = seedResponse.data.createSnippit.author.snippits
+    //   this.props.updateBOWAfterCreateAction(bOWPayload)
+    //   clearLog('snipp from store', this.props.snipp)
+    // })
 
      this.props.toggleLandingPageAction();
      this.setState({

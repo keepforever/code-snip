@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MaterialNavItem from "./MaterialNavItem";
 import { ToolbarLinks } from '../styled/toolbar'
 import { LayoutContainer_B,  } from "../styled";
+import LogOutNavItem from './LogOutNavItem'
 
 const styles = {
   root: {
@@ -34,6 +35,7 @@ function ButtonAppBar(props) {
           </Typography>
           <LayoutContainer_B>
             <ToolbarLinks>
+              <LogOutNavItem />
               {props.links.map((link, index) => {
                 return <MaterialNavItem key={index} config={link} />;
               })}
