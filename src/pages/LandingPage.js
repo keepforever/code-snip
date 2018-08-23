@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 // material-ui
+import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -54,9 +55,9 @@ class LandingPage extends Component {
   }
 
   _bootstrapAsync = async () => {
-    if(!localStorage.getItem("snarfToken")) {
-      console.log('abort')
-      return
+    if (!localStorage.getItem("snarfToken")) {
+      console.log("abort");
+      return;
     }
 
     this.setState({ isSubmitting: true });
@@ -69,7 +70,7 @@ class LandingPage extends Component {
     }
 
     if (!oldToken) {
-      console.log('no old token')
+      console.log("no old token");
       return;
     }
 
@@ -103,22 +104,20 @@ class LandingPage extends Component {
     // clearLog('newToken', newToken)
 
     this.setState({
-      redirectToReferrer: true
+      redirectToReferrer: true,
+      isSubmitting: false
     });
   };
 
-  togglePortal = () => {
-    this.props.toggleLandingPageAction();
-  };
-
   loginSubmit = async () => {
-    // clearLog("state", this.state);
+    // disable button if submitting
     if (this.state.isSubmitting) {
       return;
     }
 
     const { email, password } = this.state;
 
+    // prevent empty credential submission
     if (email.length === 0 || password.length === 0) {
       alert("cannot have email, name or passowrd be of lenth 0");
       this.setState({
@@ -149,7 +148,7 @@ class LandingPage extends Component {
       this.setState({
         ...defaultState
       });
-      alert("Sorry, try again");
+      alert("Sorry, something went wrong. Please try again");
       return;
     }
 
@@ -176,10 +175,43 @@ class LandingPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const { email, password, redirectToReferrer } = this.state;
+    const { email, password, redirectToReferrer, isSubmitting } = this.state;
 
     if (redirectToReferrer) {
       return <Redirect to="/" />;
+    }
+
+    if (isSubmitting) {
+      return (
+        <ModalContainer>
+          <OuterSpace>
+            <HelpContainer>
+              <div
+                style={{
+                  flexDirection: "column",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: 400
+                }}
+              >
+                <div style={{ padding: 10, marginBottom: 10}}>
+                  <Typography variant="subheading" color="secondary">
+                    <strong>
+                      Note: This site is hosted on two separate free services and
+                      sometimes they can be slow or fail. If you experience a
+                      login wait time greater than six seconds, refresh the page
+                      to try again.
+                    </strong>
+                  </Typography>
+                </div>
+                <CircularProgress thickness={7} />;
+              </div>
+            </HelpContainer>
+          </OuterSpace>
+        </ModalContainer>
+      );
     }
 
     return (

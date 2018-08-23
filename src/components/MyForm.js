@@ -140,11 +140,6 @@ class MyForm extends Component {
     return (
       <Paper>
         <FormOuterContainer>
-          <MyMaterialToolTip tipKey="addSnippitHelp">
-            <Typography variant="subheading" color="secondary">
-              HELP
-            </Typography>
-          </MyMaterialToolTip>
           <form onSubmit={handleSubmit}>
             <Paper>
               <FormInputDiv>

@@ -134,10 +134,10 @@ class SignUpPage extends Component {
           reference: s.reference
         }
       });
-      clearLog(`seedResponse index: `, seedResponse)
+      //clearLog(`seedResponse index: `, seedResponse)
       const bOWPayload  = seedResponse.data.createSnippit.author.snippits
       this.props.updateBOWAfterCreateAction(bOWPayload)
-      clearLog('snipp from store', this.props.snipp)
+      //clearLog('snipp from store', this.props.snipp)
     })
 
      this.props.toggleLandingPageAction();
@@ -158,7 +158,7 @@ class SignUpPage extends Component {
     const { email, password, redirectToReferrer } = this.state;
 
     if(redirectToReferrer) {
-      console.log('inside redirect')
+      //console.log('inside redirect')
       return (
         <Redirect to='/'/>
       )

@@ -18,11 +18,19 @@ export const links = [
   }
 ];
 
-export const langValueMap = ["","javascript", "css", "python", "html", "graphql"];
+export const langValueMap = ["","javascript", "python", "C++", "graphql", "css",];
 
-export const framValueMap = ["","react", "react-native", "tensorflow"];
+export const framValueMap = ["","react", "tensorflow", "unity", "flask"];
 
 export const typeValueMap = ["","boiler", "algo", "visual", "config"]
+
+
+//  To implement hover tool tip.
+// <MyMaterialToolTip tipKey="addSnippitHelp">
+//   <Typography variant="subheading" color="secondary">
+//     HELP
+//   </Typography>
+// </MyMaterialToolTip>
 
 export const tipLibrary = {
   loginButton: " 1. Send login mutation to GraphQL server 2. Server processes login, fetches user data from Prisma database. 3. Responds with auth token, user info, (snips, name, id, ), then saves to redux store.",
