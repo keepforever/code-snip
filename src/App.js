@@ -42,11 +42,11 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 // to the deployed Ziet Now server, live 8/27/2018
-// http://localhost:4000
+// https://itm-adv-server-zhbmcqazrj.now.sh
 const client = new ApolloClient({
   link: authLink.concat(
     createUploadLink({
-      uri: "https://itm-adv-server-zhbmcqazrj.now.sh"
+      uri: "http://localhost:4000"
     })
   ),
   cache: new InMemoryCache()
