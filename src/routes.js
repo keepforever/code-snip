@@ -9,6 +9,7 @@ import DataViz from "./pages/DataViz";
 import SearchSnippits from "./pages/SearchSnippits";
 import LandingPage from './pages/LandingPage'
 import SignUpPage from "./pages/SignUpPage";
+import SandboxPage from "./pages/SandboxPage"
 
 const routes = [
   {
@@ -46,6 +47,12 @@ const routes = [
     exact: true,
     main: () => <SignUpPage />,
     protected: false
+  },
+  {
+    path: "/sandbox",
+    exact: true,
+    main: () => <SandboxPage />,
+    protected: true
   }
 ];
 

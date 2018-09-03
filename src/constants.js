@@ -15,6 +15,11 @@ export const links = [
     name: "search-snip",
     route: "/search-snips",
     display: "Search Snips"
+  },
+  {
+    name: "sandbox-alpha",
+    route: "/sandbox",
+    display: "Sandbox"
   }
 ];
 
