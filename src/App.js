@@ -8,8 +8,11 @@ import Layout from "./components/Layout";
 import Routes from "./routes";
 //apollo stuff
 import { ApolloProvider } from "react-apollo";
-import { ApolloClient, InMemoryCache } from "apollo-client-preset";
+import { getMainDefinition } from 'apollo-utilities';
+import { split } from 'apollo-link';
+import { ApolloClient, InMemoryCache, } from "apollo-client-preset";
 import { createUploadLink } from "apollo-upload-client";
+import { WebSocketLink } from 'apollo-link-ws';
 //To pass Auth token in Header
 import { setContext } from "apollo-link-context";
 //material-ui
@@ -31,6 +34,13 @@ const theme = createMuiTheme({
 });
 
 // apollo
+const wsLink = new WebSocketLink({
+  uri: 'ws://localhost:4000',
+  options: {
+    reconnect: true
+  },
+})
+
 const authLink = setContext(async (_, { headers }) => {
   const token = localStorage.getItem("snarfToken");
   //console.log('token from authLink', token)
@@ -41,14 +51,20 @@ const authLink = setContext(async (_, { headers }) => {
     }
   };
 });
+
+const link = split(
+  ( { query } ) => {
+    const { kind, operation } = getMainDefinition(query);
+    return kind === 'OperationDefinition' && operation === 'subscription';
+  },
+  wsLink,
+  authLink.concat(createUploadLink({ uri: 'http://localhost:4000' })),
+)
+
 // to the deployed Ziet Now server, live 8/27/2018
 // https://itm-adv-server-zhbmcqazrj.now.sh
 const client = new ApolloClient({
-  link: authLink.concat(
-    createUploadLink({
-      uri: "http://localhost:4000"
-    })
-  ),
+  link,
   cache: new InMemoryCache()
 });
 
