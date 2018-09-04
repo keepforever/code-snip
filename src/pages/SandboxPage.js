@@ -18,6 +18,7 @@ import { clearLog } from '../utils'
 // test Subscription
 import gql from 'graphql-tag'
 import { Subscription } from 'react-apollo'
+import MyMessageConnector from '../components/messages/MyMessageConnector'
 
 const SUB = gql`
   subscription {
@@ -93,12 +94,13 @@ class Sandbox extends Component {
                 Subscription Test
             </Typography>
             <Typography variant="body2" color="secondary">
-                <Subscription subscription={SUB}>
+              previously Subcription component 
+                {/* <Subscription subscription={SUB}>
                   {(data) => {
                     console.log('HELLO SUBSCRIPTION data', data)
                     return null
                   }}
-                </Subscription>
+                </Subscription> */}
             </Typography>
           </div>
 
@@ -114,6 +116,10 @@ class Sandbox extends Component {
               </React.Fragment>
             );
           })}
+        </div>
+        <div style={{color: 'white'}}>
+          <h1>Hello</h1>
+          <MyMessageConnector />
         </div>
       </ContainerAlpha>
     );

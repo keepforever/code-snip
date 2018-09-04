@@ -1,49 +1,48 @@
-// @ts-ignore
-import * as React from "react";
+import React, { Component } from "react";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-// import {
-//   ViewMessagesQuery_messages,
-//   ViewMessagesQueryVariables,
-//   ViewMessagesQuery
-// } from "../../schemaTypes";
+import { clearLog } from "../../utils";
 
 // note, this is written with typescript and thus has some weird syntax
 // this file is 'where most of the magic happens'
 export const viewMessagesQuery = gql`
-  query ViewMessagesQuery($listingId: String!) {
-    messages(listingId: $listingId) {
+  query ViewMessagesQuery {
+    messages {
+      id
       text
-      user {
+      createdAt
+      author {
         id
         email
       }
-      listingId
     }
   }
 `;
 
+// use this constant as document in subscribeToMore
 export const newMessageSubscription = gql`
-  subscription($listingId: String!) {
-    newMessage(listingId: $listingId) {
+  subscription messageSub {
+    message {
+      id
       text
-      user {
+      createdAt
+      author {
         id
-        email
+        name
       }
-      listingId
     }
   }
 `;
 
 
-export class ViewMessages extends React.PureComponent<Props> {
+class MyViewMessages extends React.PureComponent {
   render() {
     const { children, listingId } = this.props;
     return (
       <Query
         query={viewMessagesQuery}
-        variables={{ listingId }}
+        // no vars, no filter yet.
+        // variables={{ listingId }}
       >
         {({ data, loading, subscribeToMore }) => {
           let messages = [];
@@ -58,21 +57,30 @@ export class ViewMessages extends React.PureComponent<Props> {
             subscribe: () =>
               subscribeToMore({
                 document: newMessageSubscription,
-                variables: { listingId },
+                //variables: { }, // no vars yet
                 updateQuery: (prev, { subscriptionData }) => {
-                  console.log("prev", prev);
-                  console.log("subscriptionData", subscriptionData);
+                  clearLog("prev", prev);
+                  clearLog("subscriptionData", subscriptionData);
 
                   if (!subscriptionData.data) {
                     return prev;
                   }
+
+                  //return prev;
+                  clearLog('return Aggrigate', {
+                    ...prev,
+                    messages: [
+                      ...prev.messages,
+                      subscriptionData.data.message
+                    ]
+                  })
 
                   // update prev with new data
                   return {
                     ...prev,
                     messages: [
                       ...prev.messages,
-                      (subscriptionData.data as any).newMessage
+                      subscriptionData.data.message
                     ]
                   };
                 }
@@ -83,3 +91,5 @@ export class ViewMessages extends React.PureComponent<Props> {
     );
   }
 }
+
+export default MyViewMessages

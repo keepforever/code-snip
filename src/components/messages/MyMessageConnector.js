@@ -1,43 +1,51 @@
-import * as React from "react";
-// import { RouteComponentProps } from "react-router-dom";
-// import { ViewMessages } from "@abb/controller";
-// import { InputBar } from "./InputBar";
+import React, { Component } from 'react';
+import MyViewMessages from './MyViewMessages'
+import { clearLog } from "../../utils";
 
-
-// note, this is written with typescript and thus has some weird syntax
-export class MessageConnector extends React.PureComponent<
-  RouteComponentProps<{
-    listingId: string
-  }>
-> {
-  unsubscribe: () => void;
-
-  render() {
-    const {
-      match: {
-        params: { listingId }
-      }
-    } = this.props;
+class MyMessageConnector extends Component {
+  state = {
+    isSubscribed: false
+  }
+  unsubscribe = () => {
+    return null
+  }
+  render () {
+    // use this pattern if a message thread is to be identified or quarantined
+    // to, say, a specific listing or 'chatroom'
+    // const {
+    //   match: {
+    //     params: { listingId }
+    //   }
+    // } = this.props;
+    const { isSubscribed } = this.state
+    
     return (
-      <ViewMessages listingId={listingId}>
+      <MyViewMessages listingId="listingId property">
         {({ loading, messages, subscribe }) => {
           if (loading) {
             return <div>...loading</div>;
           }
-
-          if (!this.unsubscribe) {
-            this.unsubscribe = subscribe();
+          if(!isSubscribed){
+            subscribe()
+            this.setState({
+              isSubscribed: true
+            })
+            clearLog("isSubscribed to True", 'OK')
           }
-
+          // if (!this.unsubscribe) {
+          //   clearLog('!this.unsubscribe', 'xxx')
+          //   this.unsubscribe = subscribe();
+          // }
           return (
             <div>
               {messages.map((m, i) => <div key={`${i}-lm`}>{m.text}</div>)}
-              <InputBar listingId={listingId} />
-              <button onClick={this.unsubscribe}>unsubscribe</button>
+              <div>Input bar</div>
             </div>
           );
         }}
-      </ViewMessages>
+      </MyViewMessages>
     );
   }
 }
+
+export default MyMessageConnector
