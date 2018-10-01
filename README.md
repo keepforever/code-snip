@@ -1,4 +1,4 @@
-# Welcome to Snip Snarf!
+# Welcome to Snip Snarf
 ## Designed to help you be a faster developer.
 
 ## The NERP Stack:
