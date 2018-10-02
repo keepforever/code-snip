@@ -11,7 +11,8 @@ import DataViz from "./pages/DataViz";
 import SearchSnippits from "./pages/SearchSnippits";
 // import LandingPage from './pages/LandingPage'
 import LandingPage from './pages/landingPage/'
-import SignUpPage from "./pages/SignUpPage";
+// import SignUpPage from "./pages/SignUpPage";
+import SignUpPage from "./pages/signUpPage/";
 
 const routes = [
   {
