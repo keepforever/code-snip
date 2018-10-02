@@ -8,7 +8,8 @@ import Home from "./pages/home/";
 // import AddSnip from "./pages/AddSnip";
 import AddSnip from "./pages/addSnip/";
 import DataViz from "./pages/DataViz";
-import SearchSnippits from "./pages/SearchSnippits";
+//import SearchSnippits from "./pages/SearchSnippits";
+import SearchSnippits from "./pages/searchSnippits/";
 // import LandingPage from './pages/LandingPage'
 import LandingPage from './pages/landingPage/'
 // import SignUpPage from "./pages/SignUpPage";
