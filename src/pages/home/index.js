@@ -1,35 +1,28 @@
 import React, { Component } from "react";
 //material-ui
-import AppBar from "@material-ui/core/AppBar";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import ArchiveIcon from "@material-ui/icons/Archive";
 // REDUX
-import { incrementCounter } from "../store/actions/counter";
-import { setUserInfo } from "../store/actions/user";
-import { toggleLandingPage } from "../store/actions/landingPage";
+import { incrementCounter } from "../../store/actions/counter";
+import { setUserInfo } from "../../store/actions/user";
+import { toggleLandingPage } from "../../store/actions/landingPage";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
-import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
-import { SPECIFIC_USERS_SNIPPITS_QUERY } from "../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
-import { DELETE_SNIP } from "../graphql/mutations/DELETE_SNIP";
-import { SNIPPITS_QUERY_SIMPLE } from "../graphql/queries/SNIPPITS_QUERY_SIMPLE";
+import { SNIPPITS_QUERY } from "../../graphql/queries/SNIPPITS_QUERY";
+import { SPECIFIC_USERS_SNIPPITS_QUERY } from "../../graphql/queries/SPECIFIC_USERS_SNIPPITS_QUERY";
+import { DELETE_SNIP } from "../../graphql/mutations/DELETE_SNIP";
+import { SNIPPITS_QUERY_SIMPLE } from "../../graphql/queries/SNIPPITS_QUERY_SIMPLE";
 // locals
-import Portal from "../components/portals/portalTemplate";
-import HomePageSnippitList from '../components/HomePageSnippitList';
-import {
-  ContainerAlpha,
-  HideDivWhenSmall,
-  ShowDivWhenSmall
-} from "../components/styled";
-import HomeHelpPage from "./help/HomeHelpPage";
-import ConfirmDeletePage from "./deleteSnip/ConfirmDeletePage";
+import HomeView from './homeView';
+import Portal from "../../components/portals/portalTemplate";
+import HomePageSnippitList from '../../components/HomePageSnippitList';
+import { LoadSpinContainer } from "../../components/styled";
+import HomeHelpPage from "../help/HomeHelpPage";
+import ConfirmDeletePage from "../deleteSnip/ConfirmDeletePage";
 // utils
-import { clearLog } from "../utils";
+import { clearLog } from "../../utils";
 import fileDownload from "js-file-download";
 
 const defaultState = {
@@ -123,17 +116,11 @@ class Home extends Component {
 
     if (loading || newLoading) {
       return (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: 400
-          }}
-        >
-          <CircularProgress thickness={7} />;
-        </div>
+        <LoadSpinContainer>
+          <CircularProgress
+             thickness={7}
+          />;
+        </LoadSpinContainer>
       );
     }
 
@@ -156,37 +143,14 @@ class Home extends Component {
       );
     }
     return (
-      <ContainerAlpha>
-        <AppBar position="static" color="default">
-          <div style={styles.headerContainer}>
-            <Typography variant="title" color="secondary">
-              Your Snips
-            </Typography>
-            <Button
-              onClick={() => this.downloadSnippitLibrary(snippits)}
-              color="secondary"
-            >
-              <HideDivWhenSmall>
-                <ArchiveIcon />
-              </HideDivWhenSmall>
-              <ShowDivWhenSmall>
-                Download Snip Library
-              </ShowDivWhenSmall>
-            </Button>
-            <Typography variant="body2" color="secondary">
-              <div style={{ cursor: "pointer" }} onClick={this.toggleHelp}>
-                help
-              </div>
-            </Typography>
-          </div>
-        </AppBar>
-        <HomePageSnippitList
-          soup={this.props.user.snipSoup}
-          snips={newSnippits}
-          delSnippo={this.handleDelSnippo}
-        />
-      </ContainerAlpha>
-    );
+      <HomeView
+        downloadSnippits={() => this.downloadSnippitLibrary(snippits)}
+        toggleHelp={this.toggleHelp}
+        soup={this.props.user.snipSoup}
+        snips={newSnippits}
+        delSnippo={this.handleDelSnippo}
+      />
+    )
   }
 }
 

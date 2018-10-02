@@ -8,28 +8,30 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 // REDUX
-import { toggleLandingPage } from "../store/actions/landingPage";
-import { setUserInfo } from "../store/actions/user";
-import { setUserInfoRefresh } from "../store/actions/user";
+import { toggleLandingPage } from "../../store/actions/landingPage";
+import { setUserInfo } from "../../store/actions/user";
+import { setUserInfoRefresh } from "../../store/actions/user";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // graphql dependencies
 import { graphql, compose } from "react-apollo";
 //import Q's and M's
-import { SNIPPITS_QUERY } from "../graphql/queries/SNIPPITS_QUERY";
-import { ME_QUERY } from "../graphql/queries/ME_QUERY";
-import { LOGIN_MUTATION } from "../graphql/mutations/LOGIN_MUTATION";
-import { REFRESH_TOKEN_MUTATION } from "../graphql/mutations/REFRESH_TOKEN_MUTATION";
+import { SNIPPITS_QUERY } from "../../graphql/queries/SNIPPITS_QUERY";
+import { ME_QUERY } from "../../graphql/queries/ME_QUERY";
+import { LOGIN_MUTATION } from "../../graphql/mutations/LOGIN_MUTATION";
+import { REFRESH_TOKEN_MUTATION } from "../../graphql/mutations/REFRESH_TOKEN_MUTATION";
 // locals
+import LandingPageView from './landingPageView'
+import IsSubmittingView from './isSubmittingView'
 import {
   ModalContainer,
   WelcomeContainer,
   HelpContainer
-} from "../components/styled";
-import OuterSpace from "../components/outer-space";
-import MyMaterialToolTip from "../components/tool-tips/MyMaterialToolTip";
+} from "../../components/styled";
+import OuterSpace from "../../components/outer-space";
+import MyMaterialToolTip from "../../components/tool-tips/MyMaterialToolTip";
 //utils
-import { clearLog } from "../utils";
+import { clearLog } from "../../utils";
 
 const defaultState = {
   email: "",
@@ -167,9 +169,16 @@ class LandingPage extends Component {
     });
   };
 
-  handleTextChange = name => event => {
+  // handleTextChange = name => event => {
+  //   console.log('\n', '\n', 'text change')
+  //   this.setState({
+  //     [name]: event.target.value
+  //   });
+  // };
+
+  handleTextChange = (fieldName, event) => {
     this.setState({
-      [name]: event.target.value
+      [fieldName]: event.target.value
     });
   };
 
@@ -183,102 +192,21 @@ class LandingPage extends Component {
 
     if (isSubmitting) {
       return (
-        <ModalContainer>
-          <OuterSpace>
-            <HelpContainer>
-              <div
-                style={{
-                  flexDirection: "column",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  height: 400
-                }}
-              >
-                <div style={{ padding: 10, marginBottom: 10}}>
-                  <Typography variant="subheading" color="secondary">
-                    <strong>
-                      Note: This site is hosted on two separate free services and
-                      sometimes they can be slow or fail. If you experience a
-                      login wait time greater than six seconds, refresh the page
-                      to try again.
-                    </strong>
-                  </Typography>
-                </div>
-                <CircularProgress thickness={7} />;
-              </div>
-            </HelpContainer>
-          </OuterSpace>
-        </ModalContainer>
+        <IsSubmittingView />
       );
     }
 
     return (
-      <ModalContainer>
-        <OuterSpace>
-          <HelpContainer>
-            <div style={styles.main}>
-              <div style={styles.welcomeText}>
-                <Typography variant="display1" color="secondary">
-                  <strong>Snip Snarf</strong>
-                </Typography>
-              </div>
-              <TextField
-                fullWidth
-                autoFocus
-                id="email-input"
-                label="Email..."
-                value={email}
-                onChange={this.handleTextChange("email")}
-                margin="normal"
-                className={classes.root}
-                InputProps={{
-                  className: classes.input
-                }}
-                InputLabelProps={{
-                  className: classes.input
-                }}
-              />
-              <TextField
-                fullWidth
-                id="password-input"
-                label="Password..."
-                value={password}
-                onChange={this.handleTextChange("password")}
-                margin="normal"
-                className={classes.root}
-                InputProps={{
-                  className: classes.input
-                }}
-                InputLabelProps={{
-                  className: classes.input
-                }}
-              />
-              <div style={styles.button} onClick={this.loginSubmit}>
-                <Button
-                  color="secondary"
-                  disabled={this.state.isSubmitting}
-                  variant="outlined"
-                  fullWidth
-                >
-                  Login
-                </Button>
-              </div>
-              <NavLink to="/signup">
-                <Button fullWidth color="secondary">
-                  <Typography variant="button" color="inherit">
-                    <div style={{ marginTop: 25, color: "white" }}>
-                      New? Create Account...
-                    </div>
-                  </Typography>
-                </Button>
-              </NavLink>
-            </div>
-          </HelpContainer>
-        </OuterSpace>
-      </ModalContainer>
-    );
+      <LandingPageView
+        email={email}
+        password={password}
+        isSubmitting={isSubmitting}
+        textChange={
+          (fieldName, event) => this.handleTextChange(fieldName, event)
+        }
+        loginSubmit={() => this.loginSubmit()}
+      />
+    )
   }
 }
 

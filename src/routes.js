@@ -3,11 +3,14 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 // main routes
-import Home from "./pages/Home";
-import AddSnip from "./pages/AddSnip";
+// import Home from "./pages/Home";
+import Home from "./pages/home/";
+// import AddSnip from "./pages/AddSnip";
+import AddSnip from "./pages/addSnip/";
 import DataViz from "./pages/DataViz";
 import SearchSnippits from "./pages/SearchSnippits";
-import LandingPage from './pages/LandingPage'
+// import LandingPage from './pages/LandingPage'
+import LandingPage from './pages/landingPage/'
 import SignUpPage from "./pages/SignUpPage";
 
 const routes = [

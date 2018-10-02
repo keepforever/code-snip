@@ -2,6 +2,14 @@ import styled from "styled-components";
 //import { keyframes } from "styled-components";
 
 export {
+  LoadSpinContainer,
+  HeaderContainer,
+  CursorDiv,
+  WelcomeTextContainer
+} from './shared'
+
+
+export {
   DrawerToggleDiv,
   LogoContainer
 } from './drawer'

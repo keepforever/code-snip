@@ -56,7 +56,7 @@ class SignUpPage extends Component {
     const { name, email, password } = this.state;
 
     if(name.length === 0 || email.length === 0 || password.length === 0) {
-      alert('cannot have email, name or passowrd be of lenth 0')
+      alert('cannot have email, name or password be of lenth 0')
       this.setState({
         ...defaultState
       });
