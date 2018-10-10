@@ -25,7 +25,7 @@ const IsSubmittingView = ( props ) => {
               <strong>
                 Note: This site is hosted on two separate free services and
                 sometimes they can be slow or fail. If you experience a
-                login wait time greater than six seconds, refresh the page
+                login wait time greater than 30 seconds, refresh the page
                 to try again.
               </strong>
             </Typography>
