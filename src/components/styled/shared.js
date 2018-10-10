@@ -25,3 +25,4 @@ export const HeaderContainer = styled.div`
 export const CursorDiv = styled.div`
   cursor: pointer;
 `
+CursorDiv.displayName = "CursorDiv"

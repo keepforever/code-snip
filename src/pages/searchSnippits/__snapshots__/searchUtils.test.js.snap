@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render renders correctly 1`] = `
+<div
+  class="sc-dxgOiQ lkmDLs"
+>
+  <header
+    class="MuiPaper-root-9 MuiPaper-elevation4-15 MuiAppBar-root-1 MuiAppBar-positionStatic-5 MuiAppBar-colorDefault-6"
+  >
+    <div
+      class="sc-bdVaJa hFMMqI"
+    >
+      <h2
+        class="MuiTypography-root-36 MuiTypography-title-42 MuiTypography-colorSecondary-57"
+      >
+        Search Snips
+      </h2>
+      <aside
+        class="MuiTypography-root-36 MuiTypography-body2-44 MuiTypography-colorSecondary-57"
+      >
+        <div
+          class="sc-bZQynM IAXmQ"
+        >
+          help
+        </div>
+      </aside>
+    </div>
+  </header>
+  <div
+    class="sc-kGXeez kTcdBW"
+  >
+    <header
+      class="MuiPaper-root-9 MuiPaper-elevation4-15 MuiAppBar-root-1 MuiAppBar-positionStatic-5 MuiAppBar-colorDefault-6"
+    >
+      <div
+        class="MuiFormControl-root-61 MuiFormControl-marginNormal-62 MuiFormControl-fullWidth-64"
+      >
+        <label
+          class="MuiFormLabel-root-70 MuiInputLabel-root-65 MuiInputLabel-formControl-66 MuiInputLabel-animated-69 MuiInputLabel-shrink-68"
+          data-shrink="true"
+          for="search-input"
+        >
+          Snarf for snips...
+        </label>
+        <div
+          class="MuiInput-root-75 MuiInput-fullWidth-82 MuiInput-formControl-76 MuiInput-underline-79"
+        >
+          <input
+            aria-invalid="false"
+            autofocus=""
+            class="MuiInput-input-83"
+            id="search-input"
+            type="text"
+            value="kang"
+          >
+            
+          </input>
+        </div>
+      </div>
+    </header>
+  </div>
+  <div>
+    
+  </div>
+</div>
+`;
+
+exports[`shallow renders correctly 1`] = `
+<styled.div>
+  <WithStyles(AppBar)
+    color="default"
+    position="static"
+  >
+    <styled.div>
+      <WithStyles(Typography)
+        color="secondary"
+        variant="title"
+      >
+        Search Snips
+      </WithStyles(Typography)>
+      <WithStyles(Typography)
+        color="secondary"
+        variant="body2"
+      >
+        <CursorDiv
+          onClick={[Function]}
+        >
+          help
+        </CursorDiv>
+      </WithStyles(Typography)>
+    </styled.div>
+  </WithStyles(AppBar)>
+  <styled.div>
+    <WithStyles(AppBar)
+      color="default"
+      position="static"
+    >
+      <TextField
+        autoFocus={true}
+        fullWidth={true}
+        id="search-input"
+        label="Snarf for snips..."
+        margin="normal"
+        onChange={[Function]}
+        required={false}
+        select={false}
+        value="kang"
+      />
+    </WithStyles(AppBar)>
+  </styled.div>
+  <div />
+</styled.div>
+`;

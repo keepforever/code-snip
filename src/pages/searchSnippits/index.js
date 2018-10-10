@@ -53,7 +53,7 @@ class Search extends Component {
     }
 
     //console.log('snips', snips)
-    console.log('soup', '\n', JSON.stringify(snipSoup))
+    //console.log('soup', '\n', JSON.stringify(snipSoup))
 
     let match = [];
     if(search.length > 1) {
