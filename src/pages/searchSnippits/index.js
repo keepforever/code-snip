@@ -16,6 +16,7 @@ import SearchSnipHelpPage from '../help/SearchSnipHelpPage'
 import Portal from '../../components/portals/portalTemplate'
 // utils
 import { clearLog } from '../../utils'
+import { trimSearch } from './utils'
 
 class Search extends Component {
 
@@ -52,16 +53,11 @@ class Search extends Component {
     }
 
     //console.log('snips', snips)
-    //console.log('soup', snipSoup)
+    console.log('soup', '\n', JSON.stringify(snipSoup))
 
     let match = [];
     if(search.length > 1) {
-      snipSoup.forEach((item, index) => {
-        const bagToString = item.bagOfWords.join(" ")
-        if (bagToString.includes(search.trim().toLowerCase())) {
-          match.push(index)
-        }
-      })
+      match = [...trimSearch(snipSoup, search)]
     }
 
     return (
