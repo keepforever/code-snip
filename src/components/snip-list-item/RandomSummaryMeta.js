@@ -83,6 +83,7 @@ const styles = {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    overflowY: 'hidden'
   }
 }
